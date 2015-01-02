@@ -22,7 +22,8 @@ SOURCES += main.cpp\
     Fader.cpp \
     Controls.cpp \
     AudioDeviceControls.cpp \
-    AudioDeviceView.cpp
+    AudioDeviceView.cpp \
+    AudioThread.cpp
 
 HEADERS  += MainWindow.h \
     Types.h \
@@ -34,6 +35,7 @@ HEADERS  += MainWindow.h \
     Fader.h \
     Controls.h \
     AudioDeviceControls.h \
-    AudioDeviceView.h
+    AudioDeviceView.h \
+    AudioThread.h
 
 FORMS    += MainWindow.ui

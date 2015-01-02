@@ -16,7 +16,7 @@ class AudioDevice: public QIODevice
 	Q_OBJECT
 
 public:
-	AudioDevice(const QAudioFormat &format, Controls *controls, AudioDeviceControls * adc, QObject *parent );
+	AudioDevice(const QAudioFormat &format, Controls *controls, AudioDeviceControls * adc, QObject *parent = 0 );
 	virtual ~AudioDevice();
 
 	void start();

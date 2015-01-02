@@ -17,25 +17,25 @@ void Fader::setModel(Model *model)
 {
 	m_model = model;
 	connect( m_model, SIGNAL( dataChanged(int)) , this, SLOT( modelValueChanged( int ) ) );
-	setMinimum( m_model->getMin() * multipler );
-	setMaximum( m_model->getMax() * multipler );
-	setValue( m_model->value() * multipler );
+	setMinimum( m_model->getMin() * multipler() );
+	setMaximum( m_model->getMax() * multipler() );
+	setValue( m_model->value() * multipler() );
 	setTickInterval( 100 );
 }
 
 void Fader::modelValueChanged( int val )
 {
-	if(value() / multipler != val )
+	if(value() / multipler() != val )
 	{
-		setValue(val * multipler);
+		setValue(val * multipler());
 	}
 }
 
 void Fader::UiComponentValueChanged( int val )
 {
-	if(m_model->value() * multipler != val )
+	if(m_model->value() * multipler() != val )
 	{
-		m_model->setValue( (float)val / (float)multipler );
+		m_model->setValue( (float)val / (float)multipler() );
 	}
 }
 

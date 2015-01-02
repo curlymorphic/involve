@@ -17,6 +17,10 @@ public:
 	explicit Fader( Model *model = 0, QWidget *parent = 0 );
 	~Fader();
 	void setModel(Model *model);
+	inline int multipler()
+	{
+		return 1000;
+	}
 
 signals:
 
@@ -26,7 +30,6 @@ public slots:
 
 private:
 	Model *m_model;
-	const int multipler = 1000;
 };
 
 

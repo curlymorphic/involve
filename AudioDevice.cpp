@@ -100,22 +100,25 @@ void AudioDevice::createAudioOutput()
 	if( m_audioOutput) { delete m_audioOutput; }
 	m_audioOutput = 0;
 	m_audioOutput = new QAudioOutput(m_device, m_format, this);
-//	m_audioOutput->setBufferSize(10000);
+	//	m_audioOutput->setBufferSize(10000);
 
 	start();
 	m_audioOutput->start(this);
-//	m_audioDeviceControls->m_bufferSize = m_audioOutput->bufferSize();
+	//	m_audioDeviceControls->m_bufferSize = m_audioOutput->bufferSize();
 }
 
 
 
 qint64 AudioDevice::readData(char *data, qint64 len)
 {
-	len = len > bytesAvailable() ? bytesAvailable() : len;
-	m_module.processAudio( m_frameBuffer, len / 4 );
-	sampleFrameToBuffer( m_frameBuffer, len, m_format );
-	memcpy(data,m_buffer,len);
-	m_audioDeviceControls->m_bufferSize = len / 4;
+	if( len )
+	{
+		len = len > bytesAvailable() ? bytesAvailable() : len;
+		m_module.processAudio( m_frameBuffer, len / 4 );
+		sampleFrameToBuffer( m_frameBuffer, len, m_format );
+		memcpy(data,m_buffer,len);
+		m_audioDeviceControls->m_bufferSize = len;
+	}
 	return len;
 }
 
@@ -129,7 +132,7 @@ qint64 AudioDevice::writeData(const char *data, qint64 len)
 
 qint64 AudioDevice::bytesAvailable() const
 {
-//	return m_buffer.size() + QIODevice::bytesAvailable();
+	//	return m_buffer.size() + QIODevice::bytesAvailable();
 	return 512;
 }
 

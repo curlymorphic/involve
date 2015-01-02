@@ -7,6 +7,7 @@
 #include "Fader.h"
 #include "AudioDeviceControls.h"
 #include "AudioDeviceView.h"
+#include "AudioThread.h"
 
 
 namespace Ui {
@@ -23,16 +24,15 @@ public:
 	explicit MainWindow( QWidget *parent = 0 );
 	~MainWindow();
 
-private:
-	QAudioFormat m_format;
-	void initializeAudio();
+
 
 private:
 	Ui::MainWindow *ui;
-	AudioDevice *m_audioDevice;
+
 	Controls *m_controls;
 	AudioDeviceControls *m_audioDeviceControls;
 	AudioDeviceView *m_audioDeviceView;
+	AudioThread *m_audioThread;
 
 
 

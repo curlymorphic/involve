@@ -7,6 +7,8 @@
 #include <QDebug>
 #include "Types.h"
 #include "AudioDeviceView.h"
+#include "AudioThread.h"
+#include <QThread>
 
 
 const int DurationSeconds = 1;
@@ -27,41 +29,25 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_audioDeviceControls = new AudioDeviceControls;
 	ui->setupUi(this);
 
+	Fader *f = new Fader( &m_controls->m_freqModel, this );
+	f->move(50,50);
+	f->setOrientation(Qt::Horizontal);
+	f->show();
+
 	m_audioDeviceView = new AudioDeviceView( this, m_audioDeviceControls );
 	m_audioDeviceView->show();
-	//	m_audioThread = new AudioThread( this );
-	//	m_audioThread->start();
-	initializeAudio();
+		m_audioThread = new AudioThread(m_audioDeviceControls, m_controls, this );
+		m_audioThread->start(m_audioThread->HighPriority);
+//	initializeAudio();
 }
 
 MainWindow::~MainWindow()
 {
 	delete ui;
+
 }
 
-void MainWindow::initializeAudio()
-{
-	m_format.setSampleRate( 44100 );
-	m_format.setChannelCount(2);
-	m_format.setSampleSize(16);
-	m_format.setCodec("audio/pcm");
-	m_format.setByteOrder(QAudioFormat::LittleEndian);
-	m_format.setSampleType(QAudioFormat::SignedInt);
 
-	QAudioDeviceInfo info(QAudioDeviceInfo::defaultOutputDevice());
-	if (!info.isFormatSupported(m_format)) {
-		qWarning() << "Default format not supported - trying to use nearest";
-		m_format = info.nearestFormat(m_format);
-	}
-	m_audioDeviceControls->m_sampleRate = m_format.sampleRate();
-	m_audioDevice = new AudioDevice(m_format, m_controls, m_audioDeviceControls, this);
-	m_audioDevice->createAudioOutput();
-
-	Fader *f = new Fader( &m_controls->m_freqModel, this );
-	f->move(50,50);
-	f->setOrientation(Qt::Horizontal);
-	f->show();
-}
 
 
 
