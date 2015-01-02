@@ -8,6 +8,7 @@
 #include "AudioDeviceControls.h"
 #include "AudioDeviceView.h"
 #include "AudioThread.h"
+#include "Demo1ModuleControls.h"
 
 
 namespace Ui {
@@ -29,10 +30,11 @@ public:
 private:
 	Ui::MainWindow *ui;
 
-	Controls *m_controls;
+	Demo1ModuleControls *m_controls;
 	AudioDeviceControls *m_audioDeviceControls;
 	AudioDeviceView *m_audioDeviceView;
 	AudioThread *m_audioThread;
+	AudioModule *m_audioModule;
 
 
 

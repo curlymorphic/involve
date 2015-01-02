@@ -10,7 +10,7 @@ class AudioThread : public QThread
 {
 	Q_OBJECT
 public:
-	AudioThread(AudioDeviceControls *adc = 0, Controls *controls = 0, QWidget *parent = 0);
+	AudioThread(AudioDeviceControls *adc = 0, AudioModule *audioModule = 0 , ModuleControls *controls = 0, QWidget *parent = 0);
 	~AudioThread();
 
 protected:
@@ -21,7 +21,8 @@ private:
 	void initializeAudio();
 	AudioDevice *m_audioDevice;
 	AudioDeviceControls *m_audioDeviceControls;
-	Controls *m_controls;
+	ModuleControls *m_controls;
+	AudioModule *m_audioModule;
 
 };
 

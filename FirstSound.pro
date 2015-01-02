@@ -23,7 +23,9 @@ SOURCES += main.cpp\
     Controls.cpp \
     AudioDeviceControls.cpp \
     AudioDeviceView.cpp \
-    AudioThread.cpp
+    AudioThread.cpp \
+    Demo1ModuleControls.cpp \
+    Demo1AudioModule.cpp
 
 HEADERS  += MainWindow.h \
     Types.h \
@@ -36,6 +38,9 @@ HEADERS  += MainWindow.h \
     Controls.h \
     AudioDeviceControls.h \
     AudioDeviceView.h \
-    AudioThread.h
+    AudioThread.h \
+    ModuleControls.h \
+    Demo1ModuleControls.h \
+    Demo1AudioModule.h
 
 FORMS    += MainWindow.ui

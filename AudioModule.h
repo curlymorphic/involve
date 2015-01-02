@@ -23,7 +23,7 @@ public:
 	/// \param samplerate Audio Sample rate
 	/// \param controls	The data controls for this module
 	///
-	AudioModule( qint64 samplerate, Controls *controls );
+	AudioModule( qint64 samplerate, ModuleControls *controls );
 	~AudioModule();
 	///
 	/// \brief processAudio
@@ -34,9 +34,8 @@ public:
 	///
 	virtual void processAudio(sampleFrame *buffer, qint64 len );
 
-private:
-	Oscillator *m_osc;
-	Controls *m_controls;
+protected:
+	ModuleControls m_controls;
 
 };
 

@@ -15,8 +15,7 @@ public:
 	explicit Controls(QObject *parent = 0);
 	~Controls();
 
-	Model m_freqModel;
-	Model m_gainModel;
+
 
 signals:
 

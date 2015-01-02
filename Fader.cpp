@@ -20,7 +20,7 @@ void Fader::setModel(Model *model)
 	setMinimum( m_model->getMin() * multipler() );
 	setMaximum( m_model->getMax() * multipler() );
 	setValue( m_model->value() * multipler() );
-	setTickInterval( 100 );
+	setTickInterval( 1 );
 }
 
 void Fader::modelValueChanged( int val )

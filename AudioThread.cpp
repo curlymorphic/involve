@@ -2,11 +2,12 @@
 #include <QAudioDeviceInfo>
 
 
-AudioThread::AudioThread(AudioDeviceControls *adc, Controls *controls, QWidget *parent):
+AudioThread::AudioThread(AudioDeviceControls *adc, AudioModule *audioModule, ModuleControls *controls, QWidget *parent):
 	QThread( 0 ),
 	m_audioDevice( 0 ),
 	m_audioDeviceControls( adc ),
-	m_controls( controls )
+	m_controls( controls ),
+	m_audioModule( audioModule )
 {
 	start();
 	QObject::moveToThread( this );
@@ -42,7 +43,7 @@ void AudioThread::initializeAudio()
 		m_format = info.nearestFormat(m_format);
 	}
 	m_audioDeviceControls->m_sampleRate = m_format.sampleRate();
-	m_audioDevice = new AudioDevice( m_format, m_controls, m_audioDeviceControls );
+	m_audioDevice = new AudioDevice( m_format, m_audioModule, m_controls, m_audioDeviceControls );
 	m_audioDevice->createAudioOutput();
 
 

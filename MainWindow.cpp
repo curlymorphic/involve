@@ -9,6 +9,7 @@
 #include "AudioDeviceView.h"
 #include "AudioThread.h"
 #include <QThread>
+#include "Demo1ModuleControls.h"
 
 
 const int DurationSeconds = 1;
@@ -25,18 +26,19 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_controls( 0 ),
 	m_audioDeviceControls( 0 )
 {
-	m_controls = new Controls( this );
+	m_controls = new Demo1ModuleControls( this );
 	m_audioDeviceControls = new AudioDeviceControls;
 	ui->setupUi(this);
 
-	Fader *f = new Fader( &m_controls->m_freqModel, this );
+	Fader *f = new Fader( &m_controls->freqModel, this );
 	f->move(50,50);
 	f->setOrientation(Qt::Horizontal);
 	f->show();
 
 	m_audioDeviceView = new AudioDeviceView( this, m_audioDeviceControls );
 	m_audioDeviceView->show();
-		m_audioThread = new AudioThread(m_audioDeviceControls, m_controls, this );
+	m_audioModule = new Demo1AudioModule( 44100, m_controls );
+		m_audioThread = new AudioThread(m_audioDeviceControls, m_audioModule, m_controls, this );
 		m_audioThread->start(m_audioThread->HighPriority);
 //	initializeAudio();
 }

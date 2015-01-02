@@ -19,7 +19,7 @@ public:
 	void setModel(Model *model);
 	inline int multipler()
 	{
-		return 1000;
+		return 10;
 	}
 
 signals:

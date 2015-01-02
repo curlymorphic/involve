@@ -3,10 +3,11 @@
 #include <qmath.h>
 #include <QIODevice>
 
-AudioDevice::AudioDevice(const QAudioFormat &format, Controls *controls, AudioDeviceControls * adc, QObject *parent) :
+AudioDevice::AudioDevice(const QAudioFormat &format, AudioModule *module, ModuleControls *controls, AudioDeviceControls * adc, QObject *parent) :
 	QIODevice(parent),
 	m_pos(0),
-	m_module( 44100 , controls),
+	m_module( module ),
+	m_moduleControls( controls ),
 	m_device(QAudioDeviceInfo::defaultOutputDevice()),
 	m_audioDevice(0),
 	m_audioOutput(0),
@@ -114,7 +115,7 @@ qint64 AudioDevice::readData(char *data, qint64 len)
 	if( len )
 	{
 		len = len > bytesAvailable() ? bytesAvailable() : len;
-		m_module.processAudio( m_frameBuffer, len / 4 );
+		m_module->processAudio( m_frameBuffer, len / 4 );
 		sampleFrameToBuffer( m_frameBuffer, len, m_format );
 		memcpy(data,m_buffer,len);
 		m_audioDeviceControls->m_bufferSize = len;

@@ -9,6 +9,7 @@
 #include <QAudioOutput>
 #include <QByteArray>
 #include <QIODevice>
+#include "Demo1AudioModule.h"
 
 
 class AudioDevice: public QIODevice
@@ -16,7 +17,7 @@ class AudioDevice: public QIODevice
 	Q_OBJECT
 
 public:
-	AudioDevice(const QAudioFormat &format, Controls *controls, AudioDeviceControls * adc, QObject *parent = 0 );
+	AudioDevice(const QAudioFormat &format, AudioModule *module, ModuleControls *controls, AudioDeviceControls * adc, QObject *parent = 0 );
 	virtual ~AudioDevice();
 
 	void start();
@@ -38,7 +39,8 @@ private:
 	QByteArray m_buffer;
 	sampleFrame *m_frameBuffer;
 	QAudioFormat m_format;
-	AudioModule m_module;
+	AudioModule *m_module;
+	ModuleControls *m_moduleControls;
 	QAudioDeviceInfo m_device;
 	AudioDevice *m_audioDevice;
 	QAudioOutput *m_audioOutput;
