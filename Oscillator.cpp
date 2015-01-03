@@ -20,14 +20,12 @@ void Oscillator::setFrequency(float frequency)
 	m_phase_increment = frequency / m_sampleRate;
 }
 
-void Oscillator::processAudio(sampleFrame *buffer, qint64 len)
+
+inline void Oscillator::tick(sampleFrame *frame)
 {
-	for( int i = 0; i < len; ++i)
-	{
-		m_current += m_phase_increment;
-		if( m_current > 0.5) { m_current -= 1.0; }
-		buffer[i][0] = m_current;
-		buffer[i][1] = m_current;
-	}
+	m_current += m_phase_increment;
+	if( m_current > 0.5) { m_current -= 1.0; }
+	frame[0][0] = m_current;
+	frame[0][1] = m_current;
 }
 

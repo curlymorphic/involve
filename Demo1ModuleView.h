@@ -5,6 +5,7 @@
 #include <QWidget>
 #include "ModuleView.h"
 #include "Demo1ModuleControls.h"
+#include "Fader.h"
 
 class Demo1ModuleView : public ModuleView
 {
@@ -12,9 +13,16 @@ class Demo1ModuleView : public ModuleView
 public:
 	Demo1ModuleView( Demo1ModuleControls *controls, QWidget *parent = 0 , Qt::WindowFlags flags = 0);
 	~Demo1ModuleView();
+	virtual void layout();
+
 
 private:
 	Demo1ModuleControls *m_controls;
+
+	Fader *m_freqFader;
+	Fader *m_gainFader;
+	Fader *m_cutOffFader;
+	Fader *m_resFader;
 };
 
 #endif // DEMO1MODULEVIEW_H

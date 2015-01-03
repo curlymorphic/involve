@@ -27,7 +27,10 @@ SOURCES += main.cpp\
     Demo1ModuleControls.cpp \
     Demo1AudioModule.cpp \
     ModuleView.cpp \
-    Demo1ModuleView.cpp
+    Demo1ModuleView.cpp \
+    Gain.cpp \
+    Lfo.cpp \
+    Filters.cpp
 
 HEADERS  += MainWindow.h \
     Types.h \
@@ -45,6 +48,9 @@ HEADERS  += MainWindow.h \
     Demo1ModuleControls.h \
     Demo1AudioModule.h \
     ModuleView.h \
-    Demo1ModuleView.h
+    Demo1ModuleView.h \
+    Gain.h \
+    Lfo.h \
+    Filters.h
 
 FORMS    += MainWindow.ui

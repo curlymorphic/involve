@@ -38,6 +38,15 @@ private:
 	AudioModule *m_audioModule;
 	ModuleView *m_moduleView;
 
+protected:
+	 virtual void resizeEvent(QResizeEvent * event)
+	{
+		if(m_moduleView)
+		{
+			m_moduleView->layout();
+		}
+	}
+
 
 
 

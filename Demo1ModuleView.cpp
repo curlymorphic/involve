@@ -10,35 +10,40 @@ Demo1ModuleView::Demo1ModuleView(Demo1ModuleControls *controls, QWidget *parent,
 	ModuleView( parent, flags ),
 	m_controls( controls )
 {
-	const int height8 = QApplication::screens().at( 0 )->size().height() / 8;
-	Fader *freqFader = new Fader( &m_controls->freqModel , this );
-	freqFader->move( width() * 0.1 , height8  );
-	freqFader->resize( width() * 0.8 , freqFader->height() );
-	freqFader->setOrientation( Qt::Horizontal );
-	freqFader->show();
+	m_freqFader = new Fader( &m_controls->freqModel , this );
+	m_gainFader = new Fader( &m_controls->gainModel, this);
+	m_cutOffFader = new Fader(&m_controls->cutOffModel, this);
+	m_resFader = new Fader( &m_controls->resModel, this );
 
-	Fader *gainFader = new Fader( &m_controls->gainModel, this);
-	gainFader->resize( width() * 0.8 , gainFader->height() );
-	gainFader->setOrientation( Qt::Horizontal );
-	gainFader->show();
-	gainFader->move( width() * 0.1 , height8 * 2 );
-
-	Fader *cutOffFader = new Fader (&m_controls->cutOffModel, this);
-	cutOffFader->resize( width() * 0.8 , cutOffFader->height() );
-	cutOffFader->setOrientation( Qt::Horizontal );
-	cutOffFader->show();
-	cutOffFader->move( width() * 0.1 , height8 * 3 );
-
-	Fader *resFader = new Fader ( &m_controls->resModel, this );
-	resFader->resize( width() * 0.8 , resFader->height() );
-	resFader->setOrientation( Qt::Horizontal );
-	resFader->show();
-	resFader->move( width() * 0.1 , height8 * 4 );
-
+	m_freqFader->show();
+	m_gainFader->show();
+	m_cutOffFader->show();
+	m_resFader->show();
 }
 
 Demo1ModuleView::~Demo1ModuleView()
 {
 
 }
+
+void Demo1ModuleView::layout()
+{
+	const int height8 = QApplication::screens().at( 0 )->size().height() / 8;
+	m_freqFader->move( width() * 0.1 , height8  );
+	m_freqFader->resize( width() * 0.8 , m_freqFader->height() );
+	m_freqFader->setOrientation( Qt::Horizontal );
+	m_gainFader->resize( width() * 0.8 , m_gainFader->height() );
+	m_gainFader->setOrientation( Qt::Horizontal );
+	m_gainFader->move( width() * 0.1 , height8 * 2 );
+	m_cutOffFader->resize( width() * 0.8 , m_cutOffFader->height() );
+	m_cutOffFader->setOrientation( Qt::Horizontal );
+	m_cutOffFader->move( width() * 0.1 , height8 * 3 );
+	m_resFader->resize( width() * 0.8 , m_resFader->height() );
+	m_resFader->setOrientation( Qt::Horizontal );
+	m_resFader->move( width() * 0.1 , height8 * 4 );
+
+}
+
+
+
 

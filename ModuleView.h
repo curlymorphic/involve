@@ -11,7 +11,9 @@ class ModuleView : public QWidget
 public:
 	ModuleView( QWidget *parent = 0 , Qt::WindowFlags flags = 0 );
 	~ModuleView();
-protected:
+	virtual void layout();
+
+
 
 
 

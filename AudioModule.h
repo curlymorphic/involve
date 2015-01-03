@@ -3,7 +3,7 @@
 
 #include "AudioProcess.h"
 #include "Oscillator.h"
-#include "Controls.h"
+#include "ModuleControls.h"
 
 #include <QtCore>
 
