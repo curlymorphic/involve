@@ -27,7 +27,7 @@ void Fader::modelValueChanged( int val )
 {
 	if(value() / multipler() != val )
 	{
-		setValue(val * multipler());
+		setValue((float)val * multipler());
 	}
 }
 
@@ -38,5 +38,4 @@ void Fader::UiComponentValueChanged( int val )
 		m_model->setValue( (float)val / (float)multipler() );
 	}
 }
-
 

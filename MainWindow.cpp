@@ -48,6 +48,11 @@ MainWindow::MainWindow(QWidget *parent) :
 		m_audioThread->start();
 //	initializeAudio();
 
+	periodicUpdate = new QTimer( this );
+	periodicUpdate->start( 200 );
+
+	connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( update() ));
+
 }
 
 MainWindow::~MainWindow()

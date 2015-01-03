@@ -37,6 +37,7 @@ public:
 protected:
 	ModuleControls m_controls;
 
+
 };
 
 #endif // AUDIOMODULE_H

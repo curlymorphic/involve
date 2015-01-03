@@ -13,6 +13,13 @@ public:
 	~ModuleView();
 	virtual void layout();
 
+protected:
+	virtual void resizeEvent( QResizeEvent *event)
+	{
+		QWidget::resizeEvent( event );
+		layout();
+	}
+
 
 
 

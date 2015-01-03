@@ -40,6 +40,7 @@ private:
 	AudioThread *m_audioThread;
 	AudioModule *m_audioModule;
 	ModuleView *m_moduleView;
+	QTimer *periodicUpdate;
 
 protected:
 	 virtual void resizeEvent(QResizeEvent * event)
@@ -49,7 +50,7 @@ protected:
 		{
 			m_moduleView->resize( QApplication::screens().at( 0 )->size().width(),
 								  QApplication::screens().at( 0 )->size().height() - 50 );
-			m_moduleView->layout();
+//			m_moduleView->layout();
 		}
 		QMainWindow::resizeEvent( event );
 	}
