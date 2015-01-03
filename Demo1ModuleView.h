@@ -6,6 +6,7 @@
 #include "ModuleView.h"
 #include "Demo1ModuleControls.h"
 #include "Fader.h"
+#include "Ribbon.h"
 
 class Demo1ModuleView : public ModuleView
 {
@@ -16,6 +17,8 @@ public:
 	virtual void layout();
 
 
+
+
 private:
 	Demo1ModuleControls *m_controls;
 
@@ -23,6 +26,7 @@ private:
 	Fader *m_gainFader;
 	Fader *m_cutOffFader;
 	Fader *m_resFader;
+	Ribbon *m_ribbon;
 };
 
 #endif // DEMO1MODULEVIEW_H

@@ -22,6 +22,8 @@ private:
 	Lfo *m_volLfo;
 	Lp12 *m_lp;
 	Demo1ModuleControls *m_controls;
+
+
 };
 
 #endif // DEMO1AUDIOMODULE_H

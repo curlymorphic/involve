@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     Demo1ModuleView.cpp \
     Gain.cpp \
     Lfo.cpp \
-    Filters.cpp
+    Filters.cpp \
+    Ribbon.cpp
 
 HEADERS  += MainWindow.h \
     Types.h \
@@ -51,6 +52,7 @@ HEADERS  += MainWindow.h \
     Demo1ModuleView.h \
     Gain.h \
     Lfo.h \
-    Filters.h
+    Filters.h \
+    Ribbon.h
 
 FORMS    += MainWindow.ui

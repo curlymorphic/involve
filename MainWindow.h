@@ -10,6 +10,9 @@
 #include "AudioThread.h"
 #include "Demo1ModuleControls.h"
 #include "ModuleView.h"
+#include "QResizeEvent"
+#include "QApplication"
+#include "QScreen"
 
 
 namespace Ui {
@@ -41,10 +44,14 @@ private:
 protected:
 	 virtual void resizeEvent(QResizeEvent * event)
 	{
+		(void) event;
 		if(m_moduleView)
 		{
+			m_moduleView->resize( QApplication::screens().at( 0 )->size().width(),
+								  QApplication::screens().at( 0 )->size().height() - 50 );
 			m_moduleView->layout();
 		}
+		QMainWindow::resizeEvent( event );
 	}
 
 
