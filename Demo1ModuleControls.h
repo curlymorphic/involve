@@ -19,6 +19,8 @@ public:
 
 	Model freqModel;
 	Model gainModel;
+	Model cutOffModel;
+	Model resModel;
 };
 
 #endif // DEMO1MODULECONTROLS_H

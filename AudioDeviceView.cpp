@@ -8,16 +8,16 @@ AudioDeviceView::AudioDeviceView(QWidget *parent, AudioDeviceControls *controls)
 	m_audioDeviceControls( controls )
 {
 
-	setMinimumSize( 100, 100 );
-	resize( 100, 100 );
+
+	resize( parent->width() , 50 );
 
 	m_sampleRateLabel = new QLabel( this );
 	m_sampleRateLabel->move ( 5, 5 );
-	m_sampleRateLabel->resize( 80, m_sampleRateLabel->height() );
+	m_sampleRateLabel->resize( 200, m_sampleRateLabel->height() );
 
 	m_bufferSizeLabel = new QLabel( this );
-	m_bufferSizeLabel->move( 5, 15 );
-	m_bufferSizeLabel->resize( 80, m_bufferSizeLabel->height() );
+	m_bufferSizeLabel->move( 200, 5 );
+	m_bufferSizeLabel->resize( 200, m_bufferSizeLabel->height() );
 
 	QTimer *t = new QTimer( this );
 	t->setSingleShot( false );

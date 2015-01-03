@@ -2,11 +2,10 @@
 
 
 
-Oscillator::Oscillator(qint64 sampleRate, ModuleControls *controls) :
+Oscillator::Oscillator( qint64 sampleRate ) :
 	AudioProcess( sampleRate ),
 	m_phase_increment( 0.003 ),
-	m_current( 0 ),
-	m_controls( (Demo1ModuleControls*)controls )
+	m_current( 0 )
 {
 
 }
@@ -23,7 +22,6 @@ void Oscillator::setFrequency(float frequency)
 
 void Oscillator::processAudio(sampleFrame *buffer, qint64 len)
 {
-	setFrequency( m_controls->freqModel.value() );
 	for( int i = 0; i < len; ++i)
 	{
 		m_current += m_phase_increment;
