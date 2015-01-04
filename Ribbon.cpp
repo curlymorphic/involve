@@ -79,8 +79,9 @@ bool Ribbon::event(QEvent *event)
 		if(event->type() == QEvent::TouchEnd ) { emit noteOff(); }
 		QTouchEvent *touchEvent = static_cast<QTouchEvent *>(event);
 		int x = touchEvent->touchPoints().at(0).pos().x();
-		m_freqModel->setValue( touchEvent->touchPoints().last().pos().x() / m_pixelPerHz );
-		m_velocityModel->setValue( ( height() - touchEvent->touchPoints().last().pos().y() )/ m_pixelPerVel );
+		int y = touchEvent->touchPoints().at(0).pos().y();
+		if( x > 0 && x < width() ) { m_freqModel->setValue( x / m_pixelPerHz ); }
+		if( y > 0 && y < height() ) { m_velocityModel->setValue( ( height() - y )/ m_pixelPerVel ); }
 		return true;
 		break;
 	}
