@@ -31,7 +31,9 @@ SOURCES += main.cpp\
     Gain.cpp \
     Lfo.cpp \
     Filters.cpp \
-    Ribbon.cpp
+    Ribbon.cpp \
+    TouchController.cpp \
+    VFader.cpp
 
 HEADERS  += MainWindow.h \
     Types.h \
@@ -53,6 +55,8 @@ HEADERS  += MainWindow.h \
     Gain.h \
     Lfo.h \
     Filters.h \
-    Ribbon.h
+    Ribbon.h \
+    TouchController.h \
+    VFader.h
 
 FORMS    += MainWindow.ui

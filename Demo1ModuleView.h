@@ -7,6 +7,7 @@
 #include "Demo1ModuleControls.h"
 #include "Fader.h"
 #include "Ribbon.h"
+#include "VFader.h"
 
 class Demo1ModuleView : public ModuleView
 {
@@ -22,7 +23,7 @@ public:
 private:
 	Demo1ModuleControls *m_controls;
 
-	Fader *m_freqFader;
+	VFader *m_freqFader;
 	Fader *m_gainFader;
 	Fader *m_cutOffFader;
 	Fader *m_resFader;

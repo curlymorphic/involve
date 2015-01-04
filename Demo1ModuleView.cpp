@@ -11,7 +11,7 @@ Demo1ModuleView::Demo1ModuleView(Demo1ModuleControls *controls, QWidget *parent,
 	ModuleView( parent, flags ),
 	m_controls( controls )
 {
-	m_freqFader = new Fader( &m_controls->freqModel , this );
+	m_freqFader = new VFader( 0, &m_controls->freqModel , this );
 	m_gainFader = new Fader( &m_controls->gainModel, this );
 	m_cutOffFader = new Fader(&m_controls->cutOffModel, this );
 	m_resFader = new Fader( &m_controls->resModel, this );
@@ -34,9 +34,9 @@ void Demo1ModuleView::layout()
 	const int height = QApplication::screens().at( 0 )->size().height();
 	const int width = QApplication::screens().at( 0 )->size().width();
 //	resize( height-50, width-50 );
-	m_freqFader->move( width * 0.1 , height8  );
-	m_freqFader->resize( width * 0.8 , m_freqFader->height() );
-	m_freqFader->setOrientation( Qt::Horizontal );
+	m_freqFader->move( width * 0.1 , height8  - 50  );
+	m_freqFader->resize( width * 0.8 , 200 );
+//	m_freqFader->setOrientation( Qt::Horizontal );
 	m_gainFader->resize( width * 0.8 , m_gainFader->height() );
 	m_gainFader->setOrientation( Qt::Horizontal );
 	m_gainFader->move( width * 0.1 , height8 * 2 );

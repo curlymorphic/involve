@@ -1,17 +1,15 @@
-#ifndef RIBBON_H
-#define RIBBON_H
+#ifndef VFADER_H
+#define VFADER_H
 
 #include <QWidget>
 #include "Model.h"
 #include "TouchController.h"
 
-class Ribbon : public TouchController
+class VFader : public TouchController
 {
-	Q_OBJECT
 public:
-	explicit Ribbon( Model *xModel = 0, Model *yModel = 0, QWidget *parent = 0 );
-	~Ribbon();
-
+	VFader( Model *xModel = 0, Model *yModel = 0, QWidget *parent = 0 );
+	~VFader();
 
 protected:
 	virtual void paintEvent( QPaintEvent *event );
@@ -22,4 +20,4 @@ private:
 	qint64 m_dotSize;
 };
 
-#endif // RIBBON_H
+#endif // VFADER_H
