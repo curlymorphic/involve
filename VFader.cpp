@@ -4,8 +4,8 @@
 
 
 
-VFader::VFader(Model *xModel, Model *yModel, QWidget *parent) :
-	TouchController( xModel, yModel, parent ),
+VFader::VFader(  Model *yModel, QWidget *parent) :
+	TouchController( 0, yModel, parent ),
 	m_dotSize( 10 )
 {
 

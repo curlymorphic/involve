@@ -6,7 +6,10 @@
 class ModuleControls : public Controls
 {
 public:
-	explicit ModuleControls( QObject *parent = 0) : Controls( parent )
+	explicit ModuleControls( QObject *parent = 0) :
+		Controls( parent ),
+		noteOn( false ),
+		noteOff( false )
 	{
 
 	}
@@ -15,6 +18,9 @@ public:
 	{
 
 	}
+
+	bool noteOn;
+	bool noteOff;
 };
 
 #endif // MODULECONTROLS

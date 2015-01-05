@@ -17,16 +17,17 @@ public:
 	~Demo1ModuleView();
 	virtual void layout();
 
-
+private slots:
+	void notePressed();
+	void noteRelease();
 
 
 private:
 	Demo1ModuleControls *m_controls;
 
-	VFader *m_freqFader;
-	Fader *m_gainFader;
-	Fader *m_cutOffFader;
-	Fader *m_resFader;
+
+	VFader *m_cutOffFader;
+	VFader *m_resFader;
 	Ribbon *m_ribbon;
 };
 

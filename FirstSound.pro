@@ -33,7 +33,9 @@ SOURCES += main.cpp\
     Filters.cpp \
     Ribbon.cpp \
     TouchController.cpp \
-    VFader.cpp
+    VFader.cpp \
+    ControlGenerator.cpp
+
 
 HEADERS  += MainWindow.h \
     Types.h \
@@ -57,6 +59,10 @@ HEADERS  += MainWindow.h \
     Filters.h \
     Ribbon.h \
     TouchController.h \
-    VFader.h
+    VFader.h \
+    ControlGenerator.h \
+    AD.h \
+    Interpolation.h \
+    ADSR.h
 
 FORMS    += MainWindow.ui

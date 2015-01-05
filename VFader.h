@@ -8,7 +8,7 @@
 class VFader : public TouchController
 {
 public:
-	VFader( Model *xModel = 0, Model *yModel = 0, QWidget *parent = 0 );
+	VFader(  Model *yModel = 0, QWidget *parent = 0 );
 	~VFader();
 
 protected:

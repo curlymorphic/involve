@@ -2,16 +2,17 @@
 #define LFO_H
 
 #include <QtCore>
+#include "ControlGenerator.h"
 
 
 
-class Lfo
+class Lfo : public ControlGenerator
 {
 public:
 	Lfo( qint64 sampleRate );
 	~Lfo();
 	void setFrequency( float freq );
-	inline float tick()
+	virtual inline float tick()
 	{
 		m_currentValue += m_increment;
 		if( m_currentValue > 0.5 ) { m_currentValue -= 1.0; }
@@ -19,7 +20,6 @@ public:
 	}
 
 protected:
-	qint64 m_sampleRate;
 	float m_increment;
 	float m_currentValue;
 };

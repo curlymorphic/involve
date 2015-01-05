@@ -7,6 +7,9 @@
 #include "Gain.h"
 #include "Lfo.h"
 #include "Filters.h"
+#include "AD.h"
+#include "ADSR.h"
+
 
 class Demo1AudioModule : public AudioModule
 {
@@ -21,6 +24,7 @@ private:
 	Gain *m_gain;
 	Lfo *m_volLfo;
 	Lp12 *m_lp;
+	Adsr *m_ad;
 	Demo1ModuleControls *m_controls;
 
 

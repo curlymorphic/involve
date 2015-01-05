@@ -119,6 +119,8 @@ qint64 AudioDevice::readData(char *data, qint64 len)
 		sampleFrameToBuffer( m_frameBuffer, len, m_format );
 		memcpy(data,m_buffer,len);
 		m_audioDeviceControls->m_bufferSize = len;
+		m_moduleControls->noteOn = false;
+		m_moduleControls->noteOff = false;
 	}
 	return len;
 }

@@ -49,7 +49,7 @@ MainWindow::MainWindow(QWidget *parent) :
 //	initializeAudio();
 
 	periodicUpdate = new QTimer( this );
-	periodicUpdate->start( 200 );
+	periodicUpdate->start( 50 );
 
 	connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( update() ));
 
