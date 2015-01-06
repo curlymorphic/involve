@@ -17,8 +17,7 @@ public:
 	}
 
 
-	Model freqModel;
-	Model gainModel;
+
 	Model cutOffModel;
 	Model resModel;
 };

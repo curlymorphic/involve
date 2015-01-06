@@ -34,6 +34,16 @@ public:
 		return m_min;
 	}
 
+	inline void setMax( float max)
+	{
+		m_max = max;
+	}
+
+	inline void setMin( float min )
+	{
+		m_min = min;
+	}
+
 signals:
 	void dataChanged( int );
 

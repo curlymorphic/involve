@@ -12,7 +12,7 @@ public:
 		ControlGenerator( sampleRate ),
 		m_attackTime( 20000 ),
 		m_decayTime( 35000 ),
-		m_phase( Phase::decay ),
+		m_phase( decay ),
 		m_samplesSincePhaseChanged( 9999999 )
 	{
 

@@ -2,6 +2,7 @@
 #define FILTERS_H
 
 #include "AudioProcess.h"
+#include "AudioMath.h"
 
 
 class BiQuad

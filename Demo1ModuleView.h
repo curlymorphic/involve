@@ -6,7 +6,6 @@
 #include "ModuleView.h"
 #include "Demo1ModuleControls.h"
 #include "Fader.h"
-#include "Ribbon.h"
 #include "VFader.h"
 
 class Demo1ModuleView : public ModuleView
@@ -28,7 +27,7 @@ private:
 
 	VFader *m_cutOffFader;
 	VFader *m_resFader;
-	Ribbon *m_ribbon;
+
 };
 
 #endif // DEMO1MODULEVIEW_H

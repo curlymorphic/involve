@@ -19,7 +19,11 @@ protected:
 
 private:
 
+	void initilizeNotes();
+
+
 	qint64 m_dotSize;
+	float *m_notes;
 };
 
 #endif // RIBBON_H

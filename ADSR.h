@@ -14,7 +14,7 @@ public:
 		m_decayTime( 35000 ),
 		m_sustainLevel( 0.5 ),
 		m_releaseTime( 65000 ),
-		m_phase( Phase::release ),
+		m_phase( release ),
 		m_samplesSincePhaseChanged( 999999 ),
 		m_lastValue( 0 )
 	{

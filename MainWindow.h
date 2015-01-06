@@ -13,6 +13,9 @@
 #include "QResizeEvent"
 #include "QApplication"
 #include "QScreen"
+#include "Ribbon.h"
+#include "VFader.h"
+#include "UiControls.h"
 
 
 namespace Ui {
@@ -41,20 +44,44 @@ private:
 	AudioModule *m_audioModule;
 	ModuleView *m_moduleView;
 	QTimer *periodicUpdate;
+	Ribbon *m_ribbon;
+	VFader *m_startOctaveFader;
+	VFader *m_ocatveRangeFader;
+	UiControls *m_uiControls;
 
 protected:
 	 virtual void resizeEvent(QResizeEvent * event)
 	{
+		const int height8 = QApplication::screens().at( 0 )->size().height() / 8;
+		const int height = QApplication::screens().at( 0 )->size().height();
+		const int width = QApplication::screens().at( 0 )->size().width();
+
 		(void) event;
 		if(m_moduleView)
 		{
-			m_moduleView->resize( QApplication::screens().at( 0 )->size().width(),
-								  QApplication::screens().at( 0 )->size().height() - 50 );
+			m_moduleView->resize( width * 0.95 ,
+								  height - 50 );
 //			m_moduleView->layout();
+		}
+		if (m_ribbon)
+		{
+			m_ribbon->resize( width , height8 * 2);
+			m_ribbon->move( 0, height - (height8 *3) );
+		}
+
+		if(m_ocatveRangeFader)
+		{
+			m_ocatveRangeFader->resize( width * 0.05 , height8 * 2 );
+			m_ocatveRangeFader->move( width - ( width * 0.05 ) , 0);
+
+			m_startOctaveFader->resize( width * 0.05 , height8 * 2 );
+			m_startOctaveFader->move( width - ( width * 0.05 ) , height8*3 );
 		}
 		QMainWindow::resizeEvent( event );
 	}
 
+private slots:
+	virtual void updateRibbon();
 
 
 

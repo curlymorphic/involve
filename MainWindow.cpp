@@ -13,6 +13,8 @@
 #include "Demo1ModuleView.h"
 #include <QApplication>
 #include "QScreen"
+#include "VFader.h"
+//#include "AudioMath.h"
 
 
 const int DurationSeconds = 1;
@@ -41,6 +43,17 @@ MainWindow::MainWindow(QWidget *parent) :
 						  QApplication::screens().at( 0 )->size().height() - 50 );
 	m_moduleView->move( 0 , 50 );
 
+	m_ribbon = new Ribbon( &m_controls->freqModel, &m_controls->gainModel, this );
+	connect( m_ribbon, SIGNAL( noteOn() ), m_moduleView, SLOT( notePressed() ) ) ;
+	connect( m_ribbon, SIGNAL( noteOff() ), m_moduleView, SLOT( noteRelease() ) );
+
+	m_uiControls = new UiControls( this );
+	m_ocatveRangeFader = new VFader( &m_uiControls->octaves, this);
+	m_ocatveRangeFader->show();
+
+	m_startOctaveFader = new VFader( &m_uiControls->startOctave, this ) ;
+	m_startOctaveFader->show();
+
 	m_audioDeviceView = new AudioDeviceView( this, m_audioDeviceControls );
 	m_audioDeviceView->show();
 	m_audioModule = new Demo1AudioModule( 44100, m_controls );
@@ -51,14 +64,26 @@ MainWindow::MainWindow(QWidget *parent) :
 	periodicUpdate = new QTimer( this );
 	periodicUpdate->start( 50 );
 
-	connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( update() ));
+	connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( updateRibbon() ));
+		connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( update() ));
 
 }
 
 MainWindow::~MainWindow()
 {
 	delete ui;
+	if ( m_startOctaveFader ) { delete m_startOctaveFader; }
+	if( m_ocatveRangeFader ) { delete m_ocatveRangeFader; }
 
+}
+
+void MainWindow::updateRibbon()
+{
+	m_controls->freqModel.setMin( midiNoteFreq( (int)m_uiControls->startOctave.value()*12 ) );
+	m_controls->freqModel.setMax(  midiNoteFreq( ((int) m_uiControls->startOctave.value() * 12 ) +
+												m_uiControls->octaves.value() * 12 ) );
+	m_ribbon->recalculatePixelMultipliers();
+//	QMainWindow::update();
 }
 
 

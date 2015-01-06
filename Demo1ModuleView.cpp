@@ -14,9 +14,8 @@ Demo1ModuleView::Demo1ModuleView(Demo1ModuleControls *controls, QWidget *parent,
 
 	m_cutOffFader = new VFader(&m_controls->cutOffModel, this );
 	m_resFader = new VFader( &m_controls->resModel, this );
-	m_ribbon = new Ribbon( &m_controls->freqModel, &m_controls->gainModel, this );
-	connect( m_ribbon, SIGNAL( noteOn() ), this, SLOT( notePressed() ) ) ;
-	connect( m_ribbon, SIGNAL( noteOff() ), this, SLOT( noteRelease() ) );
+
+
 
 
 	m_cutOffFader->show();
@@ -40,8 +39,7 @@ void Demo1ModuleView::layout()
 	m_resFader->resize( width * 0.1 , height8 * 2 );
 	m_resFader->move( width * 0.3 , 0 );
 
-	m_ribbon->resize( width , height8 * 2);
-	m_ribbon->move( 0, height - (height8 *3) );
+
 
 }
 

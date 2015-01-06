@@ -78,6 +78,11 @@ float TouchController::getMaxY()
 	return m_maxY;
 }
 
+qint64 TouchController::getXPixel(float val)
+{
+	return (val-m_minX) * m_pixelPerX;
+}
+
 void TouchController::resizeEvent(QResizeEvent *event)
 {
 	recalculatePixelMultipliers();
@@ -98,8 +103,8 @@ bool TouchController::event(QEvent *event)
 		QTouchEvent *touchEvent = static_cast<QTouchEvent *>(event);
 		int x = touchEvent->touchPoints().at(0).pos().x();
 		int y = touchEvent->touchPoints().at(0).pos().y();
-		if( m_xModel && x > 0 && x < width() ) { m_xModel->setValue( x / m_pixelPerX ); }
-		if( m_yModel && y > 0 && y < height() ) { m_yModel->setValue( ( height() - y )/ m_pixelPerY ); }
+		if( m_xModel && x > 0 && x < width() ) { m_xModel->setValue( ( x / m_pixelPerX ) + m_minX ); }
+		if( m_yModel && y > 0 && y < height() ) { m_yModel->setValue( (( height() - y )  / m_pixelPerY ) + m_minY); }
 		return true;
 		break;
 	}
@@ -111,8 +116,16 @@ bool TouchController::event(QEvent *event)
 
 void TouchController::recalculatePixelMultipliers()
 {
+
 	m_pixelPerX = width() / (m_maxX - m_minX );
 	m_pixelPerY = height() / (m_maxY - m_minY );
+	if( m_xModel && m_yModel )
+	{
+		m_maxX = m_xModel->getMax();
+		m_minX = m_xModel->getMin();
+		m_maxY = m_yModel->getMax();
+		m_minY = m_yModel->getMin();
+	}
 
 }
 

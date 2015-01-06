@@ -11,6 +11,7 @@ public:
 
 	TouchController(Model *xModel = 0, Model *yModel = 0, QWidget *parent = 0);
 	~TouchController();
+	void recalculatePixelMultipliers();
 
 	void setMinX( float x );
 	float getMinX();
@@ -21,6 +22,9 @@ public:
 	float getMinY();
 	void setMaxY( float y );
 	float getMaxY();
+
+	qint64 getXPixel( float val );
+	qint64 getYPixel( float val );
 
 signals:
 
@@ -43,7 +47,6 @@ protected:
 
 
 private:
-	void recalculatePixelMultipliers();
 
 
 
