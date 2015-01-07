@@ -16,6 +16,7 @@
 #include "Ribbon.h"
 #include "VFader.h"
 #include "UiControls.h"
+#include "AutomationSensor.h"
 
 
 namespace Ui {
@@ -48,6 +49,7 @@ private:
 	VFader *m_startOctaveFader;
 	VFader *m_ocatveRangeFader;
 	UiControls *m_uiControls;
+	AutomationSensor *m_automationSensor;
 
 protected:
 	 virtual void resizeEvent(QResizeEvent * event)

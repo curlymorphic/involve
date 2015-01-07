@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += multimedia widgets
+QT += sensors
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -35,7 +36,8 @@ SOURCES += main.cpp\
     TouchController.cpp \
     VFader.cpp \
     ControlGenerator.cpp \
-    UiControls.cpp
+    UiControls.cpp \
+    AutomationSensor.cpp
 
 
 HEADERS  += MainWindow.h \
@@ -66,6 +68,7 @@ HEADERS  += MainWindow.h \
     Interpolation.h \
     ADSR.h \
     AudioMath.h \
-    UiControls.h
+    UiControls.h \
+    AutomationSensor.h
 
 FORMS    += MainWindow.ui

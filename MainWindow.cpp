@@ -67,6 +67,10 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( updateRibbon() ));
 		connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( update() ));
 
+	m_automationSensor = new AutomationSensor( this );
+	m_automationSensor->m_xModel = &m_controls->cutOffModel;
+	m_automationSensor->m_yModel = &m_controls->resModel;
+//	m_automationSensor->m_zModel = &m_uiControls->octaves;
 }
 
 MainWindow::~MainWindow()
