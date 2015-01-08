@@ -1,5 +1,5 @@
 Phaser
-4 pole filter
+
 adsr controls
 
 vu meter
@@ -19,4 +19,6 @@ document
 ******** DONE *********
 waveshapes
 move ribbon to bottom of screen
+4 pole filter
+
 

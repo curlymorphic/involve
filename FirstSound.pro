@@ -38,7 +38,8 @@ SOURCES += main.cpp\
     ControlGenerator.cpp \
     UiControls.cpp \
     AutomationSensor.cpp \
-    WTOscillator.cpp
+    WTOscillator.cpp \
+    VuFader.cpp
 
 
 HEADERS  += MainWindow.h \
@@ -71,7 +72,8 @@ HEADERS  += MainWindow.h \
     AudioMath.h \
     UiControls.h \
     AutomationSensor.h \
-    WTOscillator.h
+    WTOscillator.h \
+    VuFader.h
 
 FORMS    += MainWindow.ui
 

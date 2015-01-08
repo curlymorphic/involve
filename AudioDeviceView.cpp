@@ -1,23 +1,26 @@
 #include "AudioDeviceView.h"
 #include <QTimer>
+#include <QApplication>
+#include <QScreen>
 
 
 
 AudioDeviceView::AudioDeviceView(QWidget *parent, AudioDeviceControls *controls) :
 	QWidget( parent ),
-	m_audioDeviceControls( controls )
+	m_audioDeviceControls( controls ),
+	m_gainFader(0)
 {
 
 
 	resize( parent->width() , 50 );
+	const int height8 = QApplication::screens().at( 0 )->size().height() / 8;
+	const int screenHeight = QApplication::screens().at( 0 )->size().height();
+	const int ScreenWidth = QApplication::screens().at( 0 )->size().width();
+	m_gainFader = new VuFader( &controls->m_gainModel , this );
+	m_gainFader->resize(height8 * 2, height() );
+	m_gainFader->move( 0, 0 );
 
-	m_sampleRateLabel = new QLabel( this );
-	m_sampleRateLabel->move ( 5, 5 );
-	m_sampleRateLabel->resize( 200, m_sampleRateLabel->height() );
 
-	m_bufferSizeLabel = new QLabel( this );
-	m_bufferSizeLabel->move( 200, 5 );
-	m_bufferSizeLabel->resize( 200, m_bufferSizeLabel->height() );
 
 	QTimer *t = new QTimer( this );
 	t->setSingleShot( false );
@@ -35,7 +38,6 @@ AudioDeviceView::~AudioDeviceView()
 
 void AudioDeviceView::updateText()
 {
-	m_sampleRateLabel->setText( QString::number( m_audioDeviceControls->m_sampleRate ) );
-	m_bufferSizeLabel->setText( QString::number( m_audioDeviceControls->m_bufferSize ) );
+
 }
 

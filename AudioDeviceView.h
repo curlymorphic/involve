@@ -4,6 +4,7 @@
 #include <QWidget>
 #include "AudioDeviceControls.h"
 #include <QLabel>
+#include "VuFader.h"
 
 class AudioDeviceView : public QWidget
 {
@@ -19,8 +20,7 @@ public slots:
 
 private:
 	AudioDeviceControls *m_audioDeviceControls;
-	QLabel *m_sampleRateLabel;
-	QLabel *m_bufferSizeLabel;
+	VuFader *m_gainFader;
 
 };
 

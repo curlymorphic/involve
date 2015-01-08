@@ -11,7 +11,7 @@ public:
 		noteOn( false ),
 		noteOff( false ),
 		freqModel(100.0, 65.4, 130.8, 0.1, tr ( "Frequency" ) , this ),
-		gainModel(0.5, 0.0, 1.0, 0.1, tr( "Gain" ), this )
+		velocityModel(0.5, 0.0, 1.0, 0.1, tr( "Gain" ), this )
 	{
 
 	}
@@ -24,7 +24,7 @@ public:
 	bool noteOn;
 	bool noteOff;
 	Model freqModel;
-	Model gainModel;
+	Model velocityModel;
 };
 
 #endif // MODULECONTROLS

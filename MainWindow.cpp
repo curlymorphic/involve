@@ -47,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
 						  QApplication::screens().at( 0 )->size().height() - 50 );
 	m_moduleView->move( 0 , 50 );
 
-	m_ribbon = new Ribbon( &m_controls->freqModel, &m_controls->gainModel, this );
+	m_ribbon = new Ribbon( &m_controls->freqModel, &m_controls->velocityModel, this );
 	connect( m_ribbon, SIGNAL( noteOn() ), m_moduleView, SLOT( notePressed() ) ) ;
 	connect( m_ribbon, SIGNAL( noteOff() ), m_moduleView, SLOT( noteRelease() ) );
 

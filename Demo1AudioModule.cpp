@@ -27,7 +27,7 @@ void Demo1AudioModule::processAudio(sampleFrame *buffer, qint64 len)
 		{
 			m_osc->setFrequency( m_controls->freqModel.value() );
 			m_osc->setShape( (WTWaveShape)(int)m_controls->waveShapeModel.value() );
-			m_gain->setGain( m_controls->gainModel.value() *
+			m_gain->setGain( m_controls->velocityModel.value() *
 							 ( m_volLfo->tick() + 1.0 ) * m_ad->tick(m_controls->noteOn ,
 																	 m_controls->noteOff) );
 			m_lp->setParameters(m_controls->cutOffModel.value(), m_controls->resModel.value() );
