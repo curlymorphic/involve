@@ -6,7 +6,7 @@ vu meter
 delay
 distortion
 lfo
-vol
+
 pan
 background
 log scale fader
@@ -20,5 +20,7 @@ document
 waveshapes
 move ribbon to bottom of screen
 4 pole filter
+vol
+
 
 

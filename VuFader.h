@@ -4,11 +4,12 @@
 #include <QWidget>
 #include "Model.h"
 #include "TouchController.h"
+#include "AudioMath.h"
 
 class VuFader : public TouchController
 {
 public:
-	VuFader( Model *xModel = 0, QWidget *parent = 0 );
+	VuFader( Model *xModel = 0, QWidget *parent = 0, sampleFrame *peaks = 0 );
 	~VuFader();
 
 protected:
@@ -18,6 +19,7 @@ protected:
 private:
 
 	qint64 m_dotSize;
+	sampleFrame *m_peaks;
 };
 
 #endif // VUFADER_H
