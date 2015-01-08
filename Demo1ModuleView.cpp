@@ -14,12 +14,14 @@ Demo1ModuleView::Demo1ModuleView(Demo1ModuleControls *controls, QWidget *parent,
 
 	m_cutOffFader = new VFader(&m_controls->cutOffModel, this );
 	m_resFader = new VFader( &m_controls->resModel, this );
+	m_waveShapeFader = new VFader( &m_controls->waveShapeModel, this );
 
 
 
 
 	m_cutOffFader->show();
 	m_resFader->show();
+	m_waveShapeFader->show();
 }
 
 Demo1ModuleView::~Demo1ModuleView()
@@ -38,6 +40,8 @@ void Demo1ModuleView::layout()
 	m_cutOffFader->move( width * 0.1 , 0 );
 	m_resFader->resize( width * 0.1 , height8 * 2 );
 	m_resFader->move( width * 0.3 , 0 );
+	m_waveShapeFader->resize( width * 0.1 , height8 * 2 );
+	m_waveShapeFader->move( width * 0.5 , 0 );
 
 
 

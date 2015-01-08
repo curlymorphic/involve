@@ -20,6 +20,7 @@ public:
 
 	Model cutOffModel;
 	Model resModel;
+	Model waveShapeModel;
 };
 
 #endif // DEMO1MODULECONTROLS_H

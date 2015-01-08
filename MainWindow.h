@@ -68,7 +68,7 @@ protected:
 		if (m_ribbon)
 		{
 			m_ribbon->resize( width , height8 * 2);
-			m_ribbon->move( 0, height - (height8 *3) );
+			m_ribbon->move( 0, height- 50  - (height8 *2) );
 		}
 
 		if(m_ocatveRangeFader)

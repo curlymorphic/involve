@@ -9,6 +9,7 @@
 #include "Filters.h"
 #include "AD.h"
 #include "ADSR.h"
+#include "WTOscillator.h"
 
 
 class Demo1AudioModule : public AudioModule
@@ -20,7 +21,7 @@ public:
 
 
 private:
-	Oscillator *m_osc;
+	WTOscillator *m_osc;
 	Gain *m_gain;
 	Lfo *m_volLfo;
 	Lp12 *m_lp;

@@ -27,6 +27,7 @@ private:
 
 	VFader *m_cutOffFader;
 	VFader *m_resFader;
+	VFader *m_waveShapeFader;
 
 };
 

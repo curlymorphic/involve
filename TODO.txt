@@ -1,0 +1,22 @@
+Phaser
+4 pole filter
+adsr controls
+
+vu meter
+delay
+distortion
+lfo
+vol
+pan
+background
+log scale fader
+move ribbon to bottom of screen
+
+
+src code folders
+document
+
+******** DONE *********
+waveshapes
+
+

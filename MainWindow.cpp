@@ -14,7 +14,8 @@
 #include <QApplication>
 #include "QScreen"
 #include "VFader.h"
-//#include "AudioMath.h"
+#include <QPalette>
+#include <QDesktopWidget>
 
 
 const int DurationSeconds = 1;
@@ -36,6 +37,9 @@ MainWindow::MainWindow(QWidget *parent) :
 //	ui->setupUi(this);
 
 //	showNormal();
+
+
+
 
 	m_moduleView = new Demo1ModuleView( m_controls, this );
 	m_moduleView->show();
@@ -80,6 +84,8 @@ MainWindow::~MainWindow()
 	if( m_ocatveRangeFader ) { delete m_ocatveRangeFader; }
 
 }
+
+
 
 void MainWindow::updateRibbon()
 {

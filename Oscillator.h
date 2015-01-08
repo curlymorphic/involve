@@ -12,6 +12,8 @@ public:
 	~Oscillator();
 	void setFrequency( float frequency );
 	virtual inline void tick( sampleFrame *frame );
+	virtual inline float tick();
+
 
 private:
 	float m_phaze;

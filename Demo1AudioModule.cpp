@@ -4,7 +4,7 @@ Demo1AudioModule::Demo1AudioModule(qint64 sampleRate, Demo1ModuleControls *contr
 	AudioModule( sampleRate, controls ),
 	m_controls( controls )
 {
-	m_osc = new Oscillator( sampleRate );
+	m_osc = new WTOscillator( sampleRate );
 	m_osc->setFrequency( 80 );
 	m_gain = new Gain( sampleRate );
 	m_volLfo = new Lfo( sampleRate );
@@ -25,6 +25,7 @@ void Demo1AudioModule::processAudio(sampleFrame *buffer, qint64 len)
 		for(int i = 0; i < len; i++)
 		{
 			m_osc->setFrequency( m_controls->freqModel.value() );
+			m_osc->setShape( (WTWaveShape)(int)m_controls->waveShapeModel.value() );
 			m_gain->setGain( m_controls->gainModel.value() *
 							 ( m_volLfo->tick() + 1.0 ) * m_ad->tick(m_controls->noteOn ,
 																	 m_controls->noteOff) );

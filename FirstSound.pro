@@ -37,7 +37,8 @@ SOURCES += main.cpp\
     VFader.cpp \
     ControlGenerator.cpp \
     UiControls.cpp \
-    AutomationSensor.cpp
+    AutomationSensor.cpp \
+    WTOscillator.cpp
 
 
 HEADERS  += MainWindow.h \
@@ -69,6 +70,13 @@ HEADERS  += MainWindow.h \
     ADSR.h \
     AudioMath.h \
     UiControls.h \
-    AutomationSensor.h
+    AutomationSensor.h \
+    WTOscillator.h
 
 FORMS    += MainWindow.ui
+
+DISTFILES += \
+    TODO.txt
+
+RESOURCES += \
+    ImageResources.qrc

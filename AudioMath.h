@@ -2,6 +2,7 @@
 #define AUDIOMATH_H
 
 #include <qmath.h>
+#include "Types.h"
 
 const long double LD_PI = 3.14159265358979323846264338327950288419716939937510;
 const float F_PI = (float) LD_PI;
