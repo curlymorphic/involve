@@ -10,6 +10,7 @@ Demo1AudioModule::Demo1AudioModule(qint64 sampleRate, Demo1ModuleControls *contr
 	m_volLfo = new Lfo( sampleRate );
 	m_volLfo->setFrequency( 1 );
 	m_lp = new Lp12( sampleRate );
+	m_lp2 = new Lp12( sampleRate ),
 	m_ad = new Adsr( sampleRate );
 }
 
@@ -30,8 +31,10 @@ void Demo1AudioModule::processAudio(sampleFrame *buffer, qint64 len)
 							 ( m_volLfo->tick() + 1.0 ) * m_ad->tick(m_controls->noteOn ,
 																	 m_controls->noteOff) );
 			m_lp->setParameters(m_controls->cutOffModel.value(), m_controls->resModel.value() );
+			m_lp2->setParameters( m_controls->cutOffModel.value(), m_controls->resModel.value() );
 			m_osc->tick( &buffer[i] );
 			m_lp->tick( &buffer[i] );
+			m_lp2->tick( &buffer[i] );
 			m_gain->tick( &buffer[i] );
 		}
 	}

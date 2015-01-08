@@ -10,7 +10,7 @@ vol
 pan
 background
 log scale fader
-move ribbon to bottom of screen
+
 
 
 src code folders
@@ -18,5 +18,5 @@ document
 
 ******** DONE *********
 waveshapes
-
+move ribbon to bottom of screen
 

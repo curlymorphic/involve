@@ -25,6 +25,7 @@ private:
 	Gain *m_gain;
 	Lfo *m_volLfo;
 	Lp12 *m_lp;
+	Lp12 *m_lp2;
 	Adsr *m_ad;
 	Demo1ModuleControls *m_controls;
 
