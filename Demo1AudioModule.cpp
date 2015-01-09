@@ -36,9 +36,9 @@ void Demo1AudioModule::processAudio(sampleFrame *buffer, qint64 len)
 			m_osc->setShape( (WTWaveShape)(int)m_controls->waveShapeModel.value() );
 			m_gain->setGain( m_controls->velocityModel.value() *
 							  ( 1.0 - ( m_volLfo->uniTick() * m_controls->lfoGainModel.value() ) )
-							 * m_ad->tick(m_controls->noteOn , m_controls->noteOff) );
+							 * ( m_ad->tick(m_controls->noteOn , m_controls->noteOff)  ));
 			m_lp->setParameters(m_controls->cutOffModel.value() *
-								( 1.0 - ( m_volLfo->uniTick() * m_controls->lfoFilterModel.value() ) ),
+								( 1.0 - ( m_volLfo->uniTick() * m_controls->lfoFilterModel.value() )  ),
 								  m_controls->resModel.value()  );
 			m_lp2->setParameters( m_controls->cutOffModel.value(), m_controls->resModel.value() );
 			m_osc->tick( &buffer[i] );

@@ -13,8 +13,6 @@ Demo1ModuleControls::Demo1ModuleControls(QObject *parent) : ModuleControls( pare
 	decayModel(0.1, 0.01 , 5 , 0.01, tr( "decay" ) ),
 	sustainModel(0.5, 0, 1 , 0.01, tr( "sustain" ) ),
 	releaseModel(0.1, 0.01 , 5 , 0.01, tr( "release" ) ),
-	adsrGainModel(1.0, 0.0, 1.0, 0.01, tr( "Adsr > Vol " ) ),
-	adsrFilterModel(1.0, 0.0, 1.0, 0.01, tr( "Adsr > Cutoff " ) ),
 	lfoSpeedModel(0.01, 0.01, 10, 0.01, tr( "lfo speed" ) ),
 	lfoShapeModel( 2, 0 , 4 , 1, tr( "LfoShape" ) ),
 	lfoGainModel(0.0, 0.0, 1.0, 0.01, tr( "Lfo > Vol " ) ),

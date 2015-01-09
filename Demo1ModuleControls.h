@@ -26,8 +26,6 @@ public:
 	Model sustainModel;
 	Model releaseModel;
 
-	Model adsrGainModel;
-	Model adsrFilterModel;
 	Model lfoSpeedModel;
 	Model lfoShapeModel;
 	Model lfoGainModel;

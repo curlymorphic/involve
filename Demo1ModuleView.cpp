@@ -17,8 +17,6 @@ Demo1ModuleView::Demo1ModuleView(Demo1ModuleControls *controls, QWidget *parent,
 	m_decayFader = new VFader( &m_controls->decayModel, this );
 	m_sustainFader = new VFader( &m_controls->sustainModel, this );
 	m_releaseFader = new VFader( &m_controls->releaseModel, this );
-	m_adsrGainFader = new VFader( &m_controls->adsrGainModel, this );
-	m_adsrFilterFader = new VFader ( &m_controls->adsrFilterModel, this );
 	m_lfoSpeedFader = new VFader( &m_controls->lfoSpeedModel, this );
 	m_lfoShapeFader = new VFader( &m_controls->lfoShapeModel, this );
 	m_lfoGainFader = new VFader( &m_controls->lfoGainModel, this );
@@ -36,8 +34,6 @@ Demo1ModuleView::Demo1ModuleView(Demo1ModuleControls *controls, QWidget *parent,
 	m_decayFader->show();
 	m_sustainFader->show();
 	m_releaseFader->show();
-	m_adsrGainFader->show();
-	m_adsrFilterFader->show();
 	m_lfoSpeedFader->show();
 	m_lfoShapeFader->show();
 	m_lfoGainFader->show();
@@ -67,8 +63,6 @@ void Demo1ModuleView::layout()
 	m_decayFader->resize( wwidth * 0.1 , height8 * 2 );
 	m_sustainFader->resize( wwidth * 0.1 , height8 * 2 );
 	m_releaseFader->resize( wwidth * 0.1 , height8 * 2 );
-	m_adsrGainFader->resize( wwidth * 0.1 , height8 * 2 );
-	m_adsrFilterFader->resize( wwidth * 0.1 , height8 * 2 );
 	m_lfoSpeedFader->resize( wwidth * 0.1 , height8 * 2 );
 	m_lfoShapeFader->resize( wwidth * 0.1 , height8 * 2 );
 	m_lfoGainFader->resize( wwidth * 0.1 , height8 * 2 );
@@ -88,8 +82,7 @@ void Demo1ModuleView::layout()
 	m_releaseFader->move( wDivide * 7, height8 * 3 );
 	m_waveShapeFader->move( wDivide * 9 ,height8 * 3 );
 
-	m_adsrGainFader->move( wDivide, height8 *6);
-	m_adsrFilterFader->move( wDivide * 3, height8 *6);
+
 	m_delayAmmountFader->move( wDivide * 5, height8 *6);
 	m_delayTimeFader->move( wDivide * 7, height8 *6);
 	m_delayRegenFader->move( wDivide * 9, height8 *6);
