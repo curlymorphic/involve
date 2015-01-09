@@ -29,6 +29,11 @@ private:
 	VFader *m_resFader;
 	VFader *m_waveShapeFader;
 
+	VFader *m_attackFader;
+	VFader *m_decayFader;
+	VFader *m_sustainFader;
+	VFader *m_releaseFader;
+
 };
 
 #endif // DEMO1MODULEVIEW_H

@@ -59,12 +59,7 @@ protected:
 		const int width = QApplication::screens().at( 0 )->size().width();
 
 		(void) event;
-		if(m_moduleView)
-		{
-			m_moduleView->resize( width * 0.95 ,
-								  height - 50 );
-//			m_moduleView->layout();
-		}
+
 		if (m_ribbon)
 		{
 			m_ribbon->resize( width , height8 * 2);
@@ -78,6 +73,12 @@ protected:
 
 			m_startOctaveFader->resize( width * 0.05 , height8 * 2 );
 			m_startOctaveFader->move( width - ( width * 0.05 ) , height8*3 );
+		}
+		if(m_moduleView)
+		{
+			m_moduleView->resize( width * 0.95 ,
+								  height - 50 - m_ribbon->height() );
+//			m_moduleView->layout();
 		}
 		QMainWindow::resizeEvent( event );
 	}

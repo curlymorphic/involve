@@ -21,6 +21,10 @@ public:
 	Model cutOffModel;
 	Model resModel;
 	Model waveShapeModel;
+	Model attackModel;
+	Model decayModel;
+	Model sustainModel;
+	Model releaseModel;
 };
 
 #endif // DEMO1MODULECONTROLS_H

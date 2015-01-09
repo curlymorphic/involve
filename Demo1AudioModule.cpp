@@ -25,6 +25,10 @@ void Demo1AudioModule::processAudio(sampleFrame *buffer, qint64 len)
 	{
 		for(int i = 0; i < len; i++)
 		{
+			m_ad->setAttackTime( m_controls->attackModel.value() );
+			m_ad->setDecayTime( m_controls->decayModel.value() );
+			m_ad->setSustainLevel( m_controls->sustainModel.value() );
+			m_ad->setReleaseTime( m_controls->releaseModel.value() );
 			m_osc->setFrequency( m_controls->freqModel.value() );
 			m_osc->setShape( (WTWaveShape)(int)m_controls->waveShapeModel.value() );
 			m_gain->setGain( m_controls->velocityModel.value() *

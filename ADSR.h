@@ -38,7 +38,7 @@ public:
 
 	inline void setReleaseTime( qint64 time )
 	{
-		m_releaseTime = time;
+		m_releaseTime = time * m_sampleRate;
 	}
 
 	virtual inline float tick( bool noteOn, bool noteOff )
@@ -72,7 +72,7 @@ public:
 				m_phase = sustain;
 				m_samplesSincePhaseChanged = 0;
 			}
-			m_lastValue = linearInterpolate( 1, 0, (float)m_samplesSincePhaseChanged /
+			m_lastValue = linearInterpolate( 1, m_sustainLevel, (float)m_samplesSincePhaseChanged /
 									  (float)m_decayTime );
 			return m_lastValue;
 		}

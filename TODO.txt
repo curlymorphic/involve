@@ -2,7 +2,7 @@ Phaser
 
 adsr controls
 
-vu meter
+
 delay
 distortion
 lfo
@@ -21,6 +21,6 @@ waveshapes
 move ribbon to bottom of screen
 4 pole filter
 vol
-
+vu meter
 
 
