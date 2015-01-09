@@ -10,6 +10,7 @@
 #include "AD.h"
 #include "ADSR.h"
 #include "WTOscillator.h"
+#include "StereoDelay.h"
 
 
 class Demo1AudioModule : public AudioModule
@@ -27,6 +28,7 @@ private:
 	Lp12 *m_lp;
 	Lp12 *m_lp2;
 	Adsr *m_ad;
+	StereoDelay *m_delay;
 	Demo1ModuleControls *m_controls;
 
 

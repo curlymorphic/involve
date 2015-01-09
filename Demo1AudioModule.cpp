@@ -12,6 +12,7 @@ Demo1AudioModule::Demo1AudioModule(qint64 sampleRate, Demo1ModuleControls *contr
 	m_lp = new Lp12( sampleRate );
 	m_lp2 = new Lp12( sampleRate ),
 	m_ad = new Adsr( sampleRate );
+	m_delay = new StereoDelay(2.0, sampleRate );
 }
 
 Demo1AudioModule::~Demo1AudioModule()
@@ -41,10 +42,29 @@ void Demo1AudioModule::processAudio(sampleFrame *buffer, qint64 len)
 								( 1.0 - ( m_volLfo->uniTick() * m_controls->lfoFilterModel.value() )  ),
 								  m_controls->resModel.value()  );
 			m_lp2->setParameters( m_controls->cutOffModel.value(), m_controls->resModel.value() );
+			m_delay->setLength( m_controls->delayTimeModel.value() );
+			m_delay->setFeedback( m_controls->delayRegenModel.value() );
+
+
+
 			m_osc->tick( &buffer[i] );
 			m_lp->tick( &buffer[i] );
 			m_lp2->tick( &buffer[i] );
+
+
 			m_gain->tick( &buffer[i] );
+
+
+			sampleFrame *delayedFrame = new sampleFrame[1];
+			delayedFrame[0][1] = buffer[i][0];
+			delayedFrame[0][1] = buffer[i][1];
+
+			m_delay->tick( delayedFrame[0] );
+
+			buffer[i][0] = ((1.0 - m_controls->delayAmmountModel.value()) * buffer[i][0] ) +
+					(m_controls->delayAmmountModel.value() * delayedFrame[0][0] );
+			buffer[i][1] = ((1.0 - m_controls->delayAmmountModel.value()) * buffer[i][1] ) +
+					(m_controls->delayAmmountModel.value() * delayedFrame[0][1] );
 		}
 	}
 }

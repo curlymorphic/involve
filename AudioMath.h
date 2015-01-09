@@ -16,6 +16,10 @@ inline float midiNoteFreq( qint64 note )
 	return 440.0 * qPow(2.0, (note - 69.0)/12.0);
 }
 
+inline float fraction(float val){
+	return val - (int)val;
+}
+
 //qint64 freqNeariestMidiNote( float freq )
 //{
 //	return round(12*log( freq / base_a4))+57;
