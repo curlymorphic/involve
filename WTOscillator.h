@@ -38,10 +38,12 @@ public:
 	/// places the next sample in frame, as a stereo signal
 	void tick( sampleFrame *frame );
 
+	float uniTick();
+
 	///
 	/// \brief setFrequency
 	/// \param freq
-	/// sets the frequency. limited to 32.7 - 4186   c1 - c8
+	/// sets the frequency. limited to 0- 4186   c1 - c8
 	void setFrequency( float freq );
 
 	///

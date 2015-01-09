@@ -58,9 +58,14 @@ void WTOscillator::tick(sampleFrame *frame)
 	frame[0][1] = sample;
 }
 
+float WTOscillator::uniTick()
+{
+	return (tick()/2)+ 0.5;
+}
+
 void WTOscillator::setFrequency(float freq)
 {
-	freq = qBound(32.7f, freq, 4186.0f );
+	freq = qBound(0.0f, freq, 4186.0f );
 	m_increment = TABLE_LEN * ( freq / m_sampleRate );
 }
 

@@ -1,6 +1,6 @@
 Phaser
 
-adsr controls
+
 
 
 delay
@@ -22,5 +22,5 @@ move ribbon to bottom of screen
 4 pole filter
 vol
 vu meter
-
+adsr controls
 

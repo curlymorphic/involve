@@ -25,6 +25,19 @@ public:
 	Model decayModel;
 	Model sustainModel;
 	Model releaseModel;
+
+	Model adsrGainModel;
+	Model adsrFilterModel;
+	Model lfoSpeedModel;
+	Model lfoShapeModel;
+	Model lfoGainModel;
+	Model lfoFilterModel;
+
+	Model delayAmmountModel;
+	Model delayTimeModel;
+	Model delayRegenModel;
+
+
 };
 
 #endif // DEMO1MODULECONTROLS_H

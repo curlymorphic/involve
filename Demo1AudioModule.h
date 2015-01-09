@@ -23,7 +23,7 @@ public:
 private:
 	WTOscillator *m_osc;
 	Gain *m_gain;
-	Lfo *m_volLfo;
+	WTOscillator *m_volLfo;
 	Lp12 *m_lp;
 	Lp12 *m_lp2;
 	Adsr *m_ad;

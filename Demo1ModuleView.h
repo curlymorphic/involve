@@ -34,6 +34,17 @@ private:
 	VFader *m_sustainFader;
 	VFader *m_releaseFader;
 
+	VFader *m_adsrGainFader;
+	VFader *m_adsrFilterFader;
+	VFader *m_lfoSpeedFader;
+	VFader *m_lfoShapeFader;
+	VFader *m_lfoGainFader;
+	VFader *m_lfoFilterFader;
+
+	VFader *m_delayAmmountFader;
+	VFader *m_delayTimeFader;
+	VFader *m_delayRegenFader;
+
 };
 
 #endif // DEMO1MODULEVIEW_H
