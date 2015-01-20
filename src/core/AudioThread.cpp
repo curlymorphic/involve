@@ -31,6 +31,7 @@ AudioThread::AudioThread(AudioDeviceControls *adc, AudioModule *audioModule, Mod
 	m_controls( controls ),
 	m_audioModule( audioModule )
 {
+	Q_UNUSED( parent )
 	start();
 	QObject::moveToThread( this );
 }

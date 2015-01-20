@@ -36,8 +36,6 @@ AudioDeviceView::AudioDeviceView(QWidget *parent, AudioDeviceControls *controls)
 
 	resize( parent->width() , 50 );
 	const int height8 = QApplication::screens().at( 0 )->size().height() / 8;
-	const int screenHeight = QApplication::screens().at( 0 )->size().height();
-	const int ScreenWidth = QApplication::screens().at( 0 )->size().width();
 	m_gainFader = new VuFader( &controls->m_gainModel , this , &m_audioDeviceControls->peaks );
 	m_gainFader->resize(height8 * 2, height() );
 	m_gainFader->move( 0, 0 );

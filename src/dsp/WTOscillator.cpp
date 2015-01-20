@@ -32,8 +32,8 @@ WTOscillator::WTOscillator(qint64 sampleRate) :
 	m_currentTable( 0 ),
 	sineTable( 0 ),
 	squareTable( 0 ),
-	sawTable( 0 ),
-	triTable( 0 )
+	triTable( 0 ),
+	sawTable( 0 )
 {
 	setFrequency(440.0);
 	generateSineTable(100);
@@ -120,6 +120,7 @@ void WTOscillator::setUserShape(float *table)
 
 void WTOscillator::generateSineTable( qint64 bands )
 {
+	Q_UNUSED( bands )
 	sineTable = new sample_t[ TABLE_LEN ];
 	for(int i = 0; i < TABLE_LEN; i++)
 	{

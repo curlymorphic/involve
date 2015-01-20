@@ -76,7 +76,6 @@ Demo1ModuleView::~Demo1ModuleView()
 void Demo1ModuleView::layout()
 {
 	const int height8 = height() / 9;
-	const int wheight = height();
 	const int wwidth = width();
 	const int wDivide = wwidth / 12;
 
