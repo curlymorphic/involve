@@ -15,8 +15,9 @@
 /// There is only one per active application.
 ///
 
-class AudioModule : AudioProcess
+class AudioModule : public AudioProcess
 {
+	Q_OBJECT
 public:
 	///
 	/// \brief AudioModule
@@ -34,7 +35,23 @@ public:
 	///
 	virtual void processAudio(sampleFrame *buffer, qint64 len );
 
+protected slots:
+	///
+	/// \brief notePressed
+	/// \param val
+	/// called upon change to note on off status
+	void notePressed( float val );
+
 protected:
+
+	///
+	/// \brief noteOn
+	/// To be overridden, called when there is a new note
+	virtual void noteOn();
+	///
+	/// \brief noteOff
+	///To be overridden, called when the note is released
+	virtual void noteOff();
 	ModuleControls m_controls;
 
 

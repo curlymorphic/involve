@@ -6,6 +6,10 @@
 #include <QLabel>
 #include "VuFader.h"
 
+///
+/// \brief The AudioDeviceView class
+/// Audio Device GUI
+///
 class AudioDeviceView : public QWidget
 {
 	Q_OBJECT

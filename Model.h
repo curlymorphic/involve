@@ -5,7 +5,7 @@
 
 ///
 /// \brief The Model class
-///This class is used to bass data about, it can be linked to many ui components
+///This class is used to pass data about, it can be linked to many ui components
 class Model : public QObject
 {
 	Q_OBJECT
@@ -45,7 +45,7 @@ public:
 	}
 
 signals:
-	void dataChanged( int );
+	void dataChanged( float );
 
 public slots:
 

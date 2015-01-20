@@ -13,6 +13,7 @@ Demo1AudioModule::Demo1AudioModule(qint64 sampleRate, Demo1ModuleControls *contr
 	m_lp2 = new Lp12( sampleRate ),
 	m_ad = new Adsr( sampleRate );
 	m_delay = new StereoDelay(2.0, sampleRate );
+	delayedFrame = new sampleFrame[1];
 }
 
 Demo1AudioModule::~Demo1AudioModule()
@@ -37,7 +38,7 @@ void Demo1AudioModule::processAudio(sampleFrame *buffer, qint64 len)
 			m_osc->setShape( (WTWaveShape)(int)m_controls->waveShapeModel.value() );
 			m_gain->setGain( m_controls->velocityModel.value() *
 							  ( 1.0 - ( m_volLfo->uniTick() * m_controls->lfoGainModel.value() ) )
-							 * ( m_ad->tick(m_controls->noteOn , m_controls->noteOff)  ));
+							 * ( m_ad->tick()  ));
 			m_lp->setParameters(m_controls->cutOffModel.value() *
 								( 1.0 - ( m_volLfo->uniTick() * m_controls->lfoFilterModel.value() )  ),
 								  m_controls->resModel.value()  );
@@ -55,8 +56,8 @@ void Demo1AudioModule::processAudio(sampleFrame *buffer, qint64 len)
 			m_gain->tick( &buffer[i] );
 
 
-			sampleFrame *delayedFrame = new sampleFrame[1];
-			delayedFrame[0][1] = buffer[i][0];
+
+			delayedFrame[0][0] = buffer[i][0];
 			delayedFrame[0][1] = buffer[i][1];
 
 			m_delay->tick( delayedFrame[0] );
@@ -67,5 +68,15 @@ void Demo1AudioModule::processAudio(sampleFrame *buffer, qint64 len)
 					(m_controls->delayAmmountModel.value() * delayedFrame[0][1] );
 		}
 	}
+}
+
+void Demo1AudioModule::noteOn()
+{
+	m_ad->noteOn();
+}
+
+void Demo1AudioModule::noteOff()
+{
+	m_ad->noteRelease();
 }
 

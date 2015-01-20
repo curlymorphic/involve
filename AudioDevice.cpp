@@ -128,8 +128,6 @@ qint64 AudioDevice::readData(char *data, qint64 len)
 		sampleFrameToBuffer( m_frameBuffer, len, m_format );
 		memcpy(data,m_buffer,len);
 		m_audioDeviceControls->m_bufferSize = len;
-		m_moduleControls->noteOn = false;
-		m_moduleControls->noteOff = false;
 	}
 	return len;
 }
@@ -145,7 +143,7 @@ qint64 AudioDevice::writeData(const char *data, qint64 len)
 qint64 AudioDevice::bytesAvailable() const
 {
 	//	return m_buffer.size() + QIODevice::bytesAvailable();
-	return 512;
+	return 1024;
 }
 
 

@@ -4,6 +4,9 @@
 #include "AudioMath.h"
 #include "AudioProcess.h"
 
+///
+/// \brief The StereoDelay class
+/// Stereo delay module
 class StereoDelay : public AudioProcess
 {
 public:

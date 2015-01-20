@@ -4,7 +4,9 @@
 #include "AudioProcess.h"
 #include "AudioMath.h"
 
-
+///
+/// \brief The BiQuad class
+/// Standard BiQuad implementation. base class for filters
 class BiQuad
 {
 public:
@@ -71,7 +73,7 @@ public:
 	virtual inline void setFrequency( float freq ){
 		if ( freq != m_freq )
 		{
-			m_freq = freq;
+			m_freq = qBound( 35.0f , freq, 20000.0f );
 			calcCoefficents();
 		}
 	}
@@ -107,12 +109,12 @@ public:
 		bool hasChanged = false;
 		if ( freq != m_freq )
 		{
-			m_freq = freq;
+			m_freq = qBound( 55.0f , freq, 20000.0f );
 			hasChanged = true;
 		}
 		if ( res != m_res )
 		{
-			m_res = res;
+			m_res = qBound( 0.6f , res, 5.0f );
 			hasChanged = true;
 		}
 		if ( gain != m_gain )

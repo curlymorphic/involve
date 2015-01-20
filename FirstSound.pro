@@ -7,6 +7,9 @@
 QT       += multimedia widgets
 QT += sensors
 
+CONFIG += mobility
+MOBILITY += sensors
+
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = FirstSound

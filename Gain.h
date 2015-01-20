@@ -3,7 +3,9 @@
 
 #include "AudioProcess.h"
 
-
+///
+/// \brief The Gain class
+/// Gain processor
 class Gain : public AudioProcess
 {
 public:

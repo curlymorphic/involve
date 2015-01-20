@@ -6,6 +6,10 @@
 #include "AudioMath.h"
 
 
+///
+/// \brief The AudioDeviceControls class
+/// Control Model for the audio device
+///
 class AudioDeviceControls : public Controls
 {
 public:

@@ -8,7 +8,7 @@
 
 Demo1ModuleView::Demo1ModuleView(Demo1ModuleControls *controls, QWidget *parent,
 								 Qt::WindowFlags flags) :
-	ModuleView( parent, flags ),
+	ModuleView( parent, controls, flags ),
 	m_controls( controls )
 {
 
@@ -24,6 +24,9 @@ Demo1ModuleView::Demo1ModuleView(Demo1ModuleControls *controls, QWidget *parent,
 	m_delayAmmountFader = new VFader ( &m_controls->delayAmmountModel, this );
 	m_delayTimeFader = new VFader( &m_controls->delayTimeModel, this  );
 	m_delayRegenFader = new VFader( &m_controls->delayRegenModel, this );
+
+	m_cutOffFader = new VFader( &m_controls->cutOffModel, this );
+	m_resFader = new VFader( &m_controls->resModel, this );
 
 
 
@@ -71,6 +74,10 @@ void Demo1ModuleView::layout()
 	m_delayTimeFader->resize( wwidth * 0.1 , height8 * 2 );
 	m_delayRegenFader->resize( wwidth * 0.1 , height8 * 2 );
 
+	m_cutOffFader->resize( wwidth * 0.1 , height8 * 2 );
+	m_resFader->resize(  wwidth * 0.1 , height8 * 2 );
+	m_resFader->move( 0.0, height8 * 3 );
+
 	m_lfoSpeedFader->move( wDivide , 0 );
 	m_lfoShapeFader->move( wDivide * 3 , 0 );
 	m_lfoGainFader->move( wDivide * 5, 0 );
@@ -83,23 +90,15 @@ void Demo1ModuleView::layout()
 	m_waveShapeFader->move( wDivide * 9 ,height8 * 3 );
 
 
-	m_delayAmmountFader->move( wDivide * 5, height8 *6);
-	m_delayTimeFader->move( wDivide * 7, height8 *6);
-	m_delayRegenFader->move( wDivide * 9, height8 *6);
+	m_delayAmmountFader->move( wDivide * 5, height8 * 6 );
+	m_delayTimeFader->move( wDivide * 7, height8 * 6 );
+	m_delayRegenFader->move( wDivide * 9, height8 * 6 );
 
 
 
 }
 
-void Demo1ModuleView::notePressed()
-{
-	m_controls->noteOn = true;
-}
 
-void Demo1ModuleView::noteRelease()
-{
-	m_controls->noteOff = true;
-}
 
 
 

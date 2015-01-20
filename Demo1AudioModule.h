@@ -12,13 +12,21 @@
 #include "WTOscillator.h"
 #include "StereoDelay.h"
 
-
+///
+/// \brief The Demo1AudioModule class
+/// A simple single oscillator ADSR LFO Filter Delay example
 class Demo1AudioModule : public AudioModule
 {
 public:
 	Demo1AudioModule(qint64 samplerate, Demo1ModuleControls *controls);
 	~Demo1AudioModule();
 	virtual void processAudio(sampleFrame *buffer, qint64 len );
+
+protected:
+
+	virtual void noteOn();
+	virtual void noteOff();
+
 
 
 private:
@@ -30,6 +38,7 @@ private:
 	Adsr *m_ad;
 	StereoDelay *m_delay;
 	Demo1ModuleControls *m_controls;
+	sampleFrame *delayedFrame;
 
 
 };

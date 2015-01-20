@@ -5,7 +5,9 @@
 #include "ControlGenerator.h"
 
 
-
+///
+/// \brief The Lfo class
+/// cheep and nasty saw wave, will aliase
 class Lfo : public ControlGenerator
 {
 public:

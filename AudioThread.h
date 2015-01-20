@@ -6,6 +6,9 @@
 #include "AudioDevice.h"
 #include <QThread>
 
+///
+/// \brief The AudioThread class
+/// The Audio Thread. This has an event loop, and hosts all the dsp
 class AudioThread : public QThread
 {
 	Q_OBJECT

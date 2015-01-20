@@ -5,6 +5,9 @@
 #include "Model.h"
 #include "TouchController.h"
 
+///
+/// \brief The Ribbon class
+/// The ribbon controller, used for note input
 class Ribbon : public TouchController
 {
 	Q_OBJECT

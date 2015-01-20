@@ -5,6 +5,9 @@
 #include "ModuleControls.h"
 #include "Model.h"
 
+///
+/// \brief The Demo1ModuleControls class
+/// A simple single oscillator ADSR LFO Filter Delay example
 class Demo1ModuleControls : public ModuleControls
 {
 	Q_OBJECT

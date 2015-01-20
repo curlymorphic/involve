@@ -5,6 +5,9 @@
 #include "ControlGenerator.h"
 #include "Interpolation.h"
 
+///
+/// \brief The Adsr class
+/// Envelope Generator
 class Adsr : ControlGenerator
 {
 public:
@@ -21,39 +24,68 @@ public:
 
 	}
 
+	///
+	/// \brief setAttackTime
+	/// \param time Seconds
+	///
 	inline void setAttackTime( float time )
 	{
 		m_attackTime = time * m_sampleRate;
 	}
 
+	///
+	/// \brief setDecayTime
+	/// \param time Seconds
+	///
 	inline void setDecayTime( float time )
 	{
 		m_decayTime = time * m_sampleRate;
 	}
 
+	///
+	/// \brief setSustainLevel
+	/// \param level 0.0 1.0
+	///
 	inline void setSustainLevel( float level )
 	{
 		m_sustainLevel = level;
 	}
 
+	///
+	/// \brief setReleaseTime
+	/// \param time Seconds
+	///
 	inline void setReleaseTime( qint64 time )
 	{
 		m_releaseTime = time * m_sampleRate;
 	}
 
-	virtual inline float tick( bool noteOn, bool noteOff )
+	///
+	/// \brief noteOn
+	/// Retriggers the generator to the attack phase
+	inline void noteOn()
+	{
+		m_phase = attack;
+		m_samplesSincePhaseChanged = 0;
+	}
+
+	///
+	/// \brief noteRelease
+	///Puts the generator into the release phase
+	inline void noteRelease()
+	{
+		m_phase = release;
+		m_samplesSincePhaseChanged = 0;
+	}
+
+	///
+	/// \brief tick
+	/// \return
+	///returns the next multiplyer to use 0.0 - 1.0
+	/// only call once per frame
+	virtual inline float tick( )
 	{
 		m_samplesSincePhaseChanged++;
-		if ( noteOn )
-		{
-			m_phase = attack;
-			m_samplesSincePhaseChanged = 0;
-		}
-		if( noteOff )
-		{
-			m_phase = release;
-			m_samplesSincePhaseChanged = 0;
-		}
 		if( m_phase == attack )
 		{
 			if ( m_samplesSincePhaseChanged > m_attackTime )
@@ -73,13 +105,13 @@ public:
 				m_samplesSincePhaseChanged = 0;
 			}
 			m_lastValue = linearInterpolate( 1, m_sustainLevel, (float)m_samplesSincePhaseChanged /
-									  (float)m_decayTime );
+											 (float)m_decayTime );
 			return m_lastValue;
 		}
 
 		if( m_phase == sustain )
 		{
-//			m_phase=release;
+			//			m_phase=release;
 			m_lastValue = m_sustainLevel;
 			return m_lastValue;
 		}

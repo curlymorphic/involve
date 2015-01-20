@@ -8,6 +8,9 @@
 #include "Fader.h"
 #include "VFader.h"
 
+///
+/// \brief The Demo1ModuleView class
+/// A simple single oscillator ADSR LFO Filter Delay example
 class Demo1ModuleView : public ModuleView
 {
 	Q_OBJECT
@@ -16,9 +19,7 @@ public:
 	~Demo1ModuleView();
 	virtual void layout();
 
-private slots:
-	void notePressed();
-	void noteRelease();
+
 
 
 private:

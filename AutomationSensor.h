@@ -2,11 +2,13 @@
 #define AUTOMATIONSENSOR_H
 
 #include <QObject>
-#include <QtSensors/QRotationSensor>
-#include "QtSensors/QRotationReading"
+#include <QtSensors/QAccelerometer>
+#include "QtSensors/QAccelerometerReading"
 #include "Model.h"
 
-
+///
+/// \brief The AutomationSensor class
+/// Uses acceloremter data to automate provided models
 class AutomationSensor : public QObject
 {
 	Q_OBJECT
@@ -26,8 +28,8 @@ public slots:
 
 private:
 
-	QRotationSensor *m_sensor;
-	QRotationReading *m_reading;
+	QAccelerometer *m_sensor;
+	QAccelerometerReading *m_reading;
 };
 
 #endif // AUTOMATIONSENSOR_H
