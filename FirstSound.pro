@@ -15,70 +15,77 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = FirstSound
 TEMPLATE = app
 
+INCLUDEPATH += ./headers
+INCLUDEPATH += $$PWD/modules
+INCLUDEPATH += $$PWD/src
+INCLUDEPATH += $$PWD/src/core
+INCLUDEPATH += ./src/gui
+INCLUDEPATH += $$PWD/src/dsp
+
 
 SOURCES += main.cpp\
-        MainWindow.cpp \
-    AudioDevice.cpp \
-    AudioProcess.cpp \
-    Oscillator.cpp \
-    AudioModule.cpp \
-    Model.cpp \
-    Fader.cpp \
-    Controls.cpp \
-    AudioDeviceControls.cpp \
-    AudioDeviceView.cpp \
-    AudioThread.cpp \
-    Demo1ModuleControls.cpp \
-    Demo1AudioModule.cpp \
-    ModuleView.cpp \
-    Demo1ModuleView.cpp \
-    Gain.cpp \
-    Lfo.cpp \
-    Filters.cpp \
-    Ribbon.cpp \
-    TouchController.cpp \
-    VFader.cpp \
-    ControlGenerator.cpp \
-    UiControls.cpp \
-    AutomationSensor.cpp \
-    WTOscillator.cpp \
-    VuFader.cpp \
-    StereoDelay.cpp
+		src/gui/MainWindow.cpp \
+	src/core/AudioDevice.cpp \
+	src/dsp/AudioProcess.cpp \
+	src/dsp/Oscillator.cpp \
+	modules/AudioModule.cpp \
+	src/Model.cpp \
+	src/gui/Fader.cpp \
+	src/Controls.cpp \
+	src/core/AudioDeviceControls.cpp \
+	src/gui/AudioDeviceView.cpp \
+	src/core/AudioThread.cpp \
+	modules/Demo1ModuleControls.cpp \
+	modules/Demo1AudioModule.cpp \
+	modules/ModuleView.cpp \
+	modules/Demo1ModuleView.cpp \
+	src/dsp/Gain.cpp \
+	src/dsp/Lfo.cpp \
+	src/dsp/Filters.cpp \
+	src/gui/Ribbon.cpp \
+	src/gui/TouchController.cpp \
+	src/gui/VFader.cpp \
+	src/dsp/ControlGenerator.cpp \
+	src/UiControls.cpp \
+	src/core/AutomationSensor.cpp \
+	src/dsp/WTOscillator.cpp \
+	src/gui/VuFader.cpp \
+	src/dsp/StereoDelay.cpp
 
 
-HEADERS  += MainWindow.h \
-    Types.h \
-    AudioDevice.h \
-    AudioProcess.h \
-    Oscillator.h \
-    AudioModule.h \
-    Model.h \
-    Fader.h \
-    Controls.h \
-    AudioDeviceControls.h \
-    AudioDeviceView.h \
-    AudioThread.h \
-    ModuleControls.h \
-    Demo1ModuleControls.h \
-    Demo1AudioModule.h \
-    ModuleView.h \
-    Demo1ModuleView.h \
-    Gain.h \
-    Lfo.h \
-    Filters.h \
-    Ribbon.h \
-    TouchController.h \
-    VFader.h \
-    ControlGenerator.h \
-    AD.h \
-    Interpolation.h \
-    ADSR.h \
-    AudioMath.h \
-    UiControls.h \
-    AutomationSensor.h \
-    WTOscillator.h \
-    VuFader.h \
-    StereoDelay.h
+HEADERS  += headers/MainWindow.h \
+	headers/Types.h \
+	headers/AudioDevice.h \
+	headers/AudioProcess.h \
+	headers/Oscillator.h \
+	headers/AudioModule.h \
+	headers/Model.h \
+	headers/Fader.h \
+	headers/Controls.h \
+	headers/AudioDeviceControls.h \
+	headers/AudioDeviceView.h \
+	headers/AudioThread.h \
+	headers/ModuleControls.h \
+	headers/Demo1ModuleControls.h \
+	headers/Demo1AudioModule.h \
+	headers/ModuleView.h \
+	headers/Demo1ModuleView.h \
+	headers/Gain.h \
+	headers/Lfo.h \
+	headers/Filters.h \
+	headers/Ribbon.h \
+	headers/TouchController.h \
+	headers/VFader.h \
+	headers/ControlGenerator.h \
+	headers/AD.h \
+	headers/Interpolation.h \
+	headers/ADSR.h \
+	headers/AudioMath.h \
+	headers/UiControls.h \
+	headers/AutomationSensor.h \
+	headers/WTOscillator.h \
+	headers/VuFader.h \
+	headers/StereoDelay.h
 
 FORMS    += MainWindow.ui
 
