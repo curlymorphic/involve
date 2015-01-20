@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += multimedia widgets
+QT += multimedia widgets
 QT += sensors
 
 CONFIG += mobility
@@ -43,15 +43,14 @@ SOURCES += main.cpp\
 	src/dsp/Filters.cpp \
 	src/dsp/ControlGenerator.cpp \
 	src/dsp/WTOscillator.cpp \
-	src/dsp/StereoDelay.cpp
+	src/dsp/StereoDelay.cpp \
 	src/dsp/AudioProcess.cpp \
 	src/dsp/Oscillator.cpp \
 	modules/AudioModule.cpp \
 	modules/Demo1ModuleControls.cpp \
 	modules/Demo1AudioModule.cpp \
 	modules/ModuleView.cpp \
-	modules/Demo1ModuleView.cpp \
-
+	modules/Demo1ModuleView.cpp
 
 HEADERS  += headers/MainWindow.h \
 	headers/Types.h \
@@ -90,7 +89,8 @@ HEADERS  += headers/MainWindow.h \
 FORMS    += MainWindow.ui
 
 DISTFILES += \
-    TODO.txt
+    TODO.txt \
+    License.txt
 
 RESOURCES += \
     ImageResources.qrc
