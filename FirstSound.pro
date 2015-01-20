@@ -24,33 +24,33 @@ INCLUDEPATH += $$PWD/src/dsp
 
 
 SOURCES += main.cpp\
-		src/gui/MainWindow.cpp \
+	src/Model.cpp \
+	src/Controls.cpp \
+	src/UiControls.cpp \
+	src/core/AutomationSensor.cpp \
 	src/core/AudioDevice.cpp \
+	src/core/AudioDeviceControls.cpp \
+	src/core/AudioThread.cpp \
+	src/gui/MainWindow.cpp \
+	src/gui/AudioDeviceView.cpp \
+	src/gui/Fader.cpp \
+	src/gui/Ribbon.cpp \
+	src/gui/TouchController.cpp \
+	src/gui/VFader.cpp \
+	src/gui/VuFader.cpp \
+	src/dsp/Gain.cpp \
+	src/dsp/Lfo.cpp \
+	src/dsp/Filters.cpp \
+	src/dsp/ControlGenerator.cpp \
+	src/dsp/WTOscillator.cpp \
+	src/dsp/StereoDelay.cpp
 	src/dsp/AudioProcess.cpp \
 	src/dsp/Oscillator.cpp \
 	modules/AudioModule.cpp \
-	src/Model.cpp \
-	src/gui/Fader.cpp \
-	src/Controls.cpp \
-	src/core/AudioDeviceControls.cpp \
-	src/gui/AudioDeviceView.cpp \
-	src/core/AudioThread.cpp \
 	modules/Demo1ModuleControls.cpp \
 	modules/Demo1AudioModule.cpp \
 	modules/ModuleView.cpp \
 	modules/Demo1ModuleView.cpp \
-	src/dsp/Gain.cpp \
-	src/dsp/Lfo.cpp \
-	src/dsp/Filters.cpp \
-	src/gui/Ribbon.cpp \
-	src/gui/TouchController.cpp \
-	src/gui/VFader.cpp \
-	src/dsp/ControlGenerator.cpp \
-	src/UiControls.cpp \
-	src/core/AutomationSensor.cpp \
-	src/dsp/WTOscillator.cpp \
-	src/gui/VuFader.cpp \
-	src/dsp/StereoDelay.cpp
 
 
 HEADERS  += headers/MainWindow.h \
