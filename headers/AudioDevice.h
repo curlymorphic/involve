@@ -32,6 +32,7 @@
 #include <QByteArray>
 #include <QIODevice>
 #include "Demo1AudioModule.h"
+#include "Limiter.h"
 
 ///
 /// \brief The AudioDevice class
@@ -90,6 +91,7 @@ private:
 	QAudioOutput *m_audioOutput;
 	QIODevice *m_output;
 	AudioDeviceControls *m_audioDeviceControls;
+	Limiter m_limiter;
 
 
 

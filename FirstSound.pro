@@ -46,6 +46,8 @@ SOURCES += main.cpp\
 	src/dsp/StereoDelay.cpp \
 	src/dsp/AudioProcess.cpp \
 	src/dsp/Oscillator.cpp \
+	src/dsp/Limiter.cpp \
+	src/dsp/EnvelopeDetector.cpp \
 	modules/AudioModule.cpp \
 	modules/Demo1ModuleControls.cpp \
 	modules/Demo1AudioModule.cpp \
@@ -84,7 +86,9 @@ HEADERS  += headers/MainWindow.h \
 	headers/AutomationSensor.h \
 	headers/WTOscillator.h \
 	headers/VuFader.h \
-	headers/StereoDelay.h
+	headers/StereoDelay.h \
+	headers/Limiter.h \
+    headers/EnvelopeDetector.h
 
 FORMS    += MainWindow.ui
 

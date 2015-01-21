@@ -34,7 +34,8 @@ AudioDevice::AudioDevice(const QAudioFormat &format, AudioModule *module, Module
 	m_audioDevice(0),
 	m_audioOutput(0),
 	m_output(0),
-	m_audioDeviceControls( adc )
+	m_audioDeviceControls( adc ),
+	m_limiter( adc->m_sampleRate )
 {
 	m_format = format;
 
@@ -138,6 +139,7 @@ qint64 AudioDevice::readData(char *data, qint64 len)
 	{
 		len = len > bytesAvailable() ? bytesAvailable() : len;
 		m_module->processAudio( m_frameBuffer, len / 4 );
+		m_limiter.processAudio( m_frameBuffer, len / 4 );
 		for(int i = 0; i < len /4; i++)
 		{
 			m_frameBuffer[i][0] *= m_audioDeviceControls->m_gainModel.value();
