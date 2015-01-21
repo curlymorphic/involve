@@ -60,7 +60,13 @@ MainWindow::MainWindow(QWidget *parent) :
 
 //	showNormal();
 
+	QPalette* palette = new QPalette();
+	QPixmap *gb = new QPixmap(":/new/prefix1/images/brushedsteel.jpg");
+	*gb = gb->scaled(QApplication::screens().at( 0 )->size().width(),
+					 QApplication::screens().at( 0 )->size().height() );
 
+		palette->setBrush(QPalette::Background, *( new QBrush( *gb )));
+		setPalette(*palette);
 
 
 	m_moduleView = new Demo1ModuleView( m_controls, this );
@@ -85,7 +91,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_audioModule = new Demo1AudioModule( 44100, m_controls );
 		m_audioThread = new AudioThread(m_audioDeviceControls, m_audioModule, m_controls, this );
 		m_audioThread->start(QThread::HighestPriority);
-//	initializeAudio();
+
 
 	periodicUpdate = new QTimer( this );
 	periodicUpdate->start( 50 );
@@ -96,7 +102,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_automationSensor = new AutomationSensor( this );
 	m_automationSensor->m_xModel = &m_controls->cutOffModel;
 	m_automationSensor->m_yModel = &m_controls->resModel;
-//	m_automationSensor->m_zModel = &m_uiControls->octaves;
+
 }
 
 MainWindow::~MainWindow()
