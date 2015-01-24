@@ -26,12 +26,15 @@
 #include <QWidget>
 #include "Model.h"
 #include "TouchController.h"
+#include <QPixmap>
 
 class VFader : public TouchController
 {
 public:
 	VFader(  Model *yModel = 0, QWidget *parent = 0 );
 	~VFader();
+
+	void setFaderPixmap( QPixmap *pixamp);
 
 protected:
 	virtual void paintEvent( QPaintEvent *event );
@@ -40,6 +43,7 @@ protected:
 private:
 
 	qint64 m_dotSize;
+	QPixmap *m_fader;
 };
 
 #endif // VFADER_H

@@ -1,5 +1,8 @@
 <RCC>
     <qresource prefix="/new/prefix1">
         <file>images/brushedsteel.jpg</file>
+        <file>images/Box.png</file>
+        <file>images/FaderBack.png</file>
+        <file>images/Faderknob.png</file>
     </qresource>
 </RCC>

@@ -34,21 +34,21 @@ Demo1ModuleView::Demo1ModuleView(Demo1ModuleControls *controls, QWidget *parent,
 	m_controls( controls )
 {
 
-	m_waveShapeFader = new VFader( &m_controls->waveShapeModel, this );
-	m_attackFader = new VFader( &m_controls->attackModel, this );
-	m_decayFader = new VFader( &m_controls->decayModel, this );
-	m_sustainFader = new VFader( &m_controls->sustainModel, this );
-	m_releaseFader = new VFader( &m_controls->releaseModel, this );
-	m_lfoSpeedFader = new VFader( &m_controls->lfoSpeedModel, this );
-	m_lfoShapeFader = new VFader( &m_controls->lfoShapeModel, this );
-	m_lfoGainFader = new VFader( &m_controls->lfoGainModel, this );
-	m_lfoFilterFader = new VFader ( &m_controls->lfoFilterModel, this );
-	m_delayAmmountFader = new VFader ( &m_controls->delayAmmountModel, this );
-	m_delayTimeFader = new VFader( &m_controls->delayTimeModel, this  );
-	m_delayRegenFader = new VFader( &m_controls->delayRegenModel, this );
+	m_waveShapeFader = new ModuleFader( &m_controls->waveShapeModel, this );
+	m_attackFader = new ModuleFader( &m_controls->attackModel, this );
+	m_decayFader = new ModuleFader( &m_controls->decayModel, this );
+	m_sustainFader = new ModuleFader( &m_controls->sustainModel, this );
+	m_releaseFader = new ModuleFader( &m_controls->releaseModel, this );
+	m_lfoSpeedFader = new ModuleFader( &m_controls->lfoSpeedModel, this );
+	m_lfoShapeFader = new ModuleFader( &m_controls->lfoShapeModel, this );
+	m_lfoGainFader = new ModuleFader( &m_controls->lfoGainModel, this );
+	m_lfoFilterFader = new ModuleFader ( &m_controls->lfoFilterModel, this );
+	m_delayAmmountFader = new ModuleFader ( &m_controls->delayAmmountModel, this );
+	m_delayTimeFader = new ModuleFader( &m_controls->delayTimeModel, this  );
+	m_delayRegenFader = new ModuleFader( &m_controls->delayRegenModel, this );
 
-	m_cutOffFader = new VFader( &m_controls->cutOffModel, this );
-	m_resFader = new VFader( &m_controls->resModel, this );
+	m_cutOffFader = new ModuleFader( &m_controls->cutOffModel, this );
+	m_resFader = new ModuleFader( &m_controls->resModel, this );
 
 
 
