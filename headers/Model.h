@@ -66,6 +66,11 @@ public:
 		m_min = min;
 	}
 
+	inline const QString getName() const
+	{
+		return m_name;
+	}
+
 signals:
 	void dataChanged( float );
 

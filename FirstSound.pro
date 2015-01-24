@@ -52,7 +52,8 @@ SOURCES += main.cpp\
 	modules/Demo1ModuleControls.cpp \
 	modules/Demo1AudioModule.cpp \
 	modules/ModuleView.cpp \
-	modules/Demo1ModuleView.cpp
+	modules/Demo1ModuleView.cpp \
+    src/gui/ModuleFader.cpp
 
 HEADERS  += headers/MainWindow.h \
 	headers/Types.h \
@@ -88,7 +89,8 @@ HEADERS  += headers/MainWindow.h \
 	headers/VuFader.h \
 	headers/StereoDelay.h \
 	headers/Limiter.h \
-    headers/EnvelopeDetector.h
+    headers/EnvelopeDetector.h \
+    src/gui/ModuleFader.h
 
 FORMS    += MainWindow.ui
 

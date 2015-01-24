@@ -23,14 +23,19 @@
 #include "VFader.h"
 #include <QPainter>
 #include <QTouchEvent>
+#include <QPalette>
 
 
 
 VFader::VFader(  Model *yModel, QWidget *parent) :
 	TouchController( 0, yModel, parent ),
-	m_dotSize( 10 )
+	m_dotSize( 10 ),
+	m_fader( 0 )
 {
-
+	setAttribute(Qt::WA_PaintUnclipped);
+	QPalette *palette = new QPalette();
+	palette->setBrush( QPalette::Background , *( new QBrush ( * (new QColor(0, 0, 0, 0 ) ) ) ) );
+	setPalette( *palette );
 }
 
 VFader::~VFader()
@@ -38,16 +43,30 @@ VFader::~VFader()
 
 }
 
+void VFader::setFaderPixmap( QPixmap *pixamp )
+{
+	m_fader = pixamp;
+}
+
 void VFader::paintEvent(QPaintEvent *event)
 {
 	Q_UNUSED( event );
 	QPainter painter( this );
-	painter.setPen( QPen ( QColor ( 0, 0, 0, 255), 1 ,
+	painter.setPen( QPen ( QColor ( 255, 0, 0, 255), 1 ,
 						   Qt::SolidLine, Qt::RoundCap, Qt::BevelJoin ));
 	painter.drawLine(width() * 0.5, 0, width() * 0.5 , height() );
-	painter.setPen( QPen ( QColor ( 0, 0, 0, 255), m_dotSize ,
-						   Qt::SolidLine, Qt::RoundCap, Qt::BevelJoin ));
-	painter.drawPoint( width() * 0.5 , height() - ( m_yModel->value()*m_pixelPerY) );
+	if( !m_fader )
+	{
+		painter.setPen( QPen ( QColor ( 255, 0, 0, 255), m_dotSize ,
+							   Qt::SolidLine, Qt::RoundCap, Qt::BevelJoin ));
+		painter.drawPoint( width() * 0.5 , height() - ( m_yModel->value()*m_pixelPerY) );
+	}
+	else
+	{
+		painter.drawPixmap(
+					0 , height() - (int)(( m_yModel->value() * m_pixelPerY )
+										 + ( m_fader->width() * 0.5 ) ), *m_fader  );
+	}
 }
 
 void VFader::resizeEvent(QResizeEvent *event)
