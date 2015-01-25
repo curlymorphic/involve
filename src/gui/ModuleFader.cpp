@@ -61,6 +61,7 @@ void ModuleFader::resizeEvent(QResizeEvent *event)
 	m_vFader->move(0, m_yScale * 24 );
 	m_vFader->resize(event->size().width(), 118 * m_yScale );
 	QWidget::resizeEvent( event );
+	if( event->size().width() > event->size().height() * 0.5 ) resize( event->size().height() * 0.5, event->size().height() );
 
 }
 

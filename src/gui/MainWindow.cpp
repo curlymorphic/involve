@@ -61,29 +61,30 @@ MainWindow::MainWindow(QWidget *parent) :
 //	showNormal();
 
 	QPalette* palette = new QPalette();
-	QPixmap *gb = new QPixmap(":/new/prefix1/images/brushedsteel.jpg");
+	QPixmap *gb = new QPixmap(":/new/prefix1/images/Box.png");
 	*gb = gb->scaled(QApplication::screens().at( 0 )->size().width(),
 					 QApplication::screens().at( 0 )->size().height() );
 
-		palette->setBrush(QPalette::Background, *( new QBrush( *gb )));
-		setPalette(*palette);
+	palette->setBrush(QPalette::Background, *( new QBrush( *gb )));
+	setPalette(*palette);
 
 
 	m_moduleView = new Demo1ModuleView( m_controls, this );
 	m_moduleView->show();
-	m_moduleView->resize( QApplication::screens().at( 0 )->size().width(),
-						  QApplication::screens().at( 0 )->size().height() - 50 );
-	m_moduleView->move( 0 , 50 );
 
 	m_ribbon = new Ribbon( &m_controls->freqModel, &m_controls->velocityModel, this );
 	connect( m_ribbon, SIGNAL( noteOn() ), m_moduleView, SLOT( notePressed() ) ) ;
 	connect( m_ribbon, SIGNAL( noteOff() ), m_moduleView, SLOT( noteRelease() ) );
 
+	m_moduleView->resize( QApplication::screens().at( 0 )->size().width(),
+						  QApplication::screens().at( 0 )->size().height() - 50 );
+	m_moduleView->move( 0 , 50 - m_ribbon->height() - 10  );
+
 	m_uiControls = new UiControls( this );
-	m_ocatveRangeFader = new VFader( &m_uiControls->octaves, this);
+	m_ocatveRangeFader = new ModuleFader( &m_uiControls->octaves, this);
 	m_ocatveRangeFader->show();
 
-	m_startOctaveFader = new VFader( &m_uiControls->startOctave, this ) ;
+	m_startOctaveFader = new ModuleFader( &m_uiControls->startOctave, this ) ;
 	m_startOctaveFader->show();
 
 	m_audioDeviceView = new AudioDeviceView( this, m_audioDeviceControls );
@@ -121,6 +122,7 @@ void MainWindow::updateRibbon()
 	m_controls->freqModel.setMax(  midiNoteFreq( ((int) m_uiControls->startOctave.value() * 12 ) +
 												m_uiControls->octaves.value() * 12 ) );
 	m_ribbon->recalculatePixelMultipliers();
+	m_moduleView->layout();
 //	QMainWindow::update();
 }
 

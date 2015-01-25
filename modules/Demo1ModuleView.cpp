@@ -25,6 +25,8 @@
 #include <QApplication>
 #include "QScreen"
 #include "Ribbon.h"
+#include <QVBoxLayout>
+#include <QGroupBox>
 
 
 
@@ -50,6 +52,43 @@ Demo1ModuleView::Demo1ModuleView(Demo1ModuleControls *controls, QWidget *parent,
 	m_cutOffFader = new ModuleFader( &m_controls->cutOffModel, this );
 	m_resFader = new ModuleFader( &m_controls->resModel, this );
 
+	QVBoxLayout *vlayout = new QVBoxLayout( this );
+
+	QGroupBox *lfoGroup = new QGroupBox( tr ( "LFO" ), this );
+	QHBoxLayout *lfoLayout = new QHBoxLayout( lfoGroup );
+	lfoLayout->addWidget( m_lfoSpeedFader );
+	lfoLayout->addWidget( m_lfoShapeFader );
+	lfoLayout->addWidget( m_lfoGainFader );
+	lfoLayout->addWidget( m_lfoFilterFader );
+	vlayout->addWidget ( lfoGroup );
+
+	QGroupBox *adsrGroup = new QGroupBox( tr( "ADSR" ), this );
+	QHBoxLayout *adsrLayout = new QHBoxLayout( adsrGroup );
+	adsrLayout->addWidget( m_attackFader );
+	adsrLayout->addWidget( m_decayFader );
+	adsrLayout->addWidget( m_sustainFader );
+	adsrLayout->addWidget( m_releaseFader );
+	adsrLayout->addWidget( m_waveShapeFader );
+	vlayout->addWidget( adsrGroup );
+
+	QHBoxLayout *bottomRow = new QHBoxLayout( this );
+
+	QGroupBox *filterGroup = new QGroupBox( tr( "FILTER" ), this );
+	QHBoxLayout  *filterLayout = new QHBoxLayout ( filterGroup );
+	filterLayout->addWidget( m_cutOffFader );
+	filterLayout->addWidget( m_resFader );
+	bottomRow->addWidget( filterGroup );
+
+	QGroupBox *delayGroup = new QGroupBox( tr( "DELAY" ), this );
+	QHBoxLayout *delayLayout = new QHBoxLayout( delayGroup);
+	delayLayout->addWidget( m_delayAmmountFader );
+	delayLayout->addWidget( m_delayTimeFader );
+	delayLayout->addWidget( m_delayRegenFader );
+	bottomRow->addWidget( delayGroup);
+
+	vlayout->addLayout( bottomRow );
+
+
 
 
 
@@ -66,6 +105,8 @@ Demo1ModuleView::Demo1ModuleView(Demo1ModuleControls *controls, QWidget *parent,
 	m_delayAmmountFader->show();
 	m_delayTimeFader->show();
 	m_delayRegenFader->show();
+
+	layout();
 }
 
 Demo1ModuleView::~Demo1ModuleView()
@@ -97,23 +138,23 @@ void Demo1ModuleView::layout()
 
 	m_cutOffFader->resize( wwidth * 0.1 , height8 * 2 );
 	m_resFader->resize(  wwidth * 0.1 , height8 * 2 );
-	m_resFader->move( 0.0, height8 * 3 );
+//	m_resFader->move( 0.0, height8 * 3 );
 
-	m_lfoSpeedFader->move( wDivide , 0 );
-	m_lfoShapeFader->move( wDivide * 3 , 0 );
-	m_lfoGainFader->move( wDivide * 5, 0 );
-	m_lfoFilterFader->move( wDivide * 7, 0);
+//	m_lfoSpeedFader->move( wDivide , 0 );
+//	m_lfoShapeFader->move( wDivide * 3 , 0 );
+//	m_lfoGainFader->move( wDivide * 5, 0 );
+//	m_lfoFilterFader->move( wDivide * 7, 0);
 
-	m_attackFader->move( wDivide, height8 * 3 );
-	m_decayFader->move( wDivide * 3, height8 * 3 );
-	m_sustainFader->move( wDivide * 5, height8 * 3 );
-	m_releaseFader->move( wDivide * 7, height8 * 3 );
-	m_waveShapeFader->move( wDivide * 9 ,height8 * 3 );
+//	m_attackFader->move( wDivide, height8 * 3 );
+//	m_decayFader->move( wDivide * 3, height8 * 3 );
+//	m_sustainFader->move( wDivide * 5, height8 * 3 );
+//	m_releaseFader->move( wDivide * 7, height8 * 3 );
+//	m_waveShapeFader->move( wDivide * 9 ,height8 * 3 );
 
 
-	m_delayAmmountFader->move( wDivide * 5, height8 * 6 );
-	m_delayTimeFader->move( wDivide * 7, height8 * 6 );
-	m_delayRegenFader->move( wDivide * 9, height8 * 6 );
+//	m_delayAmmountFader->move( wDivide * 5, height8 * 6 );
+//	m_delayTimeFader->move( wDivide * 7, height8 * 6 );
+//	m_delayRegenFader->move( wDivide * 9, height8 * 6 );
 
 
 
