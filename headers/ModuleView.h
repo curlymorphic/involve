@@ -25,6 +25,7 @@
 
 #include <QWidget>
 #include "ModuleControls.h"
+#include <QPixmap>
 
 ///
 /// \brief The ModuleView class
@@ -42,15 +43,13 @@ private slots:
 	void noteRelease();
 
 protected:
-	virtual void resizeEvent( QResizeEvent *event)
-	{
-		QWidget::resizeEvent( event );
-		layout();
-	}
+	virtual void resizeEvent( QResizeEvent *event);
 
 private:
 
 	ModuleControls *m_moduleControls;
+	QPixmap *m_backgroundImage;
+	QPixmap *m_scaledBackgroundImage;
 
 
 

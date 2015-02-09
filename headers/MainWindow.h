@@ -40,6 +40,8 @@
 #include "VFader.h"
 #include "UiControls.h"
 #include "AutomationSensor.h"
+#include "ModuleFader.h"
+#include <QGridLayout>
 
 
 namespace Ui {
@@ -69,10 +71,11 @@ private:
 	ModuleView *m_moduleView;
 	QTimer *periodicUpdate;
 	Ribbon *m_ribbon;
-	VFader *m_startOctaveFader;
-	VFader *m_ocatveRangeFader;
+	ModuleFader *m_startOctaveFader;
+	ModuleFader *m_ocatveRangeFader;
 	UiControls *m_uiControls;
 	AutomationSensor *m_automationSensor;
+	QGridLayout *m_gridLayout;
 
 protected:
 	 virtual void resizeEvent(QResizeEvent * event)
@@ -91,18 +94,24 @@ protected:
 
 		if(m_ocatveRangeFader)
 		{
-			m_ocatveRangeFader->resize( width * 0.05 , height8 * 2 );
-			m_ocatveRangeFader->move( width - ( width * 0.05 ) , 0);
+			m_ocatveRangeFader->resize( width * 0.1 , height8 * 2 );
+			m_ocatveRangeFader->move( width - ( width * 0.1 ) , 0);
 
-			m_startOctaveFader->resize( width * 0.05 , height8 * 2 );
-			m_startOctaveFader->move( width - ( width * 0.05 ) , height8*3 );
+			m_startOctaveFader->resize( width * 0.1 , height8 * 2 );
+			m_startOctaveFader->move( width - ( width * 0.1 ) , height8*3 );
 		}
 		if(m_moduleView)
 		{
-			m_moduleView->resize( width * 0.95 ,
-								  height - 50 - m_ribbon->height() );
-//			m_moduleView->layout();
+			m_moduleView->resize( width * 0.90 ,
+								  height - ( height * 0.05 ) - m_ribbon->height() );
+			m_moduleView->layout();
+			m_moduleView->move( 0, height * 0.05 );
 		}
+		if( m_audioDeviceView )
+		{
+			m_audioDeviceView->resize( width * 0.90, height * 0.05 );
+		}
+
 		QMainWindow::resizeEvent( event );
 	}
 

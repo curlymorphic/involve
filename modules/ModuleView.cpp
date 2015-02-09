@@ -26,7 +26,14 @@
 ModuleView::ModuleView( QWidget *parent, ModuleControls *controls, Qt::WindowFlags flags) :
 	QWidget( parent, flags )
 {
+	QPalette* palette = new QPalette();
 	m_moduleControls = controls;
+	m_backgroundImage = new QPixmap (":/new/prefix1/images/Box.png");
+	m_scaledBackgroundImage = new QPixmap( *m_backgroundImage );
+	palette->setBrush(QPalette::Background, *( new QBrush( *m_scaledBackgroundImage )));
+//	palette->setBrush( QPalette::Foreground, *( new QBrush ( * (new QColor(200, 200, 200, 255 ) ) ) )    );
+	palette->setBrush(QPalette::Text, *( new QBrush ( * (new QColor(200, 200, 200, 255 ) ) ) )  );
+	setPalette(*palette);
 }
 
 
@@ -49,6 +56,16 @@ void ModuleView::notePressed()
 void ModuleView::noteRelease()
 {
 	m_moduleControls->noteOnModel.setValue( 0.0 );
+}
+
+void ModuleView::resizeEvent(QResizeEvent *event)
+{
+	*m_scaledBackgroundImage = m_backgroundImage->scaled( event->size() );
+	QPalette* palette = new QPalette();
+	palette->setBrush(QPalette::Background, *( new QBrush( *m_scaledBackgroundImage )));
+	setPalette(*palette);
+	layout();
+	QWidget::resizeEvent( event );
 }
 
 
