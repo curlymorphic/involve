@@ -39,6 +39,9 @@ public:
 	explicit AudioDeviceView(QWidget *parent = 0, AudioDeviceControls *controls = 0 );
 	~AudioDeviceView();
 
+protected:
+	virtual void resizeEvent( QResizeEvent *ev);
+
 signals:
 
 public slots:

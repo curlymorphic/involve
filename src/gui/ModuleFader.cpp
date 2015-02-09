@@ -45,12 +45,17 @@ ModuleFader::~ModuleFader()
 
 void ModuleFader::resizeEvent(QResizeEvent *event)
 {
-	*m_scaledBackgroundImage = m_backgroundImage->scaled( event->size() );
+	if(m_scaledBackgroundImage && m_backgroundImage->size() != event->size() )
+	{
+		*m_scaledBackgroundImage = m_backgroundImage->scaled( event->size() );
+	}
 	QPalette* palette = new QPalette();
 	palette->setBrush(QPalette::Background, *( new QBrush( *m_scaledBackgroundImage )));
 	setPalette(*palette);
-
-	*m_scaledFaderImage = m_faderImage->scaled( event->size().width(), event->size().width() );
+	if( m_scaledFaderImage && m_scaledFaderImage->width() != event->size().width() )
+	{
+		*m_scaledFaderImage = m_faderImage->scaled( event->size().width(), event->size().width() );
+	}
 	m_vFader->setFaderPixmap( m_scaledFaderImage );
 
 	m_yScale =  (float) event->size().height() / (float)m_backgroundImage->height() ;
