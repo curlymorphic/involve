@@ -72,12 +72,6 @@ MainWindow::MainWindow(QWidget *parent) :
 	setPalette(*palette);
 
 	m_gridLayout = new QGridLayout( );
-//	if( layout() )
-//	{
-//		delete layout();
-//	}
-//	setLayout( m_gridLayout );
-//	m_gridLayout->setParent( this );
 
 	m_audioDeviceView = new AudioDeviceView( this, m_audioDeviceControls );
 	m_audioDeviceView->show();

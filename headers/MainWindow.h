@@ -103,7 +103,7 @@ protected:
 		if(m_moduleView)
 		{
 			m_moduleView->resize( width * 0.90 ,
-								  height - ( height * 0.05 ) - m_ribbon->height() );
+								  height - ( height * 0.05 ) - m_ribbon->height() - 50 );
 			m_moduleView->layout();
 			m_moduleView->move( 0, height * 0.05 );
 		}
