@@ -31,17 +31,17 @@ Demo1ModuleControls::Demo1ModuleControls(QObject *parent) : ModuleControls( pare
 	cutOffModel(1000, 50, 10000,1, tr( "Cut" ) ),
 	resModel(1, 1, 4, 0.1, tr( "Res" ) ),
 	waveShapeModel( 2, 0 , 4 , 1, tr( "Wave" ) ),
-	attackModel(0.1, 0.01 , 5 , 0.01, tr( "Atk" ) ),
-	decayModel(0.1, 0.01 , 5 , 0.01, tr( "Dcy" ) ),
-	sustainModel(0.5, 0, 1 , 0.01, tr( "Sus" ) ),
-	releaseModel(0.1, 0.01 , 5 , 0.01, tr( "Rel" ) ),
-	lfoSpeedModel(0.01, 0.01, 10, 0.01, tr( "Spd lfo" ) ),
+	attackModel(0.5, 0.01 , 5 , 0.01, tr( "Atk" ) ),
+	decayModel(0.5, 0.01 , 5 , 0.01, tr( "Dcy" ) ),
+	sustainModel(0.9, 0, 1 , 0.01, tr( "Sus" ) ),
+	releaseModel(1.2, 0.01 , 5 , 0.01, tr( "Rel" ) ),
+	lfoSpeedModel(0.1, 0.01, 10, 0.01, tr( "Spd lfo" ) ),
 	lfoShapeModel( 2, 0 , 4 , 1, tr( "Wave lfo" ) ),
 	lfoGainModel(0.0, 0.0, 1.0, 0.01, tr( "Vol lfo " ) ),
-	lfoFilterModel(1.0, 0.0, 1.0, 0.01, tr( "Filt lfo" ) ),
-	delayAmmountModel(0.00, 0.0, 1, 0.01, tr( "Amt Delay" ) ),
-	delayTimeModel(0.05, 0.01, 1, 0.01, tr( "Time Delay" ) ),
-	delayRegenModel(0.0, 0.0, 0.99, 0.01, tr( "Fb  Delay" ) )
+	lfoFilterModel(0.0, 0.0, 1.0, 0.01, tr( "Filt lfo" ) ),
+	delayAmmountModel(0.1, 0.0, 1, 0.01, tr( "Amt Delay" ) ),
+	delayTimeModel(0.2, 0.01, 1, 0.01, tr( "Time Delay" ) ),
+	delayRegenModel(0.5, 0.0, 0.99, 0.01, tr( "Fb  Delay" ) )
 {
 
 }
