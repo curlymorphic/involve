@@ -95,7 +95,7 @@ protected:
 		if(m_ocatveRangeFader)
 		{
 			m_ocatveRangeFader->resize( width * 0.1 , height8 * 2 );
-			m_ocatveRangeFader->move( width - ( width * 0.1 ) , 0);
+			m_ocatveRangeFader->move( width - ( width * 0.1 ) , ( height * 0.05 ));
 
 			m_startOctaveFader->resize( width * 0.1 , height8 * 2 );
 			m_startOctaveFader->move( width - ( width * 0.1 ) , height8*3 );
