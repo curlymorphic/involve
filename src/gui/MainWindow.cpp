@@ -89,21 +89,6 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect( m_ribbon, SIGNAL( noteOn() ), m_moduleView, SLOT( notePressed() ) ) ;
 	connect( m_ribbon, SIGNAL( noteOff() ), m_moduleView, SLOT( noteRelease() ) );
 
-//	m_gridLayout->addWidget( m_audioDeviceView, 1, 1, 2 , 1);
-//	m_gridLayout->addWidget( m_moduleView, 1, 2, 1, 2 );
-//	m_gridLayout->addWidget( m_ocatveRangeFader, 2, 2, 1, 1 );
-//	m_gridLayout->addWidget( m_startOctaveFader, 2, 3, 1, 1 );
-//	m_gridLayout->addWidget( m_ribbon, 1, 4, 1, 1 );
-//	m_ribbon->setLayout( m_gridLayout );
-
-//	m_gridLayout->
-
-
-//	m_moduleView->resize( QApplication::screens().at( 0 )->size().width(),
-//						  QApplication::screens().at( 0 )->size().height() - 50 );
-//	m_moduleView->move( 0 , 50 - m_ribbon->height() - 10  );
-
-
 	m_audioModule = new Demo1AudioModule( 44100, m_controls );
 	m_audioThread = new AudioThread(m_audioDeviceControls, m_audioModule, m_controls, this );
 	m_audioThread->start(QThread::HighestPriority);
@@ -129,13 +114,50 @@ MainWindow::~MainWindow()
 
 }
 
+void MainWindow::resizeEvent(QResizeEvent *event)
+{
+	const int height8 = QApplication::screens().at( 0 )->size().height() / 8;
+	const int height = QApplication::screens().at( 0 )->size().height();
+	const int width = QApplication::screens().at( 0 )->size().width();
+
+	(void) event;
+
+	if (m_ribbon)
+	{
+		m_ribbon->resize( width , height8 * 2);
+		m_ribbon->move( 0, height- 50  - (height8 *2) );
+	}
+
+	if(m_ocatveRangeFader)
+	{
+		m_ocatveRangeFader->resize( width * 0.1 , height8 * 2 );
+		m_ocatveRangeFader->move( width - ( width * 0.1 ) , ( height * 0.05 ));
+
+		m_startOctaveFader->resize( width * 0.1 , height8 * 2 );
+		m_startOctaveFader->move( width - ( width * 0.1 ) , height8*3 );
+	}
+	if(m_moduleView)
+	{
+		m_moduleView->resize( width * 0.90 ,
+							  height - ( height * 0.05 ) - m_ribbon->height() - 50 );
+		m_moduleView->layout();
+		m_moduleView->move( 0, height * 0.05 );
+	}
+	if( m_audioDeviceView )
+	{
+		m_audioDeviceView->resize( width * 0.90, height * 0.05 );
+	}
+
+	QMainWindow::resizeEvent( event );
+}
+
 
 
 void MainWindow::updateRibbon()
 {
 	m_controls->freqModel.setMin( midiNoteFreq( (int)m_uiControls->startOctave.value()*12 ) );
 	m_controls->freqModel.setMax(  midiNoteFreq( ((int) m_uiControls->startOctave.value() * 12 ) +
-												m_uiControls->octaves.value() * 12 ) );
+												 m_uiControls->octaves.value() * 12 ) );
 	m_ribbon->recalculatePixelMultipliers();
 	m_moduleView->layout();
 	QMainWindow::update();

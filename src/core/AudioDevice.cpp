@@ -124,11 +124,9 @@ void AudioDevice::createAudioOutput()
 	if( m_audioOutput) { delete m_audioOutput; }
 	m_audioOutput = 0;
 	m_audioOutput = new QAudioOutput(m_device, m_format, this);
-	//	m_audioOutput->setBufferSize(10000);
 
 	start();
 	m_audioOutput->start(this);
-	//	m_audioDeviceControls->m_bufferSize = m_audioOutput->bufferSize();
 }
 
 
@@ -166,7 +164,6 @@ qint64 AudioDevice::writeData(const char *data, qint64 len)
 
 qint64 AudioDevice::bytesAvailable() const
 {
-	//	return m_buffer.size() + QIODevice::bytesAvailable();
 	return 1024;
 }
 
