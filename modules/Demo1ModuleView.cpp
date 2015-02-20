@@ -88,11 +88,6 @@ Demo1ModuleView::Demo1ModuleView(Demo1ModuleControls *controls, QWidget *parent,
 
 	vlayout->addLayout( bottomRow );
 
-
-
-
-
-
 	m_waveShapeFader->show();
 	m_attackFader->show();
 	m_decayFader->show();
@@ -138,26 +133,6 @@ void Demo1ModuleView::layout()
 
 	m_cutOffFader->resize( wwidth * 0.1 , height8 * 2 );
 	m_resFader->resize(  wwidth * 0.1 , height8 * 2 );
-//	m_resFader->move( 0.0, height8 * 3 );
-
-//	m_lfoSpeedFader->move( wDivide , 0 );
-//	m_lfoShapeFader->move( wDivide * 3 , 0 );
-//	m_lfoGainFader->move( wDivide * 5, 0 );
-//	m_lfoFilterFader->move( wDivide * 7, 0);
-
-//	m_attackFader->move( wDivide, height8 * 3 );
-//	m_decayFader->move( wDivide * 3, height8 * 3 );
-//	m_sustainFader->move( wDivide * 5, height8 * 3 );
-//	m_releaseFader->move( wDivide * 7, height8 * 3 );
-//	m_waveShapeFader->move( wDivide * 9 ,height8 * 3 );
-
-
-//	m_delayAmmountFader->move( wDivide * 5, height8 * 6 );
-//	m_delayTimeFader->move( wDivide * 7, height8 * 6 );
-//	m_delayRegenFader->move( wDivide * 9, height8 * 6 );
-
-
-
 }
 
 

@@ -45,6 +45,8 @@ void VuFader::paintEvent(QPaintEvent *event)
 	painter.setPen( QPen ( QColor ( 0, 0, 0, 255), 1 ,
 						   Qt::SolidLine, Qt::RoundCap, Qt::BevelJoin ));
 	painter.drawLine( 0 , height() * 0.5 , width(), height() * 0.5 );
+	painter.setPen( QPen ( QColor ( 0, 255, 0, 255), 10 ,
+						   Qt::SolidLine, Qt::RoundCap, Qt::BevelJoin ));
 	painter.drawLine( 0, height() * 0.25, m_peaks[0][0]*m_pixelPerX , height() * 0.25 );
 	painter.drawLine( 0, height() * 0.75, m_peaks[0][1]*m_pixelPerX , height() * 0.75 );
 	painter.setPen( QPen ( QColor ( 0, 0, 0, 255), m_dotSize ,

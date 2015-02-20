@@ -78,42 +78,7 @@ private:
 	QGridLayout *m_gridLayout;
 
 protected:
-	 virtual void resizeEvent(QResizeEvent * event)
-	{
-		const int height8 = QApplication::screens().at( 0 )->size().height() / 8;
-		const int height = QApplication::screens().at( 0 )->size().height();
-		const int width = QApplication::screens().at( 0 )->size().width();
-
-		(void) event;
-
-		if (m_ribbon)
-		{
-			m_ribbon->resize( width , height8 * 2);
-			m_ribbon->move( 0, height- 50  - (height8 *2) );
-		}
-
-		if(m_ocatveRangeFader)
-		{
-			m_ocatveRangeFader->resize( width * 0.1 , height8 * 2 );
-			m_ocatveRangeFader->move( width - ( width * 0.1 ) , 0);
-
-			m_startOctaveFader->resize( width * 0.1 , height8 * 2 );
-			m_startOctaveFader->move( width - ( width * 0.1 ) , height8*3 );
-		}
-		if(m_moduleView)
-		{
-			m_moduleView->resize( width * 0.90 ,
-								  height - ( height * 0.05 ) - m_ribbon->height() );
-			m_moduleView->layout();
-			m_moduleView->move( 0, height * 0.05 );
-		}
-		if( m_audioDeviceView )
-		{
-			m_audioDeviceView->resize( width * 0.90, height * 0.05 );
-		}
-
-		QMainWindow::resizeEvent( event );
-	}
+	 virtual void resizeEvent(QResizeEvent * event);
 
 private slots:
 	virtual void updateRibbon();
