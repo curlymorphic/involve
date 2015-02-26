@@ -33,14 +33,41 @@ WTOscillator::WTOscillator(int sampleRate) :
 	sineTable( 0 ),
 	squareTable( 0 ),
 	triTable( 0 ),
-	sawTable( 0 )
+	sawTable( 0 ),
+	m_currentShape (WT_SQUARE)
 {
-	setFrequency(440.0);
-	generateSineTable(100);
-	generateSawTable(100);
-	generateSquareTable(100);
-	generateTriTable(100);
-	setShape(WT_SINE);
+	m_bandFreq = new float[8] { 32.073, 65.4, 103.81, 261.63, 523.25, 1046.5, 2093.5, 4186.0 };
+	m_tableCount = 8;
+	setFrequency( 440.0 );
+	sineTables = new sample_t*[ m_tableCount ];
+	for(int i = 0 ; i < m_tableCount; ++i)
+	{
+		generateSineTable( m_sampleRate / m_bandFreq[i] * 0.5 );
+		sineTables[i] = sineTable;
+	}
+
+	sawTables = new sample_t*[ m_tableCount ];
+	for(int i = 0 ; i < m_tableCount; ++i)
+	{
+		generateSawTable( m_sampleRate / m_bandFreq[i] * 0.5 );
+		sawTables[i] = sawTable;
+	}
+
+	squareTables = new sample_t*[ m_tableCount ];
+	for( int i = 0; i < m_tableCount; ++i)
+	{
+		generateSquareTable( m_sampleRate / m_bandFreq[i] * 0.5 );
+		squareTables[i] = squareTable;
+	}
+
+	triTables = new sample_t*[ m_tableCount ];
+	for( int i = 0; i < m_tableCount; ++i )
+	{
+		generateTriTable( m_sampleRate / m_bandFreq[i] * 0.5 );
+		triTables[i] = triTable;
+	}
+
+	setShape( m_currentShape );
 }
 
 WTOscillator::~WTOscillator()
@@ -69,7 +96,7 @@ sample_t WTOscillator::tick()
 				0;
 	index = m_index;
 	frac = m_index - index;
-	return linearInterpolate( m_currentTable[ index] , m_currentTable[ nextIndex ], frac );
+	return linearInterpolate( m_currentTable[ index ] , m_currentTable[ nextIndex ], frac );
 }
 
 sample_t sample;
@@ -89,27 +116,30 @@ void WTOscillator::setFrequency(float freq)
 {
 	freq = bound(0.0f, freq, 4186.0f );
 	m_increment = TABLE_LEN * ( freq / m_sampleRate );
+	m_freq = freq;
 }
 
 void WTOscillator::setShape(WTWaveShape shape)
 {
+	int band = bandFromFreq( m_freq );
 	switch ( shape )
 	{
 	case WT_SINE:
-		m_currentTable = sineTable;
+		m_currentTable = sineTables[ band ];
 		break;
 	case WT_SAW:
-		m_currentTable = sawTable;
+		m_currentTable = sawTables[ band ];
 		break;
 	case WT_SQUARE:
-		m_currentTable = squareTable;
+		m_currentTable = squareTables[ band ];
 		break;
 	case WT_TRIANGLE:
-		m_currentTable = triTable;
+		m_currentTable = triTables[ band ];
 		break;
 	default:
 		break;
 	}
+	m_currentShape = shape;
 	return;
 }
 
@@ -193,5 +223,15 @@ void WTOscillator::generateSquareTable(int bands)
 	{
 		squareTable[i] /= max;
 	}
+}
+
+int WTOscillator::bandFromFreq(float freq)
+{
+	int i;
+	for( i = 0; i < m_tableCount; ++i )
+	{
+		if (m_bandFreq[i] > freq) return i;
+	}
+	return i;
 }
 

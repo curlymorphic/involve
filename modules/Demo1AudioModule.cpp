@@ -95,6 +95,7 @@ void Demo1AudioModule::processAudio(sampleFrame *buffer, int len)
 void Demo1AudioModule::noteOn()
 {
 	m_ad->noteOn();
+	m_osc->noteOn();
 }
 
 void Demo1AudioModule::noteOff()
