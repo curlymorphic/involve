@@ -24,7 +24,7 @@
 
 
 
-ControlGenerator::ControlGenerator( qint64 sampleRate ) :
+ControlGenerator::ControlGenerator( int sampleRate ) :
 	m_sampleRate( sampleRate )
 {
 

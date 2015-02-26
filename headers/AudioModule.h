@@ -37,7 +37,7 @@
 /// There is only one per active application.
 ///
 
-class AudioModule : public AudioProcess
+class AudioModule : public QObject, public AudioProcess
 {
 	Q_OBJECT
 public:
@@ -46,7 +46,7 @@ public:
 	/// \param samplerate Audio Sample rate
 	/// \param controls	The data controls for this module
 	///
-	AudioModule( qint64 samplerate, ModuleControls *controls );
+	AudioModule( int samplerate, ModuleControls *controls );
 	~AudioModule();
 	///
 	/// \brief processAudio
@@ -55,7 +55,7 @@ public:
 	///
 	/// This is where the action happens
 	///
-	virtual void processAudio(sampleFrame *buffer, qint64 len );
+	virtual void processAudio(sampleFrame *buffer, int len );
 
 protected slots:
 	///

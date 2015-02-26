@@ -29,7 +29,7 @@
 class ControlGenerator
 {
 public:
-	ControlGenerator( qint64 sampleRate );
+	ControlGenerator( int sampleRate );
 	~ControlGenerator();
 
 	virtual inline float tick()
@@ -38,7 +38,7 @@ public:
 	}
 
 protected:
-	qint64 m_sampleRate;
+	int m_sampleRate;
 };
 
 #endif // CONTROLGENERATOR_H

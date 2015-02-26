@@ -24,7 +24,7 @@
 
 
 
-Lfo::Lfo(qint64 sampleRate) :
+Lfo::Lfo(int sampleRate) :
 	ControlGenerator( sampleRate ),
 	m_currentValue( 0 )
 {

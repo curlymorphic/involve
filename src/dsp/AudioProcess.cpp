@@ -21,9 +21,8 @@
  */
 
 #include "AudioProcess.h"
-#include <QtCore>
 
-AudioProcess::AudioProcess(qint64 sampleRate) :
+AudioProcess::AudioProcess(int sampleRate) :
 	m_sampleRate( sampleRate )
 {
 
@@ -34,7 +33,7 @@ AudioProcess::~AudioProcess()
 
 }
 
-void AudioProcess::processAudio(sampleFrame *buffer, qint64 len)
+void AudioProcess::processAudio(sampleFrame *buffer, int len)
 {
 	for( int i =0; i < len; i++)
 	{
@@ -43,12 +42,12 @@ void AudioProcess::processAudio(sampleFrame *buffer, qint64 len)
 
 }
 
-void AudioProcess::setSampleRate(qint64 sampleRate)
+void AudioProcess::setSampleRate(int sampleRate)
 {
 	m_sampleRate = sampleRate;
 }
 
-qint64 AudioProcess::getSampleRate()
+int AudioProcess::getSampleRate()
 {
 	return m_sampleRate;
 }

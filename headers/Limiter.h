@@ -33,7 +33,7 @@
 class Limiter : public AudioProcess
 {
 public:
-	Limiter( qint64 sampleRate );
+	Limiter( int sampleRate );
 	~Limiter();
 	virtual void tick( sampleFrame *frame );
 	void setInGain( float dB )

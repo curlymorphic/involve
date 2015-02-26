@@ -31,7 +31,7 @@
 class Gain : public AudioProcess
 {
 public:
-	Gain( qint64 sampleRate );
+	Gain( int sampleRate );
 	~Gain();
 	inline void setGain( float gain )
 	{

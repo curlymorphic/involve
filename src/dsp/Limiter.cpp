@@ -23,7 +23,7 @@
 #include "Limiter.h"
 
 
-Limiter::Limiter(qint64 sampleRate) :
+Limiter::Limiter(int sampleRate) :
 	AudioProcess( sampleRate ),
 	m_leftDetector( sampleRate ),
 	m_rightDetector( sampleRate ),
@@ -56,7 +56,7 @@ float Limiter::calcCompressorGain(float dectortValue, float threshold )
 {
 	//compute gain
 	float yG = threshold - dectortValue;
-	yG = qMin( 0.0f, yG );
+	yG = fmin( 0.0f, yG );
 	return powf( 10.0, yG/20.0 );
 }
 

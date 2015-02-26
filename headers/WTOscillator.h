@@ -44,7 +44,7 @@ class WTOscillator : public AudioProcess
 public:
 
 	const int TABLE_LEN = 1024;
-	WTOscillator( qint64 sampleRate );
+	WTOscillator( int sampleRate );
 	~WTOscillator();
 
 	///
@@ -116,10 +116,10 @@ protected:
 
 private:
 
-	void generateSineTable( qint64 bands );
-	void generateSawTable( qint64 bands );
-	void generateTriTable( qint64 bands );
-	void generateSquareTable( qint64 bands );
+	void generateSineTable( int bands );
+	void generateSawTable( int bands );
+	void generateTriTable( int bands );
+	void generateSquareTable( int bands );
 
 };
 

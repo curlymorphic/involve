@@ -81,7 +81,7 @@ private:
 class Filter : public BiQuad, public AudioProcess
 {
 public:
-	Filter( qint64 samplerate ) :
+	Filter( int samplerate ) :
 		BiQuad(),
 		AudioProcess( samplerate )
 	{
@@ -156,9 +156,9 @@ public:
 	/// \param buf Audio Buffer
 	/// \param frames Count of sampleFrames in Audio Buffer
 	///
-	virtual void processBuffer( sampleFrame* buf, qint64 frames )
+	virtual void processBuffer( sampleFrame* buf, int frames )
 	{
-		for ( qint64 f = 0 ; f < frames ; ++f)
+		for ( int f = 0 ; f < frames ; ++f)
 		{
 			tick( &buf[f] );
 		}
@@ -194,7 +194,7 @@ protected:
 /// Coefficent calculations from http://www.musicdsp.org/files/Audio-EQ-Cookbook.txt
 class Hp12 : public Filter
 {
-	Hp12( qint64 samplerate) :
+	Hp12( int samplerate) :
 			Filter( samplerate )
 		{
 		}
@@ -244,7 +244,7 @@ public :
 class Lp12 : public Filter
 {
 public :
-	Lp12( qint64 samplerate) :
+	Lp12( int samplerate) :
 		Filter( samplerate )
 	{
 	}
@@ -290,7 +290,7 @@ public :
 class PeakFilter : public Filter
 {
 public:
-	PeakFilter( qint64 samplerate) :
+	PeakFilter( int samplerate) :
 		Filter( samplerate )
 	{
 	}
@@ -333,7 +333,7 @@ public:
 class LowShelf : public Filter
 {
 public :
-	LowShelf( qint64 samplerate) :
+	LowShelf( int samplerate) :
 		Filter( samplerate )
 	{
 	}
@@ -376,7 +376,7 @@ public :
 class HighShelf : public Filter
 {
 public :
-	HighShelf( qint64 samplerate) :
+	HighShelf( int samplerate) :
 		Filter( samplerate )
 	{
 	}

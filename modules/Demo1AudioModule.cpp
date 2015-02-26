@@ -43,7 +43,7 @@ Demo1AudioModule::~Demo1AudioModule()
 	delete m_osc;
 }
 
-void Demo1AudioModule::processAudio(sampleFrame *buffer, qint64 len)
+void Demo1AudioModule::processAudio(sampleFrame *buffer, int len)
 {
 	if(m_controls)
 	{
