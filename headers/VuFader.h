@@ -42,6 +42,11 @@ private:
 
 	qint64 m_dotSize;
 	sampleFrame *m_peaks;
+	float m_xScale;
+	QPixmap *m_backgroundImage;
+	QPixmap *m_scaledBackgroundImage;
+	QPixmap *m_faderImage;
+	QPixmap *m_scaledFaderImage;
 };
 
 #endif // VUFADER_H

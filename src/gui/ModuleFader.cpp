@@ -3,14 +3,14 @@
 
 
 ModuleFader::ModuleFader(Model *model, QWidget *parent) : QWidget(parent) ,
-  m_model( model ),
-  m_vFader( 0 ),
-  m_label( 0 ),
-  m_backgroundImage( 0 ),
-  m_scaledBackgroundImage( 0 ),
-  m_faderImage( 0 ),
-  m_scaledFaderImage( 0 ),
-  m_yScale( 1 )
+	m_model( model ),
+	m_vFader( 0 ),
+	m_label( 0 ),
+	m_backgroundImage( 0 ),
+	m_scaledBackgroundImage( 0 ),
+	m_faderImage( 0 ),
+	m_scaledFaderImage( 0 ),
+	m_yScale( 1 )
 {
 	QPalette* palette = new QPalette();
 	m_backgroundImage = new QPixmap(":/new/prefix1/images/FaderBack.png");
