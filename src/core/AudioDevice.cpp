@@ -138,7 +138,7 @@ qint64 AudioDevice::readData(char *data, qint64 len)
 		len = len > bytesAvailable() ? bytesAvailable() : len;
 		m_module->processAudio( m_frameBuffer, len / 4 );
 		m_limiter.processAudio( m_frameBuffer, len / 4 );
-		for(int i = 0; i < len /4; i++)
+		for(int i = 0; i < len / 4; i++)
 		{
 			m_frameBuffer[i][0] *= m_audioDeviceControls->m_gainModel.value();
 			m_audioDeviceControls->peaks[0] = qMax( m_audioDeviceControls->peaks[0],

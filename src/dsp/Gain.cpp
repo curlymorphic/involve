@@ -24,7 +24,7 @@
 
 
 
-Gain::Gain(qint64 sampleRate) :
+Gain::Gain(int sampleRate) :
 	AudioProcess( sampleRate ),
 	m_gain( 1.0 )
 {

@@ -33,7 +33,7 @@
 class Lfo : public ControlGenerator
 {
 public:
-	Lfo( qint64 sampleRate );
+	Lfo( int sampleRate );
 	~Lfo();
 	void setFrequency( float freq );
 	virtual inline float tick()

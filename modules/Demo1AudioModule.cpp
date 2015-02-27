@@ -43,7 +43,7 @@ Demo1AudioModule::~Demo1AudioModule()
 	delete m_osc;
 }
 
-void Demo1AudioModule::processAudio(sampleFrame *buffer, qint64 len)
+void Demo1AudioModule::processAudio(sampleFrame *buffer, int len)
 {
 	if(m_controls)
 	{
@@ -95,6 +95,7 @@ void Demo1AudioModule::processAudio(sampleFrame *buffer, qint64 len)
 void Demo1AudioModule::noteOn()
 {
 	m_ad->noteOn();
+	m_osc->noteOn();
 }
 
 void Demo1AudioModule::noteOff()

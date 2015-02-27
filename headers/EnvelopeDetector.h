@@ -33,7 +33,7 @@
 class EnvelopeDetector
 {
 public:
-	EnvelopeDetector( qint64 sampleRate )
+	EnvelopeDetector( int sampleRate )
 	{
 		m_currentValue = 0.0;
 		m_sampleRate = sampleRate;
@@ -61,18 +61,18 @@ public:
 
 	void setAttack( float seconds )
 	{
-		m_attack_coef = qExp(log( 0.01 )/(seconds * m_sampleRate  ) );
+		m_attack_coef = expf(log( 0.01 )/(seconds * m_sampleRate  ) );
 	}
 
 	void setRelease( float seconds )
 	{
-		m_release_coef = qExp(log( 0.01 )/(seconds * m_sampleRate ) );
+		m_release_coef = expf(log( 0.01 )/(seconds * m_sampleRate ) );
 	}
 
 private:
 	float m_attack_coef;
 	float m_release_coef;
-	qint64 m_sampleRate;
+	int m_sampleRate;
 	float m_currentValue;
 };
 

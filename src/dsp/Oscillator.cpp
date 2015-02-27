@@ -24,7 +24,7 @@
 
 
 
-Oscillator::Oscillator( qint64 sampleRate ) :
+Oscillator::Oscillator( int sampleRate ) :
 	AudioProcess( sampleRate ),
 	m_phase_increment( 0.003 ),
 	m_current( 0 )

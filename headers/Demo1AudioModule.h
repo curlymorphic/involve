@@ -42,7 +42,7 @@ class Demo1AudioModule : public AudioModule
 public:
 	Demo1AudioModule(qint64 samplerate, Demo1ModuleControls *controls);
 	~Demo1AudioModule();
-	virtual void processAudio(sampleFrame *buffer, qint64 len );
+	virtual void processAudio(sampleFrame *buffer, int len );
 
 protected:
 

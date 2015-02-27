@@ -44,7 +44,7 @@ class WTOscillator : public AudioProcess
 public:
 
 	const int TABLE_LEN = 1024;
-	WTOscillator( qint64 sampleRate );
+	WTOscillator( int sampleRate );
 	~WTOscillator();
 
 	///
@@ -80,6 +80,22 @@ public:
 	/// sets the wavetable to use, the table must be 1024 samples
 	void setUserShape( float *table );
 
+	///
+	/// \brief noteOn
+	/// Retriggers the generator to the attack phase
+	inline void noteOn()
+	{
+		setShape( m_currentShape );
+	}
+
+	///
+	/// \brief noteRelease
+	///Puts the generator into the release phase
+	inline void noteRelease()
+	{
+
+	}
+
 protected:
 	///
 	/// \brief m_index
@@ -112,14 +128,45 @@ protected:
 	/// the calculated Saw tooth Wave Table
 	sample_t *sawTable;
 
+	/// \brief sinTables
+	/// array of SineWaveTables
+	sample_t **sineTables;
+	///
+	/// \brief squareTables
+	///arry of Square wave tables
+	sample_t **squareTables;
+	///
+	/// \brief triTables
+	///array of triangle wave tables
+	sample_t **triTables;
+	///
+	/// \brief sawTables
+	///array of sawWaveTables
+	sample_t **sawTables;
+	///
+	/// \brief m_bandFreq
+	///array containing base frequency for each band
+	float *m_bandFreq;
+	///
+	/// \brief m_tableCount
+	///The number of tables the audio spectrum is split into.
+	int m_tableCount;
+	///
+	/// \brief m_freq
+	/// Current Frequency
+	float m_freq;
+
+	WTWaveShape m_currentShape;
 
 
 private:
 
-	void generateSineTable( qint64 bands );
-	void generateSawTable( qint64 bands );
-	void generateTriTable( qint64 bands );
-	void generateSquareTable( qint64 bands );
+	void generateSineTable( int bands );
+	void generateSawTable( int bands );
+	void generateTriTable( int bands );
+	void generateSquareTable( int bands );
+
+	int bandFromFreq( float freq );
 
 };
 

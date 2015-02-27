@@ -30,7 +30,7 @@
 class Oscillator : public AudioProcess
 {
 public:
-	Oscillator( qint64 sampleRate );
+	Oscillator( int sampleRate );
 	~Oscillator();
 	void setFrequency( float frequency );
 	virtual inline void tick( sampleFrame *frame );

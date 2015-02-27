@@ -23,7 +23,7 @@
 #ifndef AUDIOMATH_H
 #define AUDIOMATH_H
 
-#include <qmath.h>
+#include <math.h>
 #include "Types.h"
 
 const long double LD_PI = 3.14159265358979323846264338327950288419716939937510;
@@ -33,13 +33,18 @@ const float f_2PI = F_PI + F_PI;
 const float base_a4 = 440.0;
 
 
-inline float midiNoteFreq( qint64 note )
+inline float midiNoteFreq( int note )
 {
-	return 440.0 * qPow(2.0, (note - 69.0)/12.0);
+	return 440.0 * powf(2.0, (note - 69.0)/12.0);
 }
 
 inline float fraction(float val){
 	return val - (int)val;
+}
+
+inline float bound(float minval, float val, float maxval )
+{
+	return fmax( minval, fmin( val, maxval ) );
 }
 
 //qint64 freqNeariestMidiNote( float freq )

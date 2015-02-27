@@ -25,7 +25,7 @@
 
 
 
-WTOscillator::WTOscillator(qint64 sampleRate) :
+WTOscillator::WTOscillator(int sampleRate) :
 	AudioProcess( sampleRate ),
 	m_index( 0 ),
 	m_increment( 0.001 ),
@@ -33,14 +33,41 @@ WTOscillator::WTOscillator(qint64 sampleRate) :
 	sineTable( 0 ),
 	squareTable( 0 ),
 	triTable( 0 ),
-	sawTable( 0 )
+	sawTable( 0 ),
+	m_currentShape (WT_SQUARE)
 {
-	setFrequency(440.0);
-	generateSineTable(100);
-	generateSawTable(100);
-	generateSquareTable(100);
-	generateTriTable(100);
-	setShape(WT_SINE);
+	m_bandFreq = new float[8] { 32.073, 65.4, 103.81, 261.63, 523.25, 1046.5, 2093.5, 4186.0 };
+	m_tableCount = 8;
+	setFrequency( 440.0 );
+	sineTables = new sample_t*[ m_tableCount ];
+	for(int i = 0 ; i < m_tableCount; ++i)
+	{
+		generateSineTable( m_sampleRate / m_bandFreq[i] * 0.5 );
+		sineTables[i] = sineTable;
+	}
+
+	sawTables = new sample_t*[ m_tableCount ];
+	for(int i = 0 ; i < m_tableCount; ++i)
+	{
+		generateSawTable( m_sampleRate / m_bandFreq[i] * 0.5 );
+		sawTables[i] = sawTable;
+	}
+
+	squareTables = new sample_t*[ m_tableCount ];
+	for( int i = 0; i < m_tableCount; ++i)
+	{
+		generateSquareTable( m_sampleRate / m_bandFreq[i] * 0.5 );
+		squareTables[i] = squareTable;
+	}
+
+	triTables = new sample_t*[ m_tableCount ];
+	for( int i = 0; i < m_tableCount; ++i )
+	{
+		generateTriTable( m_sampleRate / m_bandFreq[i] * 0.5 );
+		triTables[i] = triTable;
+	}
+
+	setShape( m_currentShape );
 }
 
 WTOscillator::~WTOscillator()
@@ -69,7 +96,7 @@ sample_t WTOscillator::tick()
 				0;
 	index = m_index;
 	frac = m_index - index;
-	return linearInterpolate( m_currentTable[ index] , m_currentTable[ nextIndex ], frac );
+	return linearInterpolate( m_currentTable[ index ] , m_currentTable[ nextIndex ], frac );
 }
 
 sample_t sample;
@@ -87,29 +114,32 @@ float WTOscillator::uniTick()
 
 void WTOscillator::setFrequency(float freq)
 {
-	freq = qBound(0.0f, freq, 4186.0f );
+	freq = bound(0.0f, freq, 4186.0f );
 	m_increment = TABLE_LEN * ( freq / m_sampleRate );
+	m_freq = freq;
 }
 
 void WTOscillator::setShape(WTWaveShape shape)
 {
+	int band = bandFromFreq( m_freq );
 	switch ( shape )
 	{
 	case WT_SINE:
-		m_currentTable = sineTable;
+		m_currentTable = sineTables[ band ];
 		break;
 	case WT_SAW:
-		m_currentTable = sawTable;
+		m_currentTable = sawTables[ band ];
 		break;
 	case WT_SQUARE:
-		m_currentTable = squareTable;
+		m_currentTable = squareTables[ band ];
 		break;
 	case WT_TRIANGLE:
-		m_currentTable = triTable;
+		m_currentTable = triTables[ band ];
 		break;
 	default:
 		break;
 	}
+	m_currentShape = shape;
 	return;
 }
 
@@ -118,17 +148,17 @@ void WTOscillator::setUserShape(float *table)
 	m_currentTable = table;
 }
 
-void WTOscillator::generateSineTable( qint64 bands )
+void WTOscillator::generateSineTable( int bands )
 {
-	Q_UNUSED( bands )
+	bands = bands;
 	sineTable = new sample_t[ TABLE_LEN ];
 	for(int i = 0; i < TABLE_LEN; i++)
 	{
-		sineTable[i] = qSin( ((float)i/(float)TABLE_LEN) * f_2PI );
+		sineTable[i] = sinf( ((float)i/(float)TABLE_LEN) * f_2PI );
 	}
 }
 
-void WTOscillator::generateSawTable(qint64 bands)
+void WTOscillator::generateSawTable(int bands)
 {
 	float max = 0;
 	sawTable = new sample_t[ TABLE_LEN ];
@@ -138,10 +168,10 @@ void WTOscillator::generateSawTable(qint64 bands)
 		for(int g = 1; g <= bands; g++)
 		{
 			double n = double(g);
-			sawTable[i] += qPow((float)-1.0, (float) ( g + 1 ) ) *
-					(1.0 /n ) * qSin( f_2PI * i * n / (float)TABLE_LEN );
+			sawTable[i] +=powf((float)-1.0, (float) ( g + 1 ) ) *
+					(1.0 /n ) * sinf( f_2PI * i * n / (float)TABLE_LEN );
 		}
-		max = qMax( max, sawTable[i] );
+		max = fmax( max, sawTable[i] );
 	}
 
 	for( int i = 0; i < TABLE_LEN; i++ )
@@ -150,7 +180,7 @@ void WTOscillator::generateSawTable(qint64 bands)
 	}
 }
 
-void WTOscillator::generateTriTable(qint64 bands)
+void WTOscillator::generateTriTable(int bands)
 {
 	float max = 0;
 	triTable = new sample_t[ TABLE_LEN ];
@@ -160,12 +190,12 @@ void WTOscillator::generateTriTable(qint64 bands)
 		for(int g = 0; g <= bands * 0.5; g ++)
 		{
 			double n = double(g);
-			triTable[i] += qPow((float)-1.0, (float) n ) *
-					(1.0/ qPow(( float )( 2 * n +1 ),
+			triTable[i] += powf((float)-1.0, (float) n ) *
+					(1.0/ powf(( float )( 2 * n +1 ),
 							   ( float )2.0 )) *
-					qSin(f_2PI * ( 2.0 * n + 1) * i/(float)TABLE_LEN);
+					sinf(f_2PI * ( 2.0 * n + 1) * i/(float)TABLE_LEN);
 		}
-		max = qMax( max, triTable[i] );
+		max = fmax( max, triTable[i] );
 	}
 
 	for( int i = 0; i < TABLE_LEN; i++ )
@@ -174,7 +204,7 @@ void WTOscillator::generateTriTable(qint64 bands)
 	}
 }
 
-void WTOscillator::generateSquareTable(qint64 bands)
+void WTOscillator::generateSquareTable(int bands)
 {
 	float max = 0;
 	squareTable = new sample_t[ TABLE_LEN ];
@@ -184,14 +214,24 @@ void WTOscillator::generateSquareTable(qint64 bands)
 		for(int g = 1; g <= bands; g += 2)
 		{
 			double n = double(g);
-			squareTable[i] += (1.0/n) * qSin(f_2PI * i * n / TABLE_LEN );
+			squareTable[i] += (1.0/n) * sinf(f_2PI * i * n / TABLE_LEN );
 		}
-		max = qMax( max, squareTable[i] );
+		max = fmax( max, squareTable[i] );
 	}
 
 	for( int i = 0; i < TABLE_LEN; i++ )
 	{
 		squareTable[i] /= max;
 	}
+}
+
+int WTOscillator::bandFromFreq(float freq)
+{
+	int i;
+	for( i = 0; i < m_tableCount; ++i )
+	{
+		if (m_bandFreq[i] > freq) return i;
+	}
+	return i;
 }
 
