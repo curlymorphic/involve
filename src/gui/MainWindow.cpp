@@ -128,18 +128,19 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 		m_ribbon->move( 0, height- 50  - (height8 *2) );
 	}
 
+	int moduleHeight = ( height - ( height * 0.05 ) - m_ribbon->height() - 50 );
 	if(m_ocatveRangeFader)
 	{
-		m_ocatveRangeFader->resize( width * 0.1 , height8 * 2 );
+		m_ocatveRangeFader->resize( width * 0.1 ,moduleHeight * 0.5 );
 		m_ocatveRangeFader->move( width - ( width * 0.1 ) , ( height * 0.05 ));
 
-		m_startOctaveFader->resize( width * 0.1 , height8 * 2 );
-		m_startOctaveFader->move( width - ( width * 0.1 ) , height8*3 );
+		m_startOctaveFader->resize( width * 0.1 , moduleHeight * 0.5  );
+		m_startOctaveFader->move( width - ( width * 0.1 ) , ( moduleHeight * 0.5  ) + 50 );
 	}
 	if(m_moduleView)
 	{
 		m_moduleView->resize( width * 0.90 ,
-							  height - ( height * 0.05 ) - m_ribbon->height() - 50 );
+							  moduleHeight );
 		m_moduleView->layout();
 		m_moduleView->move( 0, height * 0.05 );
 	}
