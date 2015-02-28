@@ -51,7 +51,7 @@ VuFader::~VuFader()
 
 void VuFader::paintEvent(QPaintEvent *event)
 {
-	m_pixelPerX = (width() * 0.65 ) / (m_maxX - m_minX );
+	m_pixelPerX = width()  / (m_maxX - m_minX );
 	Q_UNUSED( event );
 	QPainter painter( this );
 	painter.setPen( QPen ( QColor ( 0, 0, 0, 255), 1 ,
@@ -59,8 +59,8 @@ void VuFader::paintEvent(QPaintEvent *event)
 //	painter.drawLine( 0 , height() * 0.5 , width(), height() * 0.5 );
 	painter.setPen( QPen ( QColor ( 0, 255, 0, 255), 1 ,
 						   Qt::SolidLine, Qt::RoundCap, Qt::BevelJoin ));
-	painter.drawLine( width() * 0.15, (height() * 0.5 ) - 2,  m_peaks[0][0]*m_pixelPerX + width() * 0.15, (height() * 0.5 ) - 2 ) ;
-	painter.drawLine( width() * 0.15, (height() * 0.5 ) + 1,  m_peaks[0][1]*m_pixelPerX + width() * 0.15, (height() * 0.5 ) + 1 );
+	painter.drawLine( 0, (height() * 0.5 ) - 2,  m_peaks[0][0]*m_pixelPerX , (height() * 0.5 ) - 2 ) ;
+	painter.drawLine( 0, (height() * 0.5 ) + 1,  m_peaks[0][1]*m_pixelPerX , (height() * 0.5 ) + 1 );
 	painter.setPen( QPen ( QColor ( 0, 0, 0, 255), m_dotSize ,
 						   Qt::SolidLine, Qt::RoundCap, Qt::BevelJoin ));
 //	painter.drawPoint( m_xModel->value()*m_pixelPerX, height() * 0.5 );
