@@ -73,6 +73,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 	m_gridLayout = new QGridLayout( );
 
+
 	m_audioDeviceView = new AudioDeviceView( this, m_audioDeviceControls );
 	m_audioDeviceView->show();
 	m_ocatveRangeFader = new ModuleFader( &m_uiControls->octaves, this);
@@ -100,6 +101,17 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( updateRibbon() ));
 		connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( update() ));
 
+	m_menuBtn = new QPushButton( this );
+	m_menuBtn->show();
+	connect( m_menuBtn , SIGNAL( clicked() ), this, SLOT( menuBtnPressed() ) );
+
+	m_xBtn = new QPushButton(  this );
+	m_xBtn->show();
+	connect( m_xBtn, SIGNAL( clicked() ), this, SLOT( xBtnPressed() ) );
+	m_yBtn = new QPushButton( this );
+	m_yBtn->show();
+	connect ( m_yBtn, SIGNAL( clicked() ), this, SLOT( yBtnPressed() ) );
+
 	m_automationSensor = new AutomationSensor( this );
 	m_automationSensor->m_xModel = &m_controls->cutOffModel;
 	m_automationSensor->m_yModel = &m_controls->resModel;
@@ -111,6 +123,21 @@ MainWindow::~MainWindow()
 //	delete ui;
 	if ( m_startOctaveFader ) { delete m_startOctaveFader; }
 	if( m_ocatveRangeFader ) { delete m_ocatveRangeFader; }
+
+}
+
+void MainWindow::menuBtnPressed()
+{
+
+}
+
+void MainWindow::xBtnPressed()
+{
+
+}
+
+void MainWindow::yBtnPressed()
+{
 
 }
 
@@ -147,6 +174,39 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 	if( m_audioDeviceView )
 	{
 		m_audioDeviceView->resize( width * 0.90, height * 0.05 );
+	}
+
+	if( m_menuBtn )
+	{
+		m_menuBtn->resize( width / 6, height * 0.05 );
+		m_menuBtn->move( ( 5.0 / 6.0 ) * width, 0 );
+		QPixmap pix(":/new/prefix1/images/ButtonMenu.png");
+		pix = pix.scaled( m_menuBtn->size() );
+		QIcon buttonIcon( pix );
+		m_menuBtn->setIcon(buttonIcon);
+		m_menuBtn->setIconSize( m_menuBtn->size() );
+	}
+
+	if( m_xBtn )
+	{
+		m_xBtn->resize( width / 6, height * 0.05 );
+		m_xBtn->move( 0.5 * width, 0 );
+		QPixmap pix(":/new/prefix1/images/ButtonX.png");
+		pix = pix.scaled( m_xBtn->size() );
+		QIcon buttonIcon( pix );
+		m_xBtn->setIcon(buttonIcon);
+		m_xBtn->setIconSize( m_xBtn->size() );
+	}
+
+	if( m_yBtn )
+	{
+		m_yBtn->resize( width / 6, height * 0.05 );
+		m_yBtn->move( ( 4.0 / 6.0 ) * width, 0 );
+		QPixmap pix(":/new/prefix1/images/ButtonY.png");
+		pix = pix.scaled( m_yBtn->size() );
+		QIcon buttonIcon( pix );
+		m_yBtn->setIcon(buttonIcon);
+		m_yBtn->setIconSize( m_yBtn->size() );
 	}
 
 	QMainWindow::resizeEvent( event );

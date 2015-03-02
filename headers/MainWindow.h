@@ -42,7 +42,7 @@
 #include "AutomationSensor.h"
 #include "ModuleFader.h"
 #include <QGridLayout>
-
+#include <QPushButton>
 
 namespace Ui {
 class MainWindow;
@@ -57,6 +57,11 @@ class MainWindow : public QMainWindow
 public:
 	explicit MainWindow( QWidget *parent = 0 );
 	~MainWindow();
+
+private slots:
+	void menuBtnPressed();
+	void xBtnPressed();
+	void yBtnPressed();
 
 
 
@@ -76,6 +81,9 @@ private:
 	UiControls *m_uiControls;
 	AutomationSensor *m_automationSensor;
 	QGridLayout *m_gridLayout;
+	QPushButton *m_menuBtn;
+	QPushButton *m_xBtn;
+	QPushButton *m_yBtn;
 
 protected:
 	 virtual void resizeEvent(QResizeEvent * event);
