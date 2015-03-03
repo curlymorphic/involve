@@ -40,6 +40,15 @@ public:
 		return m_value;
 	}
 
+	inline float logValue() const
+	{
+		float x = value();
+		float totalLength = log10(getMax() - getMin());
+		float m_pixelsPerUnitWidth = 20000 / totalLength;
+
+		return   pow( 10, ( x + ( (getMax() - getMin()) ) ) / ( m_pixelsPerUnitWidth  ) );
+	}
+
 	void inc(float val);
 	bool isChanged() const
 	{

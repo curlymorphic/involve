@@ -4,5 +4,15 @@
         <file>images/Box.png</file>
         <file>images/FaderBack.png</file>
         <file>images/Faderknob.png</file>
+        <file>images/HFaderKnob.png</file>
+        <file>images/HFaderBack.png</file>
+        <file>images/Button.png</file>
+        <file>images/ButtonMenu.png</file>
+        <file>images/ButtonX.png</file>
+        <file>images/ButtonY.png</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>../../../../Documents/involveArt/Fader/HFaderKnob.png</file>
+        <file>../../../../Documents/involveArt/Fader/VFaderBack.png</file>
     </qresource>
 </RCC>
