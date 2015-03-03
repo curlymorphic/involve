@@ -33,6 +33,7 @@
 #include <QIODevice>
 #include "Demo1AudioModule.h"
 #include "Limiter.h"
+//#include "Analyser.h"
 
 ///
 /// \brief The AudioDevice class
@@ -92,6 +93,7 @@ private:
 	QIODevice *m_output;
 	AudioDeviceControls *m_audioDeviceControls;
 	Limiter m_limiter;
+//	Analyser m_analyser;
 
 
 

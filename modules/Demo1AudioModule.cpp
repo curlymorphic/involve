@@ -21,6 +21,7 @@
  */
 
 #include "Demo1AudioModule.h"
+#include "QDebug"
 
 Demo1AudioModule::Demo1AudioModule(qint64 sampleRate, Demo1ModuleControls *controls) :
 	AudioModule( sampleRate, controls ),
@@ -61,18 +62,19 @@ void Demo1AudioModule::processAudio(sampleFrame *buffer, int len)
 			m_gain->setGain( m_controls->velocityModel.value() *
 							  ( 1.0 - ( m_volLfo->uniTick() * m_controls->lfoGainModel.value() ) )
 							 * ( m_ad->tick()  ));
-			m_lp->setParameters(m_controls->cutOffModel.value() *
+			m_lp->setParameters(m_controls->cutOffModel.logValue() *
 								( 1.0 - ( m_volLfo->uniTick() * m_controls->lfoFilterModel.value() )  ),
 								  m_controls->resModel.value()  );
-			m_lp2->setParameters( m_controls->cutOffModel.value(), m_controls->resModel.value() );
+			m_lp2->setParameters( m_controls->cutOffModel.logValue(), m_controls->resModel.value() );
 			m_delay->setLength( m_controls->delayTimeModel.value() );
 			m_delay->setFeedback( m_controls->delayRegenModel.value() );
+
+//			qDebug("cutoff %f\n", m_controls->cutOffModel.logValue());
 
 
 
 			m_osc->tick( &buffer[i] );
 			m_lp->tick( &buffer[i] );
-			m_lp2->tick( &buffer[i] );
 
 
 			m_gain->tick( &buffer[i] );
@@ -83,6 +85,7 @@ void Demo1AudioModule::processAudio(sampleFrame *buffer, int len)
 			delayedFrame[0][1] = buffer[i][1];
 
 			m_delay->tick( delayedFrame[0] );
+			m_lp2->tick( &buffer[i] );
 
 			buffer[i][0] = ((1.0 - m_controls->delayAmmountModel.value()) * buffer[i][0] ) +
 					(m_controls->delayAmmountModel.value() * delayedFrame[0][0] );

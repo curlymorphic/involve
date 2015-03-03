@@ -21,7 +21,11 @@ INCLUDEPATH += $$PWD/src
 INCLUDEPATH += $$PWD/src/core
 INCLUDEPATH += ./src/gui
 INCLUDEPATH += $$PWD/src/dsp
+#INCLUDEPATH += /usr/local/lib/libfftw3.a
 
+#	LIBS +=-lm \
+#	-lstdc++ \
+#	-lfftw3
 
 SOURCES += main.cpp\
 	src/Model.cpp \
@@ -53,7 +57,8 @@ SOURCES += main.cpp\
 	modules/Demo1AudioModule.cpp \
 	modules/ModuleView.cpp \
 	modules/Demo1ModuleView.cpp \
-    src/gui/ModuleFader.cpp
+	src/gui/ModuleFader.cpp
+#	src/Analyser.cpp
 
 HEADERS  += headers/MainWindow.h \
 	headers/Types.h \
@@ -90,7 +95,10 @@ HEADERS  += headers/MainWindow.h \
 	headers/StereoDelay.h \
 	headers/Limiter.h \
     headers/EnvelopeDetector.h \
-    src/gui/ModuleFader.h
+    src/gui/ModuleFader.h \
+#	headers/Analyser.h \
+
+
 
 FORMS    += MainWindow.ui
 
@@ -100,3 +108,10 @@ DISTFILES += \
 
 RESOURCES += \
     ImageResources.qrc
+
+#LIBS += -L$$PWD/../../../../../../usr/local/lib/ -lfftw3
+
+#INCLUDEPATH += $$PWD/../../../../../../usr/local/include
+#DEPENDPATH += $$PWD/../../../../../../usr/local/include
+
+#PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/lib/libfftw3.a
