@@ -57,7 +57,8 @@ SOURCES += main.cpp\
 	modules/Demo1AudioModule.cpp \
 	modules/ModuleView.cpp \
 	modules/Demo1ModuleView.cpp \
-	src/gui/ModuleFader.cpp
+	src/gui/ModuleFader.cpp \
+    Analyser.cpp
 #	src/Analyser.cpp
 
 HEADERS  += headers/MainWindow.h \
@@ -96,6 +97,7 @@ HEADERS  += headers/MainWindow.h \
 	headers/Limiter.h \
     headers/EnvelopeDetector.h \
     src/gui/ModuleFader.h \
+    Analyser.h
 #	headers/Analyser.h \
 
 

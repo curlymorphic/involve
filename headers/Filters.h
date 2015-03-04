@@ -203,7 +203,7 @@ public :
 	{
 
 		// calc intermediate
-		float w0 = f_2PI * m_freq / m_sampleRate;
+		float w0 = F_2PI * m_freq / m_sampleRate;
 		float c = cosf( w0 );
 		float s = sinf( w0 );
 		float alpha = s / ( 2 * m_res );
@@ -252,7 +252,7 @@ public :
 	{
 
 		// calc intermediate
-		float w0 = f_2PI * m_freq / m_sampleRate;
+		float w0 = F_2PI * m_freq / m_sampleRate;
 		float c = cosf( w0 );
 		float s = sinf( w0 );
 		float alpha = s / ( 2 * m_res );
@@ -299,7 +299,7 @@ public:
 	virtual void calcCoefficents()
 	{
 		// calc intermediate
-		float w0 = f_2PI * m_freq / m_sampleRate;
+		float w0 = F_2PI * m_freq / m_sampleRate;
 		float c = cosf( w0 );
 		float s = sinf( w0 );
 		float A =  pow( 10, m_gain * 0.025);
@@ -341,7 +341,7 @@ public :
 	{
 
 		// calc intermediate
-		float w0 = f_2PI * m_freq / m_sampleRate;
+		float w0 = F_2PI * m_freq / m_sampleRate;
 		float c = cosf( w0 );
 		float s = sinf( w0 );
 		float A =  pow( 10, m_gain * 0.025);
@@ -384,7 +384,7 @@ public :
 	{
 
 		// calc intermediate
-		float w0 = f_2PI * m_freq / m_sampleRate;
+		float w0 = F_2PI * m_freq / m_sampleRate;
 		float c = cosf( w0 );
 		float s = sinf( w0 );
 		float A =  pow( 10, m_gain * 0.025 );

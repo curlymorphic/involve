@@ -35,7 +35,8 @@ AudioDevice::AudioDevice(const QAudioFormat &format, AudioModule *module, Module
 	m_audioOutput(0),
 	m_output(0),
 	m_audioDeviceControls( adc ),
-	m_limiter( adc->m_sampleRate )
+	m_limiter( adc->m_sampleRate ),
+	m_analyser( 256, adc->m_sampleRate )
 {
 	m_format = format;
 
@@ -146,6 +147,9 @@ qint64 AudioDevice::readData(char *data, qint64 len)
 			m_audioDeviceControls->peaks[1] = qMax( m_audioDeviceControls->peaks[1],
 					m_frameBuffer[i][1] );
 		}
+		m_analyser.analyseAudio( m_frameBuffer, len/4 );
+//		memset(m_frameBuffer, 0 , sizeof( sampleFrame ) * ( len / 4 ) );
+//		m_analyser.processAudio( m_frameBuffer, len / 4 );
 		m_limiter.processAudio( m_frameBuffer, len / 4 );
 		sampleFrameToBuffer( m_frameBuffer, len, m_format );
 		memcpy(data,m_buffer,len);

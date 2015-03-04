@@ -154,7 +154,7 @@ void WTOscillator::generateSineTable( int bands )
 	sineTable = new sample_t[ TABLE_LEN ];
 	for(int i = 0; i < TABLE_LEN; i++)
 	{
-		sineTable[i] = sinf( ((float)i/(float)TABLE_LEN) * f_2PI );
+		sineTable[i] = sinf( ((float)i/(float)TABLE_LEN) * F_2PI );
 	}
 }
 
@@ -169,7 +169,7 @@ void WTOscillator::generateSawTable(int bands)
 		{
 			double n = double(g);
 			sawTable[i] +=powf((float)-1.0, (float) ( g + 1 ) ) *
-					(1.0 /n ) * sinf( f_2PI * i * n / (float)TABLE_LEN );
+					(1.0 /n ) * sinf( F_2PI * i * n / (float)TABLE_LEN );
 		}
 		max = fmax( max, sawTable[i] );
 	}
@@ -193,7 +193,7 @@ void WTOscillator::generateTriTable(int bands)
 			triTable[i] += powf((float)-1.0, (float) n ) *
 					(1.0/ powf(( float )( 2 * n +1 ),
 							   ( float )2.0 )) *
-					sinf(f_2PI * ( 2.0 * n + 1) * i/(float)TABLE_LEN);
+					sinf(F_2PI * ( 2.0 * n + 1) * i/(float)TABLE_LEN);
 		}
 		max = fmax( max, triTable[i] );
 	}
@@ -214,7 +214,7 @@ void WTOscillator::generateSquareTable(int bands)
 		for(int g = 1; g <= bands; g += 2)
 		{
 			double n = double(g);
-			squareTable[i] += (1.0/n) * sinf(f_2PI * i * n / TABLE_LEN );
+			squareTable[i] += (1.0/n) * sinf(F_2PI * i * n / TABLE_LEN );
 		}
 		max = fmax( max, squareTable[i] );
 	}
