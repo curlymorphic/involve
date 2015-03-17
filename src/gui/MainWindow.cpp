@@ -33,6 +33,9 @@
 #include <QThread>
 #include "Demo1ModuleControls.h"
 #include "Demo1ModuleView.h"
+#include "Demo2ModuleControls.h"
+#include "Demo2ModuleView.h"
+#include "Demo2AudioModule.h"
 #include <QApplication>
 #include "QScreen"
 #include "VFader.h"
@@ -56,7 +59,7 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_audioDeviceControls( 0 ),
 	m_gridLayout( 0 )
 {
-	m_controls = new Demo1ModuleControls( this );
+	m_controls = new Demo2ModuleControls( this );
 	m_audioDeviceControls = new AudioDeviceControls;
 	m_uiControls = new UiControls( this );
 //	ui->setupUi(this);
@@ -83,14 +86,14 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_startOctaveFader->show();
 
 
-	m_moduleView = new Demo1ModuleView( m_controls, this );
+	m_moduleView = new Demo2ModuleView( m_controls, this );
 	m_moduleView->show();
 
 	m_ribbon = new Ribbon( &m_controls->freqModel, &m_controls->velocityModel, this );
 	connect( m_ribbon, SIGNAL( noteOn() ), m_moduleView, SLOT( notePressed() ) ) ;
 	connect( m_ribbon, SIGNAL( noteOff() ), m_moduleView, SLOT( noteRelease() ) );
 
-	m_audioModule = new Demo1AudioModule( 44100, m_controls );
+	m_audioModule = new Demo2AudioModule( 44100, m_controls );
 	m_audioThread = new AudioThread(m_audioDeviceControls, m_audioModule, m_controls, this );
 	m_audioThread->start(QThread::HighestPriority);
 
@@ -113,8 +116,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect ( m_yBtn, SIGNAL( clicked() ), this, SLOT( yBtnPressed() ) );
 
 	m_automationSensor = new AutomationSensor( this );
-	m_automationSensor->m_xModel = &m_controls->cutOffModel;
-	m_automationSensor->m_yModel = &m_controls->resModel;
+//	m_automationSensor->m_xModel = &m_controls->cutOffModel;
+//	m_automationSensor->m_yModel = &m_controls->resModel;
 
 }
 

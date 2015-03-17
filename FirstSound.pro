@@ -52,12 +52,16 @@ SOURCES += main.cpp\
 	src/dsp/Oscillator.cpp \
 	src/dsp/Limiter.cpp \
 	src/dsp/EnvelopeDetector.cpp \
-	modules/AudioModule.cpp \
-	modules/Demo1ModuleControls.cpp \
-	modules/Demo1AudioModule.cpp \
-	modules/ModuleView.cpp \
-	modules/Demo1ModuleView.cpp \
-	src/gui/ModuleFader.cpp
+	modules/base/AudioModule.cpp \
+	modules/Demo1/Demo1ModuleControls.cpp \
+	modules/Demo1/Demo1AudioModule.cpp \
+	modules/base/ModuleView.cpp \
+	modules/Demo1/Demo1ModuleView.cpp \
+	src/gui/ModuleFader.cpp \
+	modules/Demo2/Demo2AudioModule.cpp \
+	modules/Demo2/Demo2ModuleControls.cpp \
+	modules/Demo2/Demo2ModuleView.cpp \
+    modules/ModuleManager.cpp
 #	src/Analyser.cpp
 
 HEADERS  += headers/MainWindow.h \
@@ -73,10 +77,10 @@ HEADERS  += headers/MainWindow.h \
 	headers/AudioDeviceView.h \
 	headers/AudioThread.h \
 	headers/ModuleControls.h \
-	headers/Demo1ModuleControls.h \
-	headers/Demo1AudioModule.h \
+	modules/Demo1/Demo1ModuleControls.h \
+	modules/Demo1/Demo1AudioModule.h \
 	headers/ModuleView.h \
-	headers/Demo1ModuleView.h \
+	modules/Demo1/Demo1ModuleView.h \
 	headers/Gain.h \
 	headers/Lfo.h \
 	headers/Filters.h \
@@ -97,6 +101,10 @@ HEADERS  += headers/MainWindow.h \
     headers/EnvelopeDetector.h \
     src/gui/ModuleFader.h \
 #	headers/Analyser.h \
+	modules/Demo2/Demo2AudioModule.h \
+	modules/Demo2/Demo2ModuleControls.h \
+	modules/Demo2/Demo2ModuleView.h \
+    modules/ModuleManager.h
 
 
 

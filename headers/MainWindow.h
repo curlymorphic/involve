@@ -68,7 +68,7 @@ private slots:
 private:
 	Ui::MainWindow *ui;
 
-	Demo1ModuleControls *m_controls;
+	ModuleControls *m_controls;
 	AudioDeviceControls *m_audioDeviceControls;
 	AudioDeviceView *m_audioDeviceView;
 	AudioThread *m_audioThread;
