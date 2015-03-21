@@ -41,6 +41,12 @@ Ribbon::~Ribbon()
 
 }
 
+void Ribbon::setModels(Model *xModel, Model *yModel)
+{
+	m_xModel = xModel;
+	m_yModel = yModel;
+}
+
 
 
 

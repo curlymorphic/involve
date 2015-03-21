@@ -26,6 +26,7 @@
 #include <QObject>
 #include "AudioDeviceControls.h"
 #include "AudioDevice.h"
+#include "ModuleManager.h"
 #include <QThread>
 
 ///
@@ -35,8 +36,9 @@ class AudioThread : public QThread
 {
 	Q_OBJECT
 public:
-	AudioThread(AudioDeviceControls *adc = 0, AudioModule *audioModule = 0 , ModuleControls *controls = 0, QWidget *parent = 0);
+	AudioThread(AudioDeviceControls *adc = 0, ModuleManager *moduleMannager = 0, QWidget *parent = 0);
 	~AudioThread();
+
 
 protected:
 	virtual void run();
@@ -46,8 +48,7 @@ private:
 	void initializeAudio();
 	AudioDevice *m_audioDevice;
 	AudioDeviceControls *m_audioDeviceControls;
-	ModuleControls *m_controls;
-	AudioModule *m_audioModule;
+	ModuleManager *m_moduleManager;
 
 };
 

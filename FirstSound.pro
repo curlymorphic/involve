@@ -104,7 +104,8 @@ HEADERS  += headers/MainWindow.h \
 	modules/Demo2/Demo2AudioModule.h \
 	modules/Demo2/Demo2ModuleControls.h \
 	modules/Demo2/Demo2ModuleView.h \
-    modules/ModuleManager.h
+    modules/ModuleManager.h \
+    modules/Demo1ModuleData.h
 
 
 

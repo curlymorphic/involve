@@ -31,7 +31,6 @@
 #include "AudioDeviceControls.h"
 #include "AudioDeviceView.h"
 #include "AudioThread.h"
-#include "Demo1ModuleControls.h"
 #include "ModuleView.h"
 #include "QResizeEvent"
 #include "QApplication"
@@ -43,6 +42,7 @@
 #include "ModuleFader.h"
 #include <QGridLayout>
 #include <QPushButton>
+#include "ModuleManager.h"
 
 namespace Ui {
 class MainWindow;
@@ -62,12 +62,14 @@ private slots:
 	void menuBtnPressed();
 	void xBtnPressed();
 	void yBtnPressed();
+	void moduleChanged( ModuleData* moduleData );
 
 
 
 private:
 	Ui::MainWindow *ui;
 
+	ModuleManager *m_moduleManager;
 	ModuleControls *m_controls;
 	AudioDeviceControls *m_audioDeviceControls;
 	AudioDeviceView *m_audioDeviceView;
