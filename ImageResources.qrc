@@ -10,6 +10,7 @@
         <file>images/ButtonMenu.png</file>
         <file>images/ButtonX.png</file>
         <file>images/ButtonY.png</file>
+        <file>images/Logo.png</file>
     </qresource>
     <qresource prefix="/">
         <file>../../../../Documents/involveArt/Fader/HFaderKnob.png</file>

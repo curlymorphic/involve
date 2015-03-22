@@ -30,11 +30,27 @@
 #include <QScreen>
 #include <QResizeEvent>
 #include <QVBoxLayout>
+#include <QLabel>
+
+void MenuDialog::loadImages()
+{
+	QPalette* palette = new QPalette();
+	m_backgroundImage = new QPixmap (":/new/prefix1/images/Box.png");
+	m_scaledBackgroundImage = new QPixmap( *m_backgroundImage );
+	palette->setBrush(QPalette::Background, *( new QBrush( *m_scaledBackgroundImage )));
+	palette->setBrush(QPalette::Text, *( new QBrush ( * (new QColor(200, 200, 200, 255 ) ) ) )  );
+	setPalette(*palette);
+	m_logoImage = new QPixmap( ":/new/prefix1/images/Logo.png" );
+	m_scaledLogoImage = new QPixmap( *m_logoImage );
+}
 
 MenuDialog::MenuDialog(ModuleManager *moduleManager, QWidget *parent) :
 	QDialog( parent ),
 	m_moduleManager( moduleManager )
 {
+	loadImages();
+	QLabel *logoLabel = new QLabel;
+	logoLabel->setPixmap( *m_scaledLogoImage );
 	SynthSelector *ss = new SynthSelector( m_moduleManager );
 	QTabWidget *tabWidget = new QTabWidget( );
 	tabWidget->addTab( ss, tr( "Synths" )  );
@@ -42,16 +58,11 @@ MenuDialog::MenuDialog(ModuleManager *moduleManager, QWidget *parent) :
 	resize( QApplication::screens().at( 0 )->size() );
 	connect( ss, SIGNAL(hideDialog() ) , this, SLOT( hide() ) );
 	QVBoxLayout *vLayout = new QVBoxLayout;
+	vLayout->addWidget( logoLabel );
 	vLayout->addWidget( tabWidget );
 	setLayout( vLayout );
 
 
-	QPalette* palette = new QPalette();
-	m_backgroundImage = new QPixmap (":/new/prefix1/images/Box.png");
-	m_scaledBackgroundImage = new QPixmap( *m_backgroundImage );
-	palette->setBrush(QPalette::Background, *( new QBrush( *m_scaledBackgroundImage )));
-	palette->setBrush(QPalette::Text, *( new QBrush ( * (new QColor(200, 200, 200, 255 ) ) ) )  );
-	setPalette(*palette);
 
 }
 
@@ -63,6 +74,7 @@ MenuDialog::~MenuDialog()
 void MenuDialog::resizeEvent(QResizeEvent *event)
 {
 	*m_scaledBackgroundImage = m_backgroundImage->scaled( event->size() );
+	*m_scaledLogoImage = m_logoImage->scaled( event->size() ,Qt::KeepAspectRatio );
 	QPalette* palette = new QPalette();
 	palette->setBrush(QPalette::Background, *( new QBrush( *m_scaledBackgroundImage )));
 	setPalette(*palette);
