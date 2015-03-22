@@ -35,6 +35,7 @@ public:
 	explicit MenuDialog( ModuleManager *moduleManager = 0, QWidget *parent = 0);
 	~MenuDialog();
 
+	void loadImages();
 protected:
 	virtual void resizeEvent( QResizeEvent *event);
 
@@ -42,6 +43,8 @@ private:
 	ModuleManager *m_moduleManager;
 	QPixmap *m_backgroundImage;
 	QPixmap *m_scaledBackgroundImage;
+	QPixmap *m_logoImage;
+	QPixmap *m_scaledLogoImage;
 
 
 };
