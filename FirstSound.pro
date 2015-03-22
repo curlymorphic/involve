@@ -61,7 +61,11 @@ SOURCES += main.cpp\
 	modules/Demo2/Demo2AudioModule.cpp \
 	modules/Demo2/Demo2ModuleControls.cpp \
 	modules/Demo2/Demo2ModuleView.cpp \
-    modules/ModuleManager.cpp
+    modules/ModuleManager.cpp \
+    src/gui/MenuDialog.cpp \
+    src/gui/About.cpp \
+    src/gui/SynthSelector.cpp \
+    src/gui/ModuleListWidget.cpp
 #	src/Analyser.cpp
 
 HEADERS  += headers/MainWindow.h \
@@ -105,7 +109,11 @@ HEADERS  += headers/MainWindow.h \
 	modules/Demo2/Demo2ModuleControls.h \
 	modules/Demo2/Demo2ModuleView.h \
     modules/ModuleManager.h \
-    modules/Demo1ModuleData.h
+    modules/Demo1ModuleData.h \
+    src/gui/MenuDialog.h \
+    src/gui/About.h \
+    src/gui/SynthSelector.h \
+    src/gui/ModuleListWidget.h
 
 
 

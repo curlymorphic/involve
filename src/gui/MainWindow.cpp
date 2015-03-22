@@ -38,6 +38,7 @@
 #include <QDesktopWidget>
 #include <QGridLayout>
 #include <QObject>
+#include "MenuDialog.h"
 
 
 const int DurationSeconds = 1;
@@ -131,7 +132,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::menuBtnPressed()
 {
-
+	MenuDialog *md = new MenuDialog( m_moduleManager );
+	md->show();
 }
 
 void MainWindow::xBtnPressed()
