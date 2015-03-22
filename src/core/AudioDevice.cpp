@@ -25,11 +25,12 @@
 #include <qmath.h>
 #include <QIODevice>
 
-AudioDevice::AudioDevice(const QAudioFormat &format, AudioModule *module, ModuleControls *controls, AudioDeviceControls * adc, QObject *parent) :
+
+AudioDevice::AudioDevice(const QAudioFormat &format, ModuleManager *mm, AudioDeviceControls * adc,  QObject *parent) :
 	QIODevice(parent),
 	m_pos(0),
-	m_module( module ),
-	m_moduleControls( controls ),
+	m_module( mm->currentModule()->getAudioModule() ),
+	m_moduleControls( mm->currentModule()->getModuleControls() ),
 	m_device(QAudioDeviceInfo::defaultOutputDevice()),
 	m_audioDevice(0),
 	m_audioOutput(0),
@@ -46,6 +47,8 @@ AudioDevice::AudioDevice(const QAudioFormat &format, AudioModule *module, Module
 		m_frameBuffer[i][1] = 0;
 	}
 
+	connect( mm, SIGNAL(moduleChanged(ModuleData*)),
+			 this, SLOT(moduleChanged(ModuleData*)) , Qt::QueuedConnection );
 }
 
 
@@ -165,6 +168,12 @@ qint64 AudioDevice::writeData(const char *data, qint64 len)
 qint64 AudioDevice::bytesAvailable() const
 {
 	return 1024;
+}
+
+void AudioDevice::moduleChanged(ModuleData *md)
+{
+	m_module = md->getAudioModule();
+	m_moduleControls = md->getModuleControls();
 }
 
 

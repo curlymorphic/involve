@@ -31,14 +31,14 @@
 #include "AudioDeviceView.h"
 #include "AudioThread.h"
 #include <QThread>
-#include "Demo1ModuleControls.h"
-#include "Demo1ModuleView.h"
 #include <QApplication>
 #include "QScreen"
 #include "VFader.h"
 #include <QPalette>
 #include <QDesktopWidget>
 #include <QGridLayout>
+#include <QObject>
+#include "MenuDialog.h"
 
 
 const int DurationSeconds = 1;
@@ -52,11 +52,13 @@ const int BufferSize      = 32768;
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow),
-	m_controls( 0 ),
 	m_audioDeviceControls( 0 ),
 	m_gridLayout( 0 )
 {
-	m_controls = new Demo1ModuleControls( this );
+	m_moduleManager = new ModuleManager( DataSampleRateHz );
+	connect( m_moduleManager, SIGNAL( moduleChanged( ModuleData* ) ),
+			 this, SLOT( moduleChanged( ModuleData* ) ) );
+	m_controls = m_moduleManager->currentModule()->getModuleControls();
 	m_audioDeviceControls = new AudioDeviceControls;
 	m_uiControls = new UiControls( this );
 //	ui->setupUi(this);
@@ -83,15 +85,16 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_startOctaveFader->show();
 
 
-	m_moduleView = new Demo1ModuleView( m_controls, this );
+	m_moduleView = m_moduleManager->currentModule()->getModuleView();
+	m_moduleView->setParent( this );
 	m_moduleView->show();
 
 	m_ribbon = new Ribbon( &m_controls->freqModel, &m_controls->velocityModel, this );
 	connect( m_ribbon, SIGNAL( noteOn() ), m_moduleView, SLOT( notePressed() ) ) ;
 	connect( m_ribbon, SIGNAL( noteOff() ), m_moduleView, SLOT( noteRelease() ) );
 
-	m_audioModule = new Demo1AudioModule( 44100, m_controls );
-	m_audioThread = new AudioThread(m_audioDeviceControls, m_audioModule, m_controls, this );
+
+	m_audioThread = new AudioThread(m_audioDeviceControls, m_moduleManager, this );
 	m_audioThread->start(QThread::HighestPriority);
 
 
@@ -113,8 +116,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect ( m_yBtn, SIGNAL( clicked() ), this, SLOT( yBtnPressed() ) );
 
 	m_automationSensor = new AutomationSensor( this );
-	m_automationSensor->m_xModel = &m_controls->cutOffModel;
-	m_automationSensor->m_yModel = &m_controls->resModel;
+//	m_automationSensor->m_xModel = &m_controls->cutOffModel;
+//	m_automationSensor->m_yModel = &m_controls->resModel;
 
 }
 
@@ -123,22 +126,36 @@ MainWindow::~MainWindow()
 //	delete ui;
 	if ( m_startOctaveFader ) { delete m_startOctaveFader; }
 	if( m_ocatveRangeFader ) { delete m_ocatveRangeFader; }
+	delete m_moduleManager;
 
 }
 
 void MainWindow::menuBtnPressed()
 {
-
+	MenuDialog *md = new MenuDialog( m_moduleManager );
+	md->show();
 }
 
 void MainWindow::xBtnPressed()
 {
-
+	m_moduleManager->changeModule( 0 );
 }
 
 void MainWindow::yBtnPressed()
 {
+	m_moduleManager->changeModule( 1 );
+}
 
+void MainWindow::moduleChanged(ModuleData *moduleData)
+{
+	m_moduleView->hide();
+	m_moduleView->setParent( 0 );
+	m_moduleView = moduleData->getModuleView();
+	m_moduleView->setParent( this );
+	m_moduleView->show();
+	resizeEvent( 0 );
+	m_ribbon->setModels( &(moduleData->getModuleControls()->freqModel),
+						 &(moduleData->getModuleControls()->velocityModel ) );
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)

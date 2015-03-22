@@ -31,9 +31,9 @@
 #include <QAudioOutput>
 #include <QByteArray>
 #include <QIODevice>
-#include "Demo1AudioModule.h"
 #include "Limiter.h"
 //#include "Analyser.h"
+#include "ModuleManager.h"
 
 ///
 /// \brief The AudioDevice class
@@ -43,7 +43,7 @@ class AudioDevice: public QIODevice
 	Q_OBJECT
 
 public:
-	AudioDevice(const QAudioFormat &format, AudioModule *module, ModuleControls *controls, AudioDeviceControls * adc, QObject *parent = 0 );
+	AudioDevice(const QAudioFormat &format, ModuleManager *mm, AudioDeviceControls * adc, QObject *parent = 0 );
 	virtual ~AudioDevice();
 
 	void start();
@@ -75,6 +75,9 @@ public:
 	/// \return
 	/// the frames size * 4
 	qint64 bytesAvailable() const;
+
+private slots:
+	void moduleChanged( ModuleData* );
 
 private:
 

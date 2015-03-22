@@ -20,36 +20,17 @@
  *
  */
 
-#ifndef AUDIOTHREAD_H
-#define AUDIOTHREAD_H
 
-#include <QObject>
-#include "AudioDeviceControls.h"
-#include "AudioDevice.h"
-#include "ModuleManager.h"
-#include <QThread>
+#ifndef ABOUT_H
+#define ABOUT_H
 
-///
-/// \brief The AudioThread class
-/// The Audio Thread. This has an event loop, and hosts all the dsp
-class AudioThread : public QThread
+#include <QWidget>
+
+class About : public QWidget
 {
-	Q_OBJECT
 public:
-	AudioThread(AudioDeviceControls *adc = 0, ModuleManager *moduleMannager = 0, QWidget *parent = 0);
-	~AudioThread();
-
-
-protected:
-	virtual void run();
-
-private:
-	QAudioFormat m_format;
-	void initializeAudio();
-	AudioDevice *m_audioDevice;
-	AudioDeviceControls *m_audioDeviceControls;
-	ModuleManager *m_moduleManager;
-
+	About( QWidget *parent = 0);
+	~About();
 };
 
-#endif // AUDIOTHREAD_H
+#endif // ABOUT_H

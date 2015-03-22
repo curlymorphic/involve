@@ -20,36 +20,36 @@
  *
  */
 
-#ifndef AUDIOTHREAD_H
-#define AUDIOTHREAD_H
 
-#include <QObject>
-#include "AudioDeviceControls.h"
-#include "AudioDevice.h"
-#include "ModuleManager.h"
-#include <QThread>
+#include "ModuleListWidget.h"
+#include <QVBoxLayout>
+#include <QLabel>
 
-///
-/// \brief The AudioThread class
-/// The Audio Thread. This has an event loop, and hosts all the dsp
-class AudioThread : public QThread
+
+
+ModuleListWidget::ModuleListWidget(ModuleData *moduleData, QWidget *parent) :
+	QWidget( parent ),
+	m_moduleData( moduleData )
 {
-	Q_OBJECT
-public:
-	AudioThread(AudioDeviceControls *adc = 0, ModuleManager *moduleMannager = 0, QWidget *parent = 0);
-	~AudioThread();
+	QVBoxLayout *vLayout = new QVBoxLayout;
+	QLabel *name = new QLabel( m_moduleData->getName() );
+	QLabel *description = new QLabel( m_moduleData->getDescription() );
+	vLayout->addWidget( name );
+	vLayout->addWidget( description );
+	setLayout( vLayout );
+	setAttribute( Qt::WA_AcceptTouchEvents, true);
+}
 
+ModuleListWidget::~ModuleListWidget()
+{
 
-protected:
-	virtual void run();
+}
 
-private:
-	QAudioFormat m_format;
-	void initializeAudio();
-	AudioDevice *m_audioDevice;
-	AudioDeviceControls *m_audioDeviceControls;
-	ModuleManager *m_moduleManager;
+bool ModuleListWidget::event(QEvent *event)
+{
+	if( event->type() == QEvent::TouchBegin )
+	{
+		emit clicked( m_moduleData );
+	}
+}
 
-};
-
-#endif // AUDIOTHREAD_H

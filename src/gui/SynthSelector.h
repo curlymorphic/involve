@@ -20,36 +20,30 @@
  *
  */
 
-#ifndef AUDIOTHREAD_H
-#define AUDIOTHREAD_H
 
-#include <QObject>
-#include "AudioDeviceControls.h"
-#include "AudioDevice.h"
+#ifndef SYNTHSELECTOR_H
+#define SYNTHSELECTOR_H
+
+#include <QWidget>
 #include "ModuleManager.h"
-#include <QThread>
+#include <QObject>
 
-///
-/// \brief The AudioThread class
-/// The Audio Thread. This has an event loop, and hosts all the dsp
-class AudioThread : public QThread
+class SynthSelector : public QWidget
 {
 	Q_OBJECT
 public:
-	AudioThread(AudioDeviceControls *adc = 0, ModuleManager *moduleMannager = 0, QWidget *parent = 0);
-	~AudioThread();
+	explicit SynthSelector( ModuleManager *moduleManager, QWidget *parent = 0);
+	~SynthSelector();
 
+signals:
+	void hideDialog();
 
-protected:
-	virtual void run();
+public slots:
+	void moduleSelected( ModuleData* );
 
 private:
-	QAudioFormat m_format;
-	void initializeAudio();
-	AudioDevice *m_audioDevice;
-	AudioDeviceControls *m_audioDeviceControls;
 	ModuleManager *m_moduleManager;
 
 };
 
-#endif // AUDIOTHREAD_H
+#endif // SYNTHSELECTOR_H

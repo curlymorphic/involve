@@ -20,36 +20,32 @@
  *
  */
 
-#ifndef AUDIOTHREAD_H
-#define AUDIOTHREAD_H
+
+
+#ifndef DEMO2MODULEVIEW_H
+#define DEMO2MODULEVIEW_H
 
 #include <QObject>
-#include "AudioDeviceControls.h"
-#include "AudioDevice.h"
-#include "ModuleManager.h"
-#include <QThread>
+#include <QWidget>
+#include "ModuleView.h"
+#include "Demo2ModuleControls.h"
+#include "Fader.h"
+#include "VFader.h"
+#include "ModuleFader.h"
 
-///
-/// \brief The AudioThread class
-/// The Audio Thread. This has an event loop, and hosts all the dsp
-class AudioThread : public QThread
+class Demo2ModuleView : public ModuleView
 {
 	Q_OBJECT
 public:
-	AudioThread(AudioDeviceControls *adc = 0, ModuleManager *moduleMannager = 0, QWidget *parent = 0);
-	~AudioThread();
+	Demo2ModuleView(ModuleControls *controls, QWidget *parent = 0 , Qt::WindowFlags flags = 0 );
+	~Demo2ModuleView();
+	virtual void layout();
 
+	private:
+		Demo2ModuleControls *m_controls;
 
-protected:
-	virtual void run();
-
-private:
-	QAudioFormat m_format;
-	void initializeAudio();
-	AudioDevice *m_audioDevice;
-	AudioDeviceControls *m_audioDeviceControls;
-	ModuleManager *m_moduleManager;
-
+		ModuleFader *m_waveShapeAFader;
+		ModuleFader *m_waveShapeBFader;
 };
 
-#endif // AUDIOTHREAD_H
+#endif // DEMO2MODULEVIEW_H

@@ -37,6 +37,8 @@ public:
 	explicit Ribbon( Model *xModel = 0, Model *yModel = 0, QWidget *parent = 0 );
 	~Ribbon();
 
+	void setModels (Model *xModel = 0, Model *yModel = 0 );
+
 
 protected:
 	virtual void paintEvent( QPaintEvent *event );

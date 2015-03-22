@@ -20,36 +20,30 @@
  *
  */
 
-#ifndef AUDIOTHREAD_H
-#define AUDIOTHREAD_H
 
+#ifndef MENUDIALOG_H
+#define MENUDIALOG_H
+
+#include <QDialog>
 #include <QObject>
-#include "AudioDeviceControls.h"
-#include "AudioDevice.h"
+#include <QWidget>
 #include "ModuleManager.h"
-#include <QThread>
 
-///
-/// \brief The AudioThread class
-/// The Audio Thread. This has an event loop, and hosts all the dsp
-class AudioThread : public QThread
+class MenuDialog : public QDialog
 {
-	Q_OBJECT
 public:
-	AudioThread(AudioDeviceControls *adc = 0, ModuleManager *moduleMannager = 0, QWidget *parent = 0);
-	~AudioThread();
-
+	explicit MenuDialog( ModuleManager *moduleManager = 0, QWidget *parent = 0);
+	~MenuDialog();
 
 protected:
-	virtual void run();
+	virtual void resizeEvent( QResizeEvent *event);
 
 private:
-	QAudioFormat m_format;
-	void initializeAudio();
-	AudioDevice *m_audioDevice;
-	AudioDeviceControls *m_audioDeviceControls;
 	ModuleManager *m_moduleManager;
+	QPixmap *m_backgroundImage;
+	QPixmap *m_scaledBackgroundImage;
+
 
 };
 
-#endif // AUDIOTHREAD_H
+#endif // MENUDIALOG_H

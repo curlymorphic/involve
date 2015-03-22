@@ -20,36 +20,38 @@
  *
  */
 
-#ifndef AUDIOTHREAD_H
-#define AUDIOTHREAD_H
 
-#include <QObject>
-#include "AudioDeviceControls.h"
-#include "AudioDevice.h"
-#include "ModuleManager.h"
-#include <QThread>
+#include "SynthSelector.h"
+#include <QVBoxLayout>
+#include <QLabel>
+#include "ModuleListWidget.h"
 
-///
-/// \brief The AudioThread class
-/// The Audio Thread. This has an event loop, and hosts all the dsp
-class AudioThread : public QThread
+SynthSelector::SynthSelector(ModuleManager *moduleManager, QWidget *parent) :
+	QWidget(parent),
+	m_moduleManager( moduleManager )
 {
-	Q_OBJECT
-public:
-	AudioThread(AudioDeviceControls *adc = 0, ModuleManager *moduleMannager = 0, QWidget *parent = 0);
-	~AudioThread();
+	QVBoxLayout *vLayout = new QVBoxLayout;
+	QLabel *label = new QLabel( tr( "Select a Synth" ) );
+	vLayout->addWidget( label );
+	for( int i = 0 ; i < m_moduleManager->moduleCount(); ++i )
+	{
+		ModuleListWidget *mlw = new ModuleListWidget( m_moduleManager->moduleAt( i ) );
+		vLayout->addWidget( mlw );
+		connect( mlw, SIGNAL( clicked( ModuleData* ) ),
+				 this, SLOT( moduleSelected( ModuleData* ) ) );
+	}
+	setLayout( vLayout );
 
+}
 
-protected:
-	virtual void run();
+SynthSelector::~SynthSelector()
+{
 
-private:
-	QAudioFormat m_format;
-	void initializeAudio();
-	AudioDevice *m_audioDevice;
-	AudioDeviceControls *m_audioDeviceControls;
-	ModuleManager *m_moduleManager;
+}
 
-};
+void SynthSelector::moduleSelected(ModuleData *moduleData)
+{
+	m_moduleManager->changeModule( moduleData );
+	emit hideDialog();
+}
 
-#endif // AUDIOTHREAD_H
