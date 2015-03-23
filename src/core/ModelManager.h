@@ -20,45 +20,42 @@
  *
  */
 
+#ifndef MODELMANAGER_H
+#define MODELMANAGER_H
+
+#include <QList>
+#include "AutomationSensor.h"
+
 #include "Model.h"
-#include "MainWindow.h"
-//#include
 
-
-
-Model::Model(float init, float min, float max, float interval, QString name, QObject *parent) :
-	QObject( parent ),
-	m_value( init ),
-	m_initial( init ),
-	m_min( min ),
-	m_max( max ),
-	m_interval( interval ),
-	m_name( name ),
-	m_initValueChanged(false)
+/**
+ * @brief The ModelManager class
+ *
+ * Kepps tracks of the models
+ */
+class ModelManager : QObject
 {
-	emit dataChanged( this );
-	(qobject_cast<MainWindow*> (QApplication::topLevelWidgets().at( 0 )))->modelManager()->registerModel( this );
-}
+	Q_OBJECT
+public:
+	ModelManager( QObject *parent = 0 );
+	~ModelManager();
 
-Model::~Model()
-{
+	void registerModel( Model *model );
+	void assignX();
+	void assignY();
 
-}
+private slots:
+	void ModelChanging( Model* );
 
-void Model::setValue(float val)
-{
-	if( val < m_min ) { m_value = val; }
-	else if( val > m_max ) { m_value = val; }
-	else { m_value = val; }
 
-	if( m_value != m_initial ) { m_initValueChanged = true; }
+private:
 
-	emit dataChanged( this );
 
-}
+	Model *m_lastChangedModel;
+	Model *m_lastNonAssignedChangedModel;
+	AutomationSensor *m_automationSensor;
 
-void Model::inc(float val)
-{
-	setValue( value() + val);
-}
 
+};
+
+#endif // MODELMANAGER_H

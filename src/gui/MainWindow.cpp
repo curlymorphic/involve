@@ -52,9 +52,11 @@ const int BufferSize      = 32768;
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow),
-	m_audioDeviceControls( 0 ),
+//	m_modelManager( 0 ),
+//	m_audioDeviceControls( 0 ),
 	m_gridLayout( 0 )
 {
+	m_modelManager = new ModelManager( );
 	m_moduleManager = new ModuleManager( DataSampleRateHz );
 	connect( m_moduleManager, SIGNAL( moduleChanged( ModuleData* ) ),
 			 this, SLOT( moduleChanged( ModuleData* ) ) );
@@ -115,9 +117,6 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_yBtn->show();
 	connect ( m_yBtn, SIGNAL( clicked() ), this, SLOT( yBtnPressed() ) );
 
-	m_automationSensor = new AutomationSensor( this );
-//	m_automationSensor->m_xModel = &m_controls->cutOffModel;
-//	m_automationSensor->m_yModel = &m_controls->resModel;
 
 }
 
@@ -138,12 +137,12 @@ void MainWindow::menuBtnPressed()
 
 void MainWindow::xBtnPressed()
 {
-	m_moduleManager->changeModule( 0 );
+	m_modelManager->assignX();
 }
 
 void MainWindow::yBtnPressed()
 {
-	m_moduleManager->changeModule( 1 );
+	m_modelManager->assignY();
 }
 
 void MainWindow::moduleChanged(ModuleData *moduleData)

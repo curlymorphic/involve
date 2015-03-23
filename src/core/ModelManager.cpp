@@ -20,45 +20,51 @@
  *
  */
 
-#include "Model.h"
-#include "MainWindow.h"
-//#include
+#include "ModelManager.h"
 
-
-
-Model::Model(float init, float min, float max, float interval, QString name, QObject *parent) :
+ModelManager::ModelManager( QObject *parent ) :
 	QObject( parent ),
-	m_value( init ),
-	m_initial( init ),
-	m_min( min ),
-	m_max( max ),
-	m_interval( interval ),
-	m_name( name ),
-	m_initValueChanged(false)
+	m_lastChangedModel( 0 ),
+	m_lastNonAssignedChangedModel( 0 )
+
 {
-	emit dataChanged( this );
-	(qobject_cast<MainWindow*> (QApplication::topLevelWidgets().at( 0 )))->modelManager()->registerModel( this );
+	m_automationSensor = new AutomationSensor( this );
 }
 
-Model::~Model()
+ModelManager::~ModelManager()
 {
 
 }
 
-void Model::setValue(float val)
+void ModelManager::registerModel(Model *model)
 {
-	if( val < m_min ) { m_value = val; }
-	else if( val > m_max ) { m_value = val; }
-	else { m_value = val; }
-
-	if( m_value != m_initial ) { m_initValueChanged = true; }
-
-	emit dataChanged( this );
-
+	connect( model, SIGNAL( dataChanged( Model* ) ), this, SLOT( ModelChanging( Model* ) ) );
 }
 
-void Model::inc(float val)
+void ModelManager::ModelChanging(Model *model)
 {
-	setValue( value() + val);
+	m_lastChangedModel = model;
+	if( model != m_automationSensor->m_xModel && model != m_automationSensor->m_yModel )
+	{
+		m_lastNonAssignedChangedModel = model;
+	}
+}
+
+
+
+void ModelManager::assignX()
+{
+	if( m_automationSensor->m_yModel != m_lastNonAssignedChangedModel )
+	{
+		m_automationSensor->m_xModel = m_lastNonAssignedChangedModel;
+	}
+}
+
+void ModelManager::assignY()
+{
+	if( m_automationSensor->m_xModel != m_lastNonAssignedChangedModel )
+	{
+		m_automationSensor->m_yModel = m_lastNonAssignedChangedModel;
+	}
 }
 

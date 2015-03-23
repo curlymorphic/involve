@@ -43,6 +43,7 @@
 #include <QGridLayout>
 #include <QPushButton>
 #include "ModuleManager.h"
+#include "ModelManager.h"
 
 namespace Ui {
 class MainWindow;
@@ -58,6 +59,11 @@ public:
 	explicit MainWindow( QWidget *parent = 0 );
 	~MainWindow();
 
+	ModelManager* modelManager()
+	{
+		return m_modelManager;
+	}
+
 private slots:
 	void menuBtnPressed();
 	void xBtnPressed();
@@ -69,6 +75,7 @@ private slots:
 private:
 	Ui::MainWindow *ui;
 
+	ModelManager *m_modelManager;
 	ModuleManager *m_moduleManager;
 	ModuleControls *m_controls;
 	AudioDeviceControls *m_audioDeviceControls;
@@ -81,7 +88,6 @@ private:
 	ModuleFader *m_startOctaveFader;
 	ModuleFader *m_ocatveRangeFader;
 	UiControls *m_uiControls;
-	AutomationSensor *m_automationSensor;
 	QGridLayout *m_gridLayout;
 	QPushButton *m_menuBtn;
 	QPushButton *m_xBtn;

@@ -65,7 +65,8 @@ SOURCES += main.cpp\
     src/gui/MenuDialog.cpp \
     src/gui/About.cpp \
     src/gui/SynthSelector.cpp \
-    src/gui/ModuleListWidget.cpp
+    src/gui/ModuleListWidget.cpp \
+    src/core/ModelManager.cpp
 #	src/Analyser.cpp
 
 HEADERS  += headers/MainWindow.h \
@@ -113,7 +114,8 @@ HEADERS  += headers/MainWindow.h \
     src/gui/MenuDialog.h \
     src/gui/About.h \
     src/gui/SynthSelector.h \
-    src/gui/ModuleListWidget.h
+    src/gui/ModuleListWidget.h \
+    src/core/ModelManager.h
 
 
 

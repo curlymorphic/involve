@@ -81,7 +81,7 @@ public:
 	}
 
 signals:
-	void dataChanged( float );
+	void dataChanged( Model *model );
 
 public slots:
 
