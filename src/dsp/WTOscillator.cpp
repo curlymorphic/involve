@@ -36,8 +36,9 @@ WTOscillator::WTOscillator(int sampleRate) :
 	sawTable( 0 ),
 	m_currentShape (WT_SQUARE)
 {
-	m_bandFreq = new float[8] { 32.073, 65.4, 103.81, 261.63, 523.25, 1046.5, 2093.5, 4186.0 };
-	m_tableCount = 8;
+	m_bandFreq = new float[10] { 32.073, 65.4, 103.81, 261.63, 523.25, 1046.5,
+			2093.5, 4186.0, 10000, 20000 };
+	m_tableCount = 10;
 	setFrequency( 440.0 );
 	sineTables = new sample_t*[ m_tableCount ];
 	for(int i = 0 ; i < m_tableCount; ++i)
