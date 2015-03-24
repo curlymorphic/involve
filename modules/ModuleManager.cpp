@@ -28,6 +28,10 @@
 #include "Demo2/Demo2AudioModule.h"
 #include "Demo2/Demo2ModuleControls.h"
 #include "Demo2/Demo2ModuleView.h"
+#include "SuperSawer/SuperSawerModuleControls.h"
+#include "SuperSawer/SuperSawAudioModule.h"
+#include "SuperSawer/SuperSawModuleView.h"
+
 
 ModuleManager::ModuleManager( int samplerate, QObject *parent) : QObject(parent) ,
   m_currentModule( 0 )
@@ -70,6 +74,15 @@ void ModuleManager::initModules( int samplerate )
 									   d2am, d2mc, d2mv );
 	addModule( d2md );
 
+	SuperSawerModuleControls *ssmc = new SuperSawerModuleControls();
+	SuperSawAudioModule *ssam = new SuperSawAudioModule( samplerate, ssmc );
+	SuperSawModuleView *ssmv = new SuperSawModuleView( ssmc );
+
+	ModuleData *ssmd = new ModuleData( "Super Sawer",
+									   tr( " 5 unison saw + sub" ),
+									   ssam, ssmc, ssmv );
+	addModule( ssmd );
+
 	changeModule( 0 );
 }
 
@@ -90,7 +103,7 @@ ModuleData *ModuleManager::moduleAt(int index)
 
 int ModuleManager::moduleCount()
 {
-	m_modules->count();
+	return m_modules->count();
 }
 
 QList<QString> ModuleManager::moduleNames()

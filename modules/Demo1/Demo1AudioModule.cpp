@@ -33,7 +33,7 @@ Demo1AudioModule::Demo1AudioModule(qint64 sampleRate, Demo1ModuleControls *contr
 	m_volLfo = new WTOscillator( sampleRate );
 	m_volLfo->setFrequency( 1 );
 	m_lp = new Lp12( sampleRate );
-	m_lp2 = new Lp12( sampleRate ),
+	m_lp2 = new Lp12( sampleRate );
 	m_ad = new Adsr( sampleRate );
 	m_delay = new StereoDelay(2.0, sampleRate );
 	delayedFrame = new sampleFrame[1];

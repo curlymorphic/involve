@@ -66,7 +66,10 @@ SOURCES += main.cpp\
     src/gui/About.cpp \
     src/gui/SynthSelector.cpp \
     src/gui/ModuleListWidget.cpp \
-    src/core/ModelManager.cpp
+    src/core/ModelManager.cpp \
+    modules/SuperSawer/SuperSawerModuleControls.cpp \
+    modules/SuperSawer/SuperSawModuleView.cpp \
+    modules/SuperSawer/SuperSawAudioModule.cpp
 #	src/Analyser.cpp
 
 HEADERS  += headers/MainWindow.h \
@@ -115,7 +118,10 @@ HEADERS  += headers/MainWindow.h \
     src/gui/About.h \
     src/gui/SynthSelector.h \
     src/gui/ModuleListWidget.h \
-    src/core/ModelManager.h
+    src/core/ModelManager.h \
+    modules/SuperSawer/SuperSawerModuleControls.h \
+    modules/SuperSawer/SuperSawModuleView.h \
+    modules/SuperSawer/SuperSawAudioModule.h
 
 
 

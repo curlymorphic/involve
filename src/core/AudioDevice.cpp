@@ -129,7 +129,9 @@ void AudioDevice::createAudioOutput()
 	m_audioOutput = new QAudioOutput(m_device, m_format, this);
 
 	start();
+	m_audioOutput->setBufferSize( 512 );
 	m_audioOutput->start(this);
+//	qDebug(" buffer size : %d", m_audioOutput->bufferSize() );
 }
 
 
@@ -167,7 +169,7 @@ qint64 AudioDevice::writeData(const char *data, qint64 len)
 
 qint64 AudioDevice::bytesAvailable() const
 {
-	return 1024;
+	return bufferSize * 4;
 }
 
 void AudioDevice::moduleChanged(ModuleData *md)

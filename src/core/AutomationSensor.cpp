@@ -31,7 +31,7 @@ AutomationSensor::AutomationSensor(QObject *parent) : QObject(parent),
 {
 	m_sensor = new QAccelerometer;
 	connect( m_sensor, SIGNAL( readingChanged() ), this, SLOT( update() ) );
-	m_sensor->setDataRate( 20 );
+//	m_sensor->setDataRate( 20 );
 	m_sensor->start();
 }
 
