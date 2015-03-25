@@ -122,6 +122,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 MainWindow::~MainWindow()
 {
+	delete m_audioThread;
 //	delete ui;
 	if ( m_startOctaveFader ) { delete m_startOctaveFader; }
 	if( m_ocatveRangeFader ) { delete m_ocatveRangeFader; }
