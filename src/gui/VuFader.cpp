@@ -29,11 +29,11 @@ VuFader::VuFader(Model *xModel, QWidget *parent, sampleFrame *peaks) :
 	TouchController( xModel , 0, parent ),
 	m_dotSize( 10 ),
 	m_peaks( peaks ),
+	m_xScale( 1 ),
 	m_backgroundImage( 0 ),
 	m_scaledBackgroundImage( 0 ),
 	m_faderImage( 0 ),
-	m_scaledFaderImage( 0 ),
-	m_xScale( 1 )
+	m_scaledFaderImage( 0 )
 {
 	QPalette* palette = new QPalette();
 	m_backgroundImage = new QPixmap(":/new/prefix1/images/HFaderBack.png");

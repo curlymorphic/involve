@@ -50,6 +50,8 @@ bool ModuleListWidget::event(QEvent *event)
 	if( event->type() == QEvent::TouchBegin )
 	{
 		emit clicked( m_moduleData );
+		return true;
 	}
+	return false;
 }
 

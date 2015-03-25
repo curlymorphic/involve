@@ -32,14 +32,14 @@ class Gain : public AudioProcess
 {
 public:
 	Gain( int sampleRate );
-	~Gain();
+	virtual ~Gain();
 	inline void setGain( float gain )
 	{
 		m_gain = gain;
 	}
 
 
-	virtual inline void tick( sampleFrame *frame );
+	virtual  void tick( sampleFrame *frame );
 
 private:
 	float m_gain;

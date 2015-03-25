@@ -34,7 +34,6 @@ Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
 	m_waveShapeAFader = new ModuleFader( &m_controls->waveShapeAModel, this );
 	m_waveShapeBFader = new ModuleFader( &m_controls->waveShapeBModel, this );
 
-	QGroupBox *boxGroup = new QGroupBox( tr( "Shapes" ), this );
 	QHBoxLayout *shapeLayout = new QHBoxLayout( this );
 	shapeLayout->addWidget( m_waveShapeAFader );
 	shapeLayout->addWidget( m_waveShapeBFader );
@@ -55,7 +54,6 @@ void Demo2ModuleView::layout()
 {
 	const int height8 = height() / 9;
 	const int wwidth = width();
-	const int wDivide = wwidth / 12;
 
 	m_waveShapeAFader->resize( wwidth * 0.1 , height8 * 2 );
 	m_waveShapeBFader->resize( wwidth * 0.1 , height8 * 2 );

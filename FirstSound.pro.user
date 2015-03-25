@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 3.3.0, 2015-03-25T09:28:25. -->
+<!-- Written by QtCreator 3.3.0, 2015-03-25T20:24:24. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -515,7 +515,7 @@
      </valuemap>
      <valuemap type="QVariantMap" key="ProjectExplorer.BuildStepList.Step.3">
       <value type="QString" key="BuildTargetSdk">android-21</value>
-      <value type="QString" key="KeystoreLocation"></value>
+      <value type="QString" key="KeystoreLocation">/home/dave/Dropbox/involve.keystore</value>
       <value type="QString" key="ProFilePathForInputFile">/home/dave/Development/involve/xy/involve/FirstSound.pro</value>
       <value type="bool" key="ProjectExplorer.BuildStep.Enabled">true</value>
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Build Android APK</value>
@@ -523,7 +523,7 @@
       <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">QmakeProjectManager.AndroidBuildApkStep</value>
       <value type="int" key="Qt4ProjectManager.AndroidDeployQtStep.DeployQtAction">2</value>
       <value type="bool" key="UseGradle">false</value>
-      <value type="bool" key="VerboseOutput">false</value>
+      <value type="bool" key="VerboseOutput">true</value>
      </valuemap>
      <value type="int" key="ProjectExplorer.BuildStepList.StepsCount">4</value>
      <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">Build</value>

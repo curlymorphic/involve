@@ -54,7 +54,7 @@ SuperSawAudioModule::~SuperSawAudioModule()
 {
 	delete[] m_oscillators;
 	delete[] m_oscFrames;
-	delete m_subFrame;
+//	delete[] m_subFrame;
 	delete m_gain;
 	delete m_lp2;
 	delete m_lp;

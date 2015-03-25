@@ -38,7 +38,7 @@ Gain::~Gain()
 
 
 
-inline void Gain::tick(sampleFrame *frame)
+void Gain::tick(sampleFrame *frame)
 {
 	frame[0][0] *= m_gain;
 	frame[0][1] *= m_gain;

@@ -46,6 +46,11 @@ public:
 
 	}
 
+	virtual ~Adsr()
+	{
+
+	}
+
 	///
 	/// \brief setAttackTime
 	/// \param time Seconds

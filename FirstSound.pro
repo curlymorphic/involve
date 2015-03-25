@@ -129,7 +129,14 @@ FORMS    += MainWindow.ui
 
 DISTFILES += \
     TODO.txt \
-    License.txt
+    License.txt \
+    android/gradle/wrapper/gradle-wrapper.jar \
+    android/AndroidManifest.xml \
+    android/gradlew.bat \
+    android/res/values/libs.xml \
+    android/build.gradle \
+    android/gradle/wrapper/gradle-wrapper.properties \
+    android/gradlew
 
 RESOURCES += \
     ImageResources.qrc
@@ -140,3 +147,5 @@ RESOURCES += \
 #DEPENDPATH += $$PWD/../../../../../../usr/local/include
 
 #PRE_TARGETDEPS += $$PWD/../../../../../../usr/local/lib/libfftw3.a
+
+ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android

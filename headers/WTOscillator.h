@@ -45,7 +45,7 @@ public:
 
 	const int TABLE_LEN = 1024;
 	WTOscillator( int sampleRate = 44100 );
-	~WTOscillator();
+	virtual ~WTOscillator();
 
 	///
 	/// \brief tick

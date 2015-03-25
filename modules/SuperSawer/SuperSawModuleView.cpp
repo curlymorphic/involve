@@ -87,7 +87,6 @@ void SuperSawModuleView::layout()
 {
 	const int height8 = height() / 9;
 	const int wwidth = width();
-	const int wDivide = wwidth / 12;
 	
 	m_seperationFader->resize( wwidth * 0.1 , height8 * 2 );
 	m_subFader->resize( wwidth * 0.1 , height8 * 2 );
