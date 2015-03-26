@@ -44,7 +44,7 @@ void ModelManager::registerModel(Model *model)
 void ModelManager::ModelChanging(Model *model)
 {
 	m_lastChangedModel = model;
-	if( !( model == m_automationSensor->m_xModel || model == m_automationSensor->m_yModel ) )
+	if( model != m_automationSensor->m_xModel && model != m_automationSensor->m_yModel )
 	{
 		m_lastNonAssignedChangedModel = model;
 	}

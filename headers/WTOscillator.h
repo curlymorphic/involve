@@ -96,6 +96,8 @@ public:
 
 	}
 
+		void generateWaveTables();
+		void allocTables();
 protected:
 	///
 	/// \brief m_index
