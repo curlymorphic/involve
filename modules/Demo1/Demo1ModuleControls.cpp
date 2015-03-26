@@ -29,7 +29,7 @@
 
 Demo1ModuleControls::Demo1ModuleControls(QObject *parent) : ModuleControls( parent ),
 	cutOffModel(1000, 50, 10000,1, tr( "Cut" ) ),
-	resModel(1, 1, 4, 0.1, tr( "Res" ) ),
+	resModel(0.7, 1, 6, 0.1, tr( "Res" ) ),
 	waveShapeModel( 2, 0 , 4 , 1, tr( "Wave" ) ),
 	attackModel(1.0, 0.01 , 5 , 0.01, tr( "Atk" ) ),
 	decayModel(1.0, 0.01 , 5 , 0.01, tr( "Dcy" ) ),
