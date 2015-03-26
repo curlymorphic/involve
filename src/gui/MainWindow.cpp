@@ -52,9 +52,11 @@ const int BufferSize      = 32768;
 MainWindow::MainWindow(QWidget *parent) :
 	QMainWindow(parent),
 	ui(new Ui::MainWindow),
-	m_audioDeviceControls( 0 ),
+//	m_modelManager( 0 ),
+//	m_audioDeviceControls( 0 ),
 	m_gridLayout( 0 )
 {
+	m_modelManager = new ModelManager( );
 	m_moduleManager = new ModuleManager( DataSampleRateHz );
 	connect( m_moduleManager, SIGNAL( moduleChanged( ModuleData* ) ),
 			 this, SLOT( moduleChanged( ModuleData* ) ) );
@@ -115,14 +117,12 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_yBtn->show();
 	connect ( m_yBtn, SIGNAL( clicked() ), this, SLOT( yBtnPressed() ) );
 
-	m_automationSensor = new AutomationSensor( this );
-//	m_automationSensor->m_xModel = &m_controls->cutOffModel;
-//	m_automationSensor->m_yModel = &m_controls->resModel;
 
 }
 
 MainWindow::~MainWindow()
 {
+	delete m_audioThread;
 //	delete ui;
 	if ( m_startOctaveFader ) { delete m_startOctaveFader; }
 	if( m_ocatveRangeFader ) { delete m_ocatveRangeFader; }
@@ -138,12 +138,12 @@ void MainWindow::menuBtnPressed()
 
 void MainWindow::xBtnPressed()
 {
-	m_moduleManager->changeModule( 0 );
+	m_modelManager->assignX();
 }
 
 void MainWindow::yBtnPressed()
 {
-	m_moduleManager->changeModule( 1 );
+	m_modelManager->assignY();
 }
 
 void MainWindow::moduleChanged(ModuleData *moduleData)
@@ -156,6 +156,12 @@ void MainWindow::moduleChanged(ModuleData *moduleData)
 	resizeEvent( 0 );
 	m_ribbon->setModels( &(moduleData->getModuleControls()->freqModel),
 						 &(moduleData->getModuleControls()->velocityModel ) );
+	connect( m_ribbon, SIGNAL( noteOn() ),moduleData->getModuleView(), SLOT( notePressed() ) ) ;
+	connect( m_ribbon, SIGNAL( noteOff() ),moduleData->getModuleView(), SLOT( noteRelease() ) );
+
+	connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( updateRibbon() ));
+		connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( update() ));
+
 }
 
 void MainWindow::resizeEvent(QResizeEvent *event)
@@ -233,8 +239,8 @@ void MainWindow::resizeEvent(QResizeEvent *event)
 
 void MainWindow::updateRibbon()
 {
-	m_controls->freqModel.setMin( midiNoteFreq( (int)m_uiControls->startOctave.value()*12 ) );
-	m_controls->freqModel.setMax(  midiNoteFreq( ((int) m_uiControls->startOctave.value() * 12 ) +
+	m_moduleManager->currentModule()->getModuleControls()->freqModel.setMin( midiNoteFreq( (int)m_uiControls->startOctave.value()*12 ) );
+	m_moduleManager->currentModule()->getModuleControls()->freqModel.setMax(  midiNoteFreq( ((int) m_uiControls->startOctave.value() * 12 ) +
 												 m_uiControls->octaves.value() * 12 ) );
 	m_ribbon->recalculatePixelMultipliers();
 	m_moduleView->layout();

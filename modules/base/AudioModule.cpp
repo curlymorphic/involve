@@ -26,7 +26,7 @@ AudioModule::AudioModule(int samplerate, ModuleControls *controls ) :
 	AudioProcess( samplerate ),
 	m_controls( controls )
 {
-	connect( &controls->noteOnModel, SIGNAL(dataChanged( float ) ), this, SLOT( notePressed( float ) ) );
+	connect( &controls->noteOnModel, SIGNAL(dataChanged( Model* ) ), this, SLOT( notePressed( Model* ) ) );
 }
 
 AudioModule::~AudioModule()
@@ -40,9 +40,9 @@ void AudioModule::processAudio(sampleFrame *buffer, int len)
 
 }
 
-void AudioModule::notePressed(float val)
+void AudioModule::notePressed(Model *model)
 {
-	if( val ) { noteOn(); }
+	if( model->value() ) { noteOn(); }
 	else { noteOff(); }
 }
 

@@ -44,8 +44,8 @@ class WTOscillator : public AudioProcess
 public:
 
 	const int TABLE_LEN = 1024;
-	WTOscillator( int sampleRate );
-	~WTOscillator();
+	WTOscillator( int sampleRate = 44100 );
+	virtual ~WTOscillator();
 
 	///
 	/// \brief tick
@@ -96,6 +96,8 @@ public:
 
 	}
 
+		void generateWaveTables();
+		void allocTables();
 protected:
 	///
 	/// \brief m_index

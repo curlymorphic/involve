@@ -20,42 +20,20 @@
  *
  */
 
-#include "Demo2ModuleView.h"
-#include <QGroupBox>
-#include <QVBoxLayout>
+#include "SuperSawerModuleControls.h"
 
-
-
-Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
-								 Qt::WindowFlags flags):
-	ModuleView( parent, controls, flags ),
-	m_controls( (Demo2ModuleControls*)controls )
-{
-	m_waveShapeAFader = new ModuleFader( &m_controls->waveShapeAModel, this );
-	m_waveShapeBFader = new ModuleFader( &m_controls->waveShapeBModel, this );
-
-	QHBoxLayout *shapeLayout = new QHBoxLayout( this );
-	shapeLayout->addWidget( m_waveShapeAFader );
-	shapeLayout->addWidget( m_waveShapeBFader );
-
-	m_waveShapeAFader->show();
-	m_waveShapeBFader->show();
-
-	layout();
-
-}
-
-Demo2ModuleView::~Demo2ModuleView()
+SuperSawerModuleControls::SuperSawerModuleControls( QObject *parent ) : ModuleControls( parent ),
+	seperationModel( 0.01f, 0.0f, 0.02f, 0.001f, tr( "Spread" ) ),
+	cutOffModel(1000.0f, 50.0f, 10000.0f ,1.0f, tr( "Cut" ) ),
+	resModel(1.0f, 1.0f, 4.0f, 0.1f, tr( "Res" ) ),
+	attackModel(1.0f, 0.01f , 5.0f , 0.01f, tr( "Atk" ) ),
+	decayModel(1.0f, 0.01f , 5.0f , 0.01f, tr( "Dcy" ) ),
+	sustainModel(0.9f, 0.0f, 1.0f , 0.01f, tr( "Sus" ) ),
+	releaseModel(3.0f, 0.01f , 5.0f , 0.01f, tr( "Rel" ) ),
+	subModel( 0.04f, 0.0f, 1.0f, 0.001f, tr( "Sub" ) )
 {
 
 }
 
-void Demo2ModuleView::layout()
-{
-	const int height8 = height() / 9;
-	const int wwidth = width();
 
-	m_waveShapeAFader->resize( wwidth * 0.1 , height8 * 2 );
-	m_waveShapeBFader->resize( wwidth * 0.1 , height8 * 2 );
-}
 

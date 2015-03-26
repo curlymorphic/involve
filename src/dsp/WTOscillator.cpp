@@ -22,8 +22,54 @@
 
 #include "WTOscillator.h"
 #include "Interpolation.h"
+#include <QDebug>
+#include <QtConcurrent/QtConcurrent>
+#include "string.h"
 
 
+
+void WTOscillator::allocTables()
+{
+
+	squareTables = new sample_t*[ m_tableCount ];
+	sineTables = new sample_t*[ m_tableCount ];
+	sawTables = new sample_t*[ m_tableCount ];
+	triTables = new sample_t*[ m_tableCount ];
+	memset( squareTables, 0, sizeof( sample_t ) * m_tableCount );
+	memset( sineTables, 0, sizeof( sample_t ) * m_tableCount );
+	memset( sawTables, 0, sizeof( sample_t ) * m_tableCount );
+	memset( triTables, 0, sizeof( sample_t ) * m_tableCount );
+}
+
+void WTOscillator::generateWaveTables()
+{
+
+	for(int i = 0 ; i < m_tableCount; ++i)
+	{
+		generateSineTable( m_sampleRate / m_bandFreq[i] * 0.5 );
+		sineTables[i] = sineTable;
+	}
+
+	for(int i = 0 ; i < m_tableCount; ++i)
+	{
+		generateSawTable( m_sampleRate / m_bandFreq[i] * 0.5 );
+		sawTables[i] = sawTable;
+	}
+	for( int i = 0; i < m_tableCount; ++i)
+	{
+		generateSquareTable( m_sampleRate / m_bandFreq[i] * 0.5 );
+		squareTables[i] = squareTable;
+	}
+
+	for( int i = 0; i < m_tableCount; ++i )
+	{
+		generateTriTable( m_sampleRate / m_bandFreq[i] * 0.5 );
+		triTables[i] = triTable;
+	}
+
+	setShape( m_currentShape );
+//	return 1;
+}
 
 WTOscillator::WTOscillator(int sampleRate) :
 	AudioProcess( sampleRate ),
@@ -36,38 +82,16 @@ WTOscillator::WTOscillator(int sampleRate) :
 	sawTable( 0 ),
 	m_currentShape (WT_SQUARE)
 {
-	m_bandFreq = new float[8] { 32.073, 65.4, 103.81, 261.63, 523.25, 1046.5, 2093.5, 4186.0 };
-	m_tableCount = 8;
+	m_bandFreq = new float[10] { 32.073, 65.4, 103.81, 261.63, 523.25, 1046.5,
+			2093.5, 4186.0, 10000, 20000 };
+	m_tableCount = 10;
 	setFrequency( 440.0 );
-	sineTables = new sample_t*[ m_tableCount ];
-	for(int i = 0 ; i < m_tableCount; ++i)
-	{
-		generateSineTable( m_sampleRate / m_bandFreq[i] * 0.5 );
-		sineTables[i] = sineTable;
-	}
+	allocTables();
+	qDebug("generate tables start \n");
+	QFuture<void> future = QtConcurrent::run( this,  &WTOscillator::generateWaveTables )  ;
+//	future.waitForFinished();
+	qDebug( "generate Tables end \n " );
 
-	sawTables = new sample_t*[ m_tableCount ];
-	for(int i = 0 ; i < m_tableCount; ++i)
-	{
-		generateSawTable( m_sampleRate / m_bandFreq[i] * 0.5 );
-		sawTables[i] = sawTable;
-	}
-
-	squareTables = new sample_t*[ m_tableCount ];
-	for( int i = 0; i < m_tableCount; ++i)
-	{
-		generateSquareTable( m_sampleRate / m_bandFreq[i] * 0.5 );
-		squareTables[i] = squareTable;
-	}
-
-	triTables = new sample_t*[ m_tableCount ];
-	for( int i = 0; i < m_tableCount; ++i )
-	{
-		generateTriTable( m_sampleRate / m_bandFreq[i] * 0.5 );
-		triTables[i] = triTable;
-	}
-
-	setShape( m_currentShape );
 }
 
 WTOscillator::~WTOscillator()
@@ -83,6 +107,10 @@ WTOscillator::~WTOscillator()
 
 sample_t WTOscillator::tick()
 {
+	if( !m_currentTable )
+	{
+		return 0;
+	}
 	int nextIndex;
 	int index;
 	float frac;

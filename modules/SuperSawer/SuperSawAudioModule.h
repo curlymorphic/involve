@@ -20,42 +20,41 @@
  *
  */
 
-#include "Demo2ModuleView.h"
-#include <QGroupBox>
-#include <QVBoxLayout>
 
+#ifndef SUPERSAWAUDIOMODULE_H
+#define SUPERSAWAUDIOMODULE_H
 
+#include "AudioModule.h"
+#include "SuperSawerModuleControls.h"
+#include "Gain.h"
+#include "Filters.h"
+#include "ADSR.h"
+#include "WTOscillator.h"
 
-Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
-								 Qt::WindowFlags flags):
-	ModuleView( parent, controls, flags ),
-	m_controls( (Demo2ModuleControls*)controls )
+class SuperSawAudioModule : public AudioModule
 {
-	m_waveShapeAFader = new ModuleFader( &m_controls->waveShapeAModel, this );
-	m_waveShapeBFader = new ModuleFader( &m_controls->waveShapeBModel, this );
+public:
+	SuperSawAudioModule( qint64 samplerate, SuperSawerModuleControls *controls );
+	~SuperSawAudioModule();
+	virtual void processAudio(sampleFrame *buffer, int len );
+	
+protected:
 
-	QHBoxLayout *shapeLayout = new QHBoxLayout( this );
-	shapeLayout->addWidget( m_waveShapeAFader );
-	shapeLayout->addWidget( m_waveShapeBFader );
+	virtual void noteOn();
+	virtual void noteOff();
 
-	m_waveShapeAFader->show();
-	m_waveShapeBFader->show();
+private:
+	Gain *m_gain;
+	Lp12 *m_lp;
+	Lp12 *m_lp2;
+	Adsr *m_ad;
+	sampleFrame *m_oscFrames;
+	sampleFrame m_subFrame;
+	WTOscillator *m_oscillators;
+	WTOscillator *m_subOscillator;
+	SuperSawerModuleControls *m_controls;
+	
+	
+};
 
-	layout();
-
-}
-
-Demo2ModuleView::~Demo2ModuleView()
-{
-
-}
-
-void Demo2ModuleView::layout()
-{
-	const int height8 = height() / 9;
-	const int wwidth = width();
-
-	m_waveShapeAFader->resize( wwidth * 0.1 , height8 * 2 );
-	m_waveShapeBFader->resize( wwidth * 0.1 , height8 * 2 );
-}
-
+#endif // SUPERSAWAUDIOMODULE_H

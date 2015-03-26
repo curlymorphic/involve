@@ -31,7 +31,8 @@ AutomationSensor::AutomationSensor(QObject *parent) : QObject(parent),
 {
 	m_sensor = new QAccelerometer;
 	connect( m_sensor, SIGNAL( readingChanged() ), this, SLOT( update() ) );
-	m_sensor->setDataRate( 20 );
+//	m_sensor->setDataRate( 20 );
+	m_sensor->setAccelerationMode( QAccelerometer::Gravity );
 	m_sensor->start();
 }
 
@@ -51,7 +52,7 @@ void AutomationSensor::update()
 	if(m_yModel)
 	{
 		m_yModel->setValue(qBound(m_yModel->getMin(),(float)qAbs ( m_reading->y()*0.2)*m_yModel->getMax()
-						   + m_yModel->getMin()  , m_yModel->getMax() ) - 1.1 );
+						   + m_yModel->getMin()  , m_yModel->getMax() ) );
 	}
 	if(m_zModel)
 	{

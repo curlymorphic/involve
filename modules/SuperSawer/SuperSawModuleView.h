@@ -20,42 +20,41 @@
  *
  */
 
-#include "Demo2ModuleView.h"
-#include <QGroupBox>
-#include <QVBoxLayout>
+#ifndef SUPERSAWMODULEVIEW_H
+#define SUPERSAWMODULEVIEW_H
 
+#include <QObject>
+#include <QWidget>
+#include "ModuleView.h"
+#include "SuperSawerModuleControls.h"
+#include "Fader.h"
+#include "VFader.h"
+#include "ModuleFader.h"
 
-
-Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
-								 Qt::WindowFlags flags):
-	ModuleView( parent, controls, flags ),
-	m_controls( (Demo2ModuleControls*)controls )
+class SuperSawModuleView : public ModuleView
 {
-	m_waveShapeAFader = new ModuleFader( &m_controls->waveShapeAModel, this );
-	m_waveShapeBFader = new ModuleFader( &m_controls->waveShapeBModel, this );
+	Q_OBJECT
+public:
+	SuperSawModuleView( SuperSawerModuleControls *controls = 0, QWidget *parent = 0 , Qt::WindowFlags flags = 0 );
+	~SuperSawModuleView();
+	virtual void layout();
+	
+private:
+	SuperSawerModuleControls *m_controls;
+	
+	ModuleFader *m_seperationFader;
+	
+	ModuleFader *m_cutOffFader;
+	ModuleFader *m_resFader;
+	
+	ModuleFader *m_attackFader;
+	ModuleFader *m_decayFader;
+	ModuleFader *m_sustainFader;
+	ModuleFader *m_releaseFader;
+	
+	ModuleFader *m_subFader;
+	
+	
+};
 
-	QHBoxLayout *shapeLayout = new QHBoxLayout( this );
-	shapeLayout->addWidget( m_waveShapeAFader );
-	shapeLayout->addWidget( m_waveShapeBFader );
-
-	m_waveShapeAFader->show();
-	m_waveShapeBFader->show();
-
-	layout();
-
-}
-
-Demo2ModuleView::~Demo2ModuleView()
-{
-
-}
-
-void Demo2ModuleView::layout()
-{
-	const int height8 = height() / 9;
-	const int wwidth = width();
-
-	m_waveShapeAFader->resize( wwidth * 0.1 , height8 * 2 );
-	m_waveShapeBFader->resize( wwidth * 0.1 , height8 * 2 );
-}
-
+#endif // SUPERSAWMODULEVIEW_H

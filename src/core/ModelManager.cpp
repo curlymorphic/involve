@@ -20,42 +20,49 @@
  *
  */
 
-#include "Demo2ModuleView.h"
-#include <QGroupBox>
-#include <QVBoxLayout>
+#include "ModelManager.h"
 
+ModelManager::ModelManager( QObject *parent ) :
+	QObject( parent ),
+	m_lastChangedModel( 0 ),
+	m_lastNonAssignedChangedModel( 0 )
 
-
-Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
-								 Qt::WindowFlags flags):
-	ModuleView( parent, controls, flags ),
-	m_controls( (Demo2ModuleControls*)controls )
 {
-	m_waveShapeAFader = new ModuleFader( &m_controls->waveShapeAModel, this );
-	m_waveShapeBFader = new ModuleFader( &m_controls->waveShapeBModel, this );
-
-	QHBoxLayout *shapeLayout = new QHBoxLayout( this );
-	shapeLayout->addWidget( m_waveShapeAFader );
-	shapeLayout->addWidget( m_waveShapeBFader );
-
-	m_waveShapeAFader->show();
-	m_waveShapeBFader->show();
-
-	layout();
-
+	m_automationSensor = new AutomationSensor( this );
 }
 
-Demo2ModuleView::~Demo2ModuleView()
+ModelManager::~ModelManager()
 {
 
 }
 
-void Demo2ModuleView::layout()
+void ModelManager::registerModel(Model *model)
 {
-	const int height8 = height() / 9;
-	const int wwidth = width();
+	connect( model, SIGNAL( dataChanged( Model* ) ), this, SLOT( ModelChanging( Model* ) ) );
+}
 
-	m_waveShapeAFader->resize( wwidth * 0.1 , height8 * 2 );
-	m_waveShapeBFader->resize( wwidth * 0.1 , height8 * 2 );
+void ModelManager::ModelChanging(Model *model)
+{
+	m_lastChangedModel = model;
+	if( model != m_automationSensor->m_xModel && model != m_automationSensor->m_yModel )
+	{
+		m_lastNonAssignedChangedModel = model;
+	}
+}
+
+
+
+void ModelManager::assignX()
+{
+
+		m_automationSensor->m_xModel = m_lastNonAssignedChangedModel;
+
+}
+
+void ModelManager::assignY()
+{
+
+		m_automationSensor->m_yModel = m_lastNonAssignedChangedModel;
+
 }
 

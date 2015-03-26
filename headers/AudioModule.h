@@ -62,7 +62,7 @@ protected slots:
 	/// \brief notePressed
 	/// \param val
 	/// called upon change to note on off status
-	void notePressed( float val );
+	void notePressed( Model *model );
 
 protected:
 

@@ -23,7 +23,7 @@
 #ifndef DEMO1AUDIOMODULE_H
 #define DEMO1AUDIOMODULE_H
 
-#include <QObject>
+//#include <QObject>
 #include "AudioModule.h"
 #include "Demo1ModuleControls.h"
 #include "Gain.h"

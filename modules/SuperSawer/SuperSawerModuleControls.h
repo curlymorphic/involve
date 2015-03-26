@@ -20,42 +20,35 @@
  *
  */
 
-#include "Demo2ModuleView.h"
-#include <QGroupBox>
-#include <QVBoxLayout>
+#ifndef SUPERSAWERMODULECONTROLS_H
+#define SUPERSAWERMODULECONTROLS_H
+
+#include <QObject>
+#include "ModuleControls.h"
+#include "Model.h"
 
 
-
-Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
-								 Qt::WindowFlags flags):
-	ModuleView( parent, controls, flags ),
-	m_controls( (Demo2ModuleControls*)controls )
+class SuperSawerModuleControls : public ModuleControls
 {
-	m_waveShapeAFader = new ModuleFader( &m_controls->waveShapeAModel, this );
-	m_waveShapeBFader = new ModuleFader( &m_controls->waveShapeBModel, this );
+	Q_OBJECT
+public:
+	SuperSawerModuleControls( QObject *parent = 0);
+	~SuperSawerModuleControls()
+	{
+		
+	}
+	
+	Model seperationModel;
+	Model cutOffModel;
+	Model resModel;
+	
+	Model attackModel;
+	Model decayModel;
+	Model sustainModel;
+	Model releaseModel;
+	
+	Model subModel;
+	
+};
 
-	QHBoxLayout *shapeLayout = new QHBoxLayout( this );
-	shapeLayout->addWidget( m_waveShapeAFader );
-	shapeLayout->addWidget( m_waveShapeBFader );
-
-	m_waveShapeAFader->show();
-	m_waveShapeBFader->show();
-
-	layout();
-
-}
-
-Demo2ModuleView::~Demo2ModuleView()
-{
-
-}
-
-void Demo2ModuleView::layout()
-{
-	const int height8 = height() / 9;
-	const int wwidth = width();
-
-	m_waveShapeAFader->resize( wwidth * 0.1 , height8 * 2 );
-	m_waveShapeBFader->resize( wwidth * 0.1 , height8 * 2 );
-}
-
+#endif // SUPERSAWERMODULECONTROLS_H

@@ -21,6 +21,8 @@
  */
 
 #include "Model.h"
+#include "MainWindow.h"
+//#include
 
 
 
@@ -34,7 +36,13 @@ Model::Model(float init, float min, float max, float interval, QString name, QOb
 	m_name( name ),
 	m_initValueChanged(false)
 {
-	emit dataChanged(init);
+	emit dataChanged( this );
+	MainWindow *mw = 0;
+	while( !mw)
+	{
+		mw = (qobject_cast<MainWindow*> (QApplication::topLevelWidgets().at( 0 )));
+	}
+	mw->modelManager()->registerModel( this );
 }
 
 Model::~Model()
@@ -50,7 +58,7 @@ void Model::setValue(float val)
 
 	if( m_value != m_initial ) { m_initValueChanged = true; }
 
-	emit dataChanged( m_value);
+	emit dataChanged( this );
 
 }
 

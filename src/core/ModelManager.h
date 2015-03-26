@@ -20,42 +20,42 @@
  *
  */
 
-#include "Demo2ModuleView.h"
-#include <QGroupBox>
-#include <QVBoxLayout>
+#ifndef MODELMANAGER_H
+#define MODELMANAGER_H
 
+#include <QList>
+#include "AutomationSensor.h"
 
+#include "Model.h"
 
-Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
-								 Qt::WindowFlags flags):
-	ModuleView( parent, controls, flags ),
-	m_controls( (Demo2ModuleControls*)controls )
+/**
+ * @brief The ModelManager class
+ *
+ * Kepps tracks of the models
+ */
+class ModelManager : QObject
 {
-	m_waveShapeAFader = new ModuleFader( &m_controls->waveShapeAModel, this );
-	m_waveShapeBFader = new ModuleFader( &m_controls->waveShapeBModel, this );
+	Q_OBJECT
+public:
+	ModelManager( QObject *parent = 0 );
+	~ModelManager();
 
-	QHBoxLayout *shapeLayout = new QHBoxLayout( this );
-	shapeLayout->addWidget( m_waveShapeAFader );
-	shapeLayout->addWidget( m_waveShapeBFader );
+	void registerModel( Model *model );
+	void assignX();
+	void assignY();
 
-	m_waveShapeAFader->show();
-	m_waveShapeBFader->show();
+private slots:
+	void ModelChanging( Model* );
 
-	layout();
 
-}
+private:
 
-Demo2ModuleView::~Demo2ModuleView()
-{
 
-}
+	Model *m_lastChangedModel;
+	Model *m_lastNonAssignedChangedModel;
+	AutomationSensor *m_automationSensor;
 
-void Demo2ModuleView::layout()
-{
-	const int height8 = height() / 9;
-	const int wwidth = width();
 
-	m_waveShapeAFader->resize( wwidth * 0.1 , height8 * 2 );
-	m_waveShapeBFader->resize( wwidth * 0.1 , height8 * 2 );
-}
+};
 
+#endif // MODELMANAGER_H
