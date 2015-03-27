@@ -24,7 +24,7 @@
 
 SuperSawerModuleControls::SuperSawerModuleControls( QObject *parent ) : ModuleControls( parent ),
 	seperationModel( 0.01f, 0.0f, 0.02f, 0.001f, tr( "Spread" ) ),
-	cutOffModel(1000.0f, 50.0f, 10000.0f ,1.0f, tr( "Cut" ) ),
+	cutOffModel(10000.0f, 50.0f, 10000.0f ,1.0f, tr( "Cut" ) ),
 	resModel(1.0f, 1.0f, 4.0f, 0.1f, tr( "Res" ) ),
 	attackModel(1.0f, 0.01f , 5.0f , 0.01f, tr( "Atk" ) ),
 	decayModel(1.0f, 0.01f , 5.0f , 0.01f, tr( "Dcy" ) ),
