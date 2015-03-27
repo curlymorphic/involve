@@ -44,6 +44,11 @@ public:
 	void assignX();
 	void assignY();
 
+	static ModelManager *instance()
+	{
+		return m_instance;
+	}
+
 private slots:
 	void ModelChanging( Model* );
 
@@ -55,6 +60,7 @@ private:
 	Model *m_lastNonAssignedChangedModel;
 	AutomationSensor *m_automationSensor;
 
+	static ModelManager *m_instance;
 
 };
 

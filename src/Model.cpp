@@ -37,12 +37,13 @@ Model::Model(float init, float min, float max, float interval, QString name, QOb
 	m_initValueChanged(false)
 {
 	emit dataChanged( this );
-	MainWindow *mw = 0;
-	while( !mw)
-	{
-		mw = (qobject_cast<MainWindow*> (QApplication::topLevelWidgets().at( 0 )));
-	}
-	mw->modelManager()->registerModel( this );
+//	MainWindow *mw = 0;
+//	while( !mw)
+//	{
+//		mw = (qobject_cast<MainWindow*> (QApplication::topLevelWidgets().at( 0 )));
+//	}
+//	mw->modelManager()->registerModel( this );
+	ModelManager::instance()->registerModel( this );
 }
 
 Model::~Model()

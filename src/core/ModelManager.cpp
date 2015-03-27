@@ -22,6 +22,8 @@
 
 #include "ModelManager.h"
 
+ModelManager* ModelManager::m_instance = 0;
+
 ModelManager::ModelManager( QObject *parent ) :
 	QObject( parent ),
 	m_lastChangedModel( 0 ),
@@ -29,6 +31,7 @@ ModelManager::ModelManager( QObject *parent ) :
 
 {
 	m_automationSensor = new AutomationSensor( this );
+	m_instance = this;
 }
 
 ModelManager::~ModelManager()
