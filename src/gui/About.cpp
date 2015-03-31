@@ -30,6 +30,7 @@
 About::About( QWidget *parent ) :
 	QWidget( parent )
 {
+	setAutoFillBackground( true );
 	QVBoxLayout *vlayout = new QVBoxLayout;
 	QLabel *title = new QLabel( tr( "Involve.\n\n Using Qt framework www.qt.io" ) );
 	QLabel *content = new QLabel( tr( "Involve synth \n Copyright (C) <2015>  <Dave French> \n"

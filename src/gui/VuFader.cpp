@@ -35,6 +35,7 @@ VuFader::VuFader(Model *xModel, QWidget *parent, sampleFrame *peaks) :
 	m_faderImage( 0 ),
 	m_scaledFaderImage( 0 )
 {
+	setAutoFillBackground( true );
 	QPalette* palette = new QPalette();
 	m_backgroundImage = new QPixmap(":/new/prefix1/images/HFaderBack.png");
 	m_scaledBackgroundImage = new QPixmap( *m_backgroundImage );

@@ -48,11 +48,13 @@ MenuDialog::MenuDialog(ModuleManager *moduleManager, QWidget *parent) :
 	QDialog( parent ),
 	m_moduleManager( moduleManager )
 {
+	setAutoFillBackground( true );
 	loadImages();
 	QLabel *logoLabel = new QLabel;
 	logoLabel->setPixmap( *m_scaledLogoImage );
 	SynthSelector *ss = new SynthSelector( m_moduleManager );
 	QTabWidget *tabWidget = new QTabWidget( );
+	tabWidget->setAutoFillBackground( true );
 	tabWidget->addTab( ss, tr( "Synths" )  );
 	tabWidget->addTab( new About, tr( "About" ) );
 	resize( QApplication::screens().at( 0 )->size() );

@@ -30,12 +30,14 @@ SynthSelector::SynthSelector(ModuleManager *moduleManager, QWidget *parent) :
 	QWidget(parent),
 	m_moduleManager( moduleManager )
 {
+	setAutoFillBackground( true );
 	QVBoxLayout *vLayout = new QVBoxLayout;
 	QLabel *label = new QLabel( tr( "Select a Synth" ) );
 	vLayout->addWidget( label );
 	for( int i = 0 ; i < m_moduleManager->moduleCount(); ++i )
 	{
 		ModuleListWidget *mlw = new ModuleListWidget( m_moduleManager->moduleAt( i ) );
+		mlw->setAutoFillBackground( true );
 		vLayout->addWidget( mlw );
 		connect( mlw, SIGNAL( clicked( ModuleData* ) ),
 				 this, SLOT( moduleSelected( ModuleData* ) ) );

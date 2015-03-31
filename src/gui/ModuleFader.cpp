@@ -12,6 +12,7 @@ ModuleFader::ModuleFader(Model *model, QWidget *parent) : QWidget(parent) ,
 	m_scaledFaderImage( 0 ),
 	m_yScale( 1 )
 {
+	setAutoFillBackground( true );
 	QPalette* palette = new QPalette();
 	m_backgroundImage = new QPixmap(":/new/prefix1/images/FaderBack.png");
 	m_scaledBackgroundImage = new QPixmap( *m_backgroundImage );
