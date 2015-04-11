@@ -69,7 +69,8 @@ SOURCES += main.cpp\
     src/core/ModelManager.cpp \
     modules/SuperSawer/SuperSawerModuleControls.cpp \
     modules/SuperSawer/SuperSawModuleView.cpp \
-    modules/SuperSawer/SuperSawAudioModule.cpp
+    modules/SuperSawer/SuperSawAudioModule.cpp \
+    src/dsp/SegementOscillator.cpp
 #	src/Analyser.cpp
 
 HEADERS  += headers/MainWindow.h \
@@ -121,7 +122,8 @@ HEADERS  += headers/MainWindow.h \
     src/core/ModelManager.h \
     modules/SuperSawer/SuperSawerModuleControls.h \
     modules/SuperSawer/SuperSawModuleView.h \
-    modules/SuperSawer/SuperSawAudioModule.h
+    modules/SuperSawer/SuperSawAudioModule.h \
+    src/dsp/SegementOscillator.h
 
 
 

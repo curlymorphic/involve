@@ -105,7 +105,7 @@ WTOscillator::~WTOscillator()
 
 
 
-sample_t WTOscillator::tick()
+sample_t WTOscillator::monoTick()
 {
 	if( !m_currentTable )
 	{
@@ -130,14 +130,14 @@ sample_t WTOscillator::tick()
 sample_t sample;
 void WTOscillator::tick(sampleFrame *frame)
 {
-	sample = tick();
+	sample = monoTick();
 	frame[0][0] = sample;
 	frame[0][1] = sample;
 }
 
 float WTOscillator::uniTick()
 {
-	return (tick()/2)+ 0.5;
+	return (monoTick()/2)+ 0.5;
 }
 
 void WTOscillator::setFrequency(float freq)

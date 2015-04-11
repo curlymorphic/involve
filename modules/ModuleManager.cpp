@@ -65,14 +65,14 @@ void ModuleManager::initModules( int samplerate )
 									   d1am, d1mc, d1mv );
 	addModule( d1md );
 
-//	Demo2ModuleControls *d2mc = new Demo2ModuleControls();
-//	Demo2AudioModule *d2am = new Demo2AudioModule( samplerate, d2mc );
-//	Demo2ModuleView *d2mv = new Demo2ModuleView( d2mc );
+	Demo2ModuleControls *d2mc = new Demo2ModuleControls();
+	Demo2AudioModule *d2am = new Demo2AudioModule( samplerate, d2mc );
+	Demo2ModuleView *d2mv = new Demo2ModuleView( d2mc );
 
-//	ModuleData *d2md = new ModuleData( "Demo 2",
-//									   tr( "Single Constant Osc" ),
-//									   d2am, d2mc, d2mv );
-//	addModule( d2md );
+	ModuleData *d2md = new ModuleData( "Demo 2",
+									   tr( "Single Constant Osc" ),
+									   d2am, d2mc, d2mv );
+	addModule( d2md );
 
 	SuperSawerModuleControls *ssmc = new SuperSawerModuleControls();
 	SuperSawAudioModule *ssam = new SuperSawAudioModule( samplerate, ssmc );

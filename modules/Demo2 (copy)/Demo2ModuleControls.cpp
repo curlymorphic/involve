@@ -20,35 +20,11 @@
  *
  */
 
-#ifndef DEMO2AUDIOMODULE_H
-#define DEMO2AUDIOMODULE_H
-
-#include <QObject>
-#include "AudioModule.h"
 #include "Demo2ModuleControls.h"
-#include "Gain.h"
-#include "WTOscillator.h"
-#include "SegementOscillator.h"
 
-
-class Demo2AudioModule : public AudioModule
+Demo2ModuleControls::Demo2ModuleControls(QObject *parent)  : ModuleControls( parent ),
+	waveShapeAModel( 2, 0 , 4 , 1, tr( "Wave" ) ),
+	waveShapeBModel( 3, 0 , 4 , 1, tr( "Wave" ) )
 {
-public:
-	Demo2AudioModule(qint64 samplerate, ModuleControls *controls);
-	virtual ~Demo2AudioModule();
-	virtual void processAudio(sampleFrame *buffer, int len );
+}
 
-protected:
-
-	virtual void noteOn();
-	virtual void noteOff();
-
-private:
-	SegementOscillator *m_oscA;
-	Gain *m_gain;
-	WTOscillator *m_oscB;
-	Demo2ModuleControls *m_controls;
-
-};
-
-#endif // DEMO2AUDIOMODULE_H

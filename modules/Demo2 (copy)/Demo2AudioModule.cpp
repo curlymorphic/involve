@@ -29,13 +29,9 @@ Demo2AudioModule::Demo2AudioModule(qint64 samplerate, ModuleControls *controls) 
 	AudioModule( samplerate, controls ),
 	m_controls( (Demo2ModuleControls*)controls )
 {
-	m_oscA = new SegementOscillator( 2, samplerate );
+	m_oscA = new WTOscillator( samplerate );
 	m_oscB = new WTOscillator( samplerate );
 	m_gain = new Gain( samplerate );
-	m_oscA->setCycleHalf( 0,0,WT_TRIANGLE );
-	m_oscA->setCycleHalf( 0, 1, WT_SQUARE );
-	m_oscA->setCycleHalf( 1, 0, WT_SINE );
-	m_oscA->setCycleHalf( 1, 1, WT_SAW );
 }
 
 Demo2AudioModule::~Demo2AudioModule()
@@ -52,9 +48,9 @@ void Demo2AudioModule::processAudio(sampleFrame *buffer, int len)
 		for( int f = 0 ; f < len; ++f )
 		{
 			m_oscA->setFrequency( m_controls->freqModel.value() );
-//			m_oscB->setFrequency( m_controls->freqModel.value() + 100 );
-//			m_oscA->setShape( (WTWaveShape)(int)m_controls->waveShapeAModel.value() );
-//			m_oscB->setShape( (WTWaveShape)(int)m_controls->waveShapeBModel.value() );
+			m_oscB->setFrequency( m_controls->freqModel.value() + 100 );
+			m_oscA->setShape( (WTWaveShape)(int)m_controls->waveShapeAModel.value() );
+			m_oscB->setShape( (WTWaveShape)(int)m_controls->waveShapeBModel.value() );
 			m_gain->setGain( m_controls->velocityModel.value() );
 			m_oscA->tick( &buffer[f] );
 			m_gain->tick( &buffer[f] );

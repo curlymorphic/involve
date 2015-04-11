@@ -52,13 +52,13 @@ public:
 	/// \return
 	///Returns the next sample
 
-	sample_t tick();
+	virtual sample_t monoTick();
 
 	///
 	/// \brief tick
 	/// \param frame
 	/// places the next sample in frame, as a stereo signal
-	void tick( sampleFrame *frame );
+	virtual void tick( sampleFrame *frame );
 
 	float uniTick();
 
@@ -66,19 +66,19 @@ public:
 	/// \brief setFrequency
 	/// \param freq
 	/// sets the frequency. limited to 0- 4186   c1 - c8
-	void setFrequency( float freq );
+	virtual void setFrequency( float freq );
 
 	///
 	/// \brief setShape
 	/// \param shape
 	///Sets the wave table to use
-	void setShape( WTWaveShape shape );
+	virtual void setShape( WTWaveShape shape );
 
 	///
 	/// \brief setUserShape
 	/// \param table
 	/// sets the wavetable to use, the table must be 1024 samples
-	void setUserShape( float *table );
+	virtual void setUserShape( float *table );
 
 	///
 	/// \brief noteOn

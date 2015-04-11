@@ -20,35 +20,32 @@
  *
  */
 
-#ifndef DEMO2AUDIOMODULE_H
-#define DEMO2AUDIOMODULE_H
+
+
+#ifndef DEMO2MODULEVIEW_H
+#define DEMO2MODULEVIEW_H
 
 #include <QObject>
-#include "AudioModule.h"
+#include <QWidget>
+#include "ModuleView.h"
 #include "Demo2ModuleControls.h"
-#include "Gain.h"
-#include "WTOscillator.h"
-#include "SegementOscillator.h"
+#include "Fader.h"
+#include "VFader.h"
+#include "ModuleFader.h"
 
-
-class Demo2AudioModule : public AudioModule
+class Demo2ModuleView : public ModuleView
 {
+	Q_OBJECT
 public:
-	Demo2AudioModule(qint64 samplerate, ModuleControls *controls);
-	virtual ~Demo2AudioModule();
-	virtual void processAudio(sampleFrame *buffer, int len );
+	Demo2ModuleView(ModuleControls *controls, QWidget *parent = 0 , Qt::WindowFlags flags = 0 );
+	~Demo2ModuleView();
+	virtual void layout();
 
-protected:
+	private:
+		Demo2ModuleControls *m_controls;
 
-	virtual void noteOn();
-	virtual void noteOff();
-
-private:
-	SegementOscillator *m_oscA;
-	Gain *m_gain;
-	WTOscillator *m_oscB;
-	Demo2ModuleControls *m_controls;
-
+		ModuleFader *m_waveShapeAFader;
+		ModuleFader *m_waveShapeBFader;
 };
 
-#endif // DEMO2AUDIOMODULE_H
+#endif // DEMO2MODULEVIEW_H

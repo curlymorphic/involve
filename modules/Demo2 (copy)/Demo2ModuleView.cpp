@@ -20,35 +20,42 @@
  *
  */
 
-#ifndef DEMO2AUDIOMODULE_H
-#define DEMO2AUDIOMODULE_H
-
-#include <QObject>
-#include "AudioModule.h"
-#include "Demo2ModuleControls.h"
-#include "Gain.h"
-#include "WTOscillator.h"
-#include "SegementOscillator.h"
+#include "Demo2ModuleView.h"
+#include <QGroupBox>
+#include <QVBoxLayout>
 
 
-class Demo2AudioModule : public AudioModule
+
+Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
+								 Qt::WindowFlags flags):
+	ModuleView( parent, controls, flags ),
+	m_controls( (Demo2ModuleControls*)controls )
 {
-public:
-	Demo2AudioModule(qint64 samplerate, ModuleControls *controls);
-	virtual ~Demo2AudioModule();
-	virtual void processAudio(sampleFrame *buffer, int len );
+	m_waveShapeAFader = new ModuleFader( &m_controls->waveShapeAModel, this );
+	m_waveShapeBFader = new ModuleFader( &m_controls->waveShapeBModel, this );
 
-protected:
+	QHBoxLayout *shapeLayout = new QHBoxLayout( this );
+	shapeLayout->addWidget( m_waveShapeAFader );
+	shapeLayout->addWidget( m_waveShapeBFader );
 
-	virtual void noteOn();
-	virtual void noteOff();
+	m_waveShapeAFader->show();
+	m_waveShapeBFader->show();
 
-private:
-	SegementOscillator *m_oscA;
-	Gain *m_gain;
-	WTOscillator *m_oscB;
-	Demo2ModuleControls *m_controls;
+	layout();
 
-};
+}
 
-#endif // DEMO2AUDIOMODULE_H
+Demo2ModuleView::~Demo2ModuleView()
+{
+
+}
+
+void Demo2ModuleView::layout()
+{
+	const int height8 = height() / 9;
+	const int wwidth = width();
+
+	m_waveShapeAFader->resize( wwidth * 0.1 , height8 * 2 );
+	m_waveShapeBFader->resize( wwidth * 0.1 , height8 * 2 );
+}
+

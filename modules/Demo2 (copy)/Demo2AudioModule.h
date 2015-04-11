@@ -28,7 +28,6 @@
 #include "Demo2ModuleControls.h"
 #include "Gain.h"
 #include "WTOscillator.h"
-#include "SegementOscillator.h"
 
 
 class Demo2AudioModule : public AudioModule
@@ -44,7 +43,7 @@ protected:
 	virtual void noteOff();
 
 private:
-	SegementOscillator *m_oscA;
+	WTOscillator *m_oscA;
 	Gain *m_gain;
 	WTOscillator *m_oscB;
 	Demo2ModuleControls *m_controls;
