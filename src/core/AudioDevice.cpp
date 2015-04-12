@@ -131,7 +131,7 @@ void AudioDevice::createAudioOutput()
 	start();
 	m_audioOutput->setBufferSize( 512 );
 	m_audioOutput->start(this);
-//	qDebug(" buffer size : %d", m_audioOutput->bufferSize() );
+	qDebug(" buffer size : %d", m_audioOutput->bufferSize() );
 }
 
 

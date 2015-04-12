@@ -5,15 +5,15 @@
 
 typedef WTWaveShape CycleTable[2];
 
-class SegementOscillator : public WTOscillator
+class ExtendableSegementOscillator : public WTOscillator
 {
 public:
-	SegementOscillator( int cycleLength, int sampleRate = 44100 );
-	virtual ~SegementOscillator();
+	ExtendableSegementOscillator( int cycleLength, int sampleRate = 44100 );
+	virtual ~ExtendableSegementOscillator();
 
 
 
-	int cycles() const &
+	int cycles()
 	{
 		return m_cycles;
 	}

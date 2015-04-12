@@ -44,7 +44,7 @@ protected:
 	virtual void noteOff();
 
 private:
-	SegementOscillator *m_oscA;
+	ExtendableSegementOscillator *m_oscA;
 	Gain *m_gain;
 	WTOscillator *m_oscB;
 	Demo2ModuleControls *m_controls;

@@ -47,7 +47,7 @@ ModuleListWidget::~ModuleListWidget()
 
 bool ModuleListWidget::event(QEvent *event)
 {
-	if( event->type() == QEvent::TouchBegin )
+	if( event->type() == QEvent::TouchBegin || event->type() == QEvent::MouseButtonPress )
 	{
 		emit clicked( m_moduleData );
 		return true;

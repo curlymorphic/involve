@@ -29,12 +29,12 @@ Demo2AudioModule::Demo2AudioModule(qint64 samplerate, ModuleControls *controls) 
 	AudioModule( samplerate, controls ),
 	m_controls( (Demo2ModuleControls*)controls )
 {
-	m_oscA = new SegementOscillator( 2, samplerate );
+	m_oscA = new ExtendableSegementOscillator( 2, samplerate );
 	m_oscB = new WTOscillator( samplerate );
 	m_gain = new Gain( samplerate );
-	m_oscA->setCycleHalf( 0,0,WT_TRIANGLE );
-	m_oscA->setCycleHalf( 0, 1, WT_SQUARE );
-	m_oscA->setCycleHalf( 1, 0, WT_SINE );
+	m_oscA->setCycleHalf( 0,0, WT_SAW );
+	m_oscA->setCycleHalf( 0, 1, WT_SAW );
+	m_oscA->setCycleHalf( 1, 0, WT_SAW );
 	m_oscA->setCycleHalf( 1, 1, WT_SAW );
 }
 

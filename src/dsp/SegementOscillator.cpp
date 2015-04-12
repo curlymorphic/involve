@@ -2,18 +2,18 @@
 #include "Interpolation.h"
 
 
-SegementOscillator::SegementOscillator(int cycleLength, int sampleRate) :
+ExtendableSegementOscillator::ExtendableSegementOscillator(int cycleLength, int sampleRate) :
 	WTOscillator( sampleRate ),
 	m_cycles( cycleLength ),
 	m_cycleTables( 0 ),
 	m_currentCycle( 0 )
 {
 	m_cycleTables = new CycleTable[ cycleLength ];
-	setAllCycles( WTWaveShape::WT_SAW);
+	setAllCycles( WT_SAW );
 
 }
 
-SegementOscillator::~SegementOscillator()
+ExtendableSegementOscillator::~ExtendableSegementOscillator()
 {
 	if(m_cycleTables)
 	{
@@ -22,7 +22,7 @@ SegementOscillator::~SegementOscillator()
 
 }
 
-sample_t SegementOscillator::monoTick()
+sample_t ExtendableSegementOscillator::monoTick()
 {
 	int nextIndex;
 	int index;
@@ -44,12 +44,12 @@ sample_t SegementOscillator::monoTick()
 	return linearInterpolate( m_currentTable[ index ] , m_currentTable[ nextIndex ], frac );
 }
 
-void SegementOscillator::setCycleHalf(int cycle, int half, WTWaveShape shape)
+void ExtendableSegementOscillator::setCycleHalf(int cycle, int half, WTWaveShape shape)
 {
 	m_cycleTables[cycle][half] = shape;
 }
 
-void SegementOscillator::setAllCycles(WTWaveShape shape)
+void ExtendableSegementOscillator::setAllCycles(WTWaveShape shape)
 {
 	for( int i = 0; i < m_cycles; ++i )
 	{
