@@ -56,6 +56,7 @@ ModuleManager::~ModuleManager()
 void ModuleManager::initModules( int samplerate )
 {
 	//TODO init modules
+
 	Demo1ModuleControls *d1mc = new Demo1ModuleControls( );
 	Demo1AudioModule *d1am = new Demo1AudioModule( samplerate, d1mc );
 	Demo1ModuleView *d1mv = new Demo1ModuleView( d1mc );

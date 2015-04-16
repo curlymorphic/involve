@@ -64,7 +64,7 @@ void VFader::paintEvent(QPaintEvent *event)
 	else
 	{
 		painter.drawPixmap(
-					0 , height() - (int)(( m_yModel->value() * m_pixelPerY )
+					0 , height() - (int)(( ( m_yModel->value() - m_yModel->getMin() )* m_pixelPerY )
 										 + ( m_fader->width() * 0.5 ) ), *m_fader  );
 	}
 }

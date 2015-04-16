@@ -32,14 +32,44 @@ class Demo2ModuleControls : public ModuleControls
 {
 	Q_OBJECT
 public:
+
 	explicit Demo2ModuleControls( QObject *parent = 0 );
-	~Demo2ModuleControls()
-	{
+	~Demo2ModuleControls();
 
-	}
+	enum MixModes { MIXMODE_MIX, MIXMODE_RINGMOD, MIXMODE_COUNT };
 
-	Model waveShapeAModel;
-	Model waveShapeBModel;
+	Model **oscAWaveShapeModels;
+	Model oscASegmentCountModel;
+	Model oscARetriggerModel;
+	Model oscAGainModel;
+	Model oscACourseDetuneMode;
+	Model oscAFineDetuneMode;
+
+
+	Model **oscBWaveShapeModels;
+	Model oscBSegmentCountModel;
+	Model oscBRetriggerModel;
+	Model oscBGainModel;
+	Model oscBCourseDetuneMode;
+	Model oscBFineDetuneMode;
+
+	Model **lfoWaveShapeModels;
+	Model lfoSegmentCountModel;
+	Model lfoRetriggerModel;
+
+	Model mixModeModel;
+
+	Model cutoffModel;
+	Model resModel;
+
+	Model attackModel;
+	Model decayModel;
+	Model sustainModel;
+	Model releaseModel;
+
+	Model lfoSpeedModel;
+	Model lfoGainModel;
+	Model lfoFilterModel;
 };
 
 #endif // DEMO2MODULECONTROLS_H

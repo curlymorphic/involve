@@ -1,4 +1,26 @@
-#include "SegementOscillator.h"
+/*
+ * Copyright (c) 2014-2015 Dave French <contact/dot/dave/dot/french3/at/googlemail/dot/com>
+ *
+ * This file is part of Involve - http://github.com/curlymorphic/involve
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public
+ * License as published by the Free Software Foundation; either
+ * version 2 of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public
+ * License along with this program (see COPYING); if not, write to the
+ * Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+ * Boston, MA 02110-1301 USA.
+ *
+ */
+
+#include "ExtendableSegementOscillator.h"
 #include "Interpolation.h"
 
 
@@ -10,7 +32,6 @@ ExtendableSegementOscillator::ExtendableSegementOscillator(int cycleLength, int 
 {
 	m_cycleTables = new CycleTable[ cycleLength ];
 	setAllCycles( WT_SAW );
-
 }
 
 ExtendableSegementOscillator::~ExtendableSegementOscillator()
@@ -22,8 +43,18 @@ ExtendableSegementOscillator::~ExtendableSegementOscillator()
 
 }
 
+ExtendableSegementOscillator::ExtendableSegementOscillator() :
+	ExtendableSegementOscillator( ExtendableSegementOscillator::maxSegmentCount )
+{
+
+}
+
 sample_t ExtendableSegementOscillator::monoTick()
 {
+	if( !m_currentTable )
+	{
+		return 0;
+	}
 	int nextIndex;
 	int index;
 	float frac;
@@ -43,6 +74,7 @@ sample_t ExtendableSegementOscillator::monoTick()
 	frac = m_index - index;
 	return linearInterpolate( m_currentTable[ index ] , m_currentTable[ nextIndex ], frac );
 }
+
 
 void ExtendableSegementOscillator::setCycleHalf(int cycle, int half, WTWaveShape shape)
 {
