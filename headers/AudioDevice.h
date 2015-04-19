@@ -46,7 +46,7 @@ public:
 	AudioDevice(const QAudioFormat &format, ModuleManager *mm, AudioDeviceControls * adc, QObject *parent = 0 );
 	virtual ~AudioDevice();
 	
-	static const int bufferSize = 256;
+	int m_bufferSize = 256;
 
 	void start();
 	void stop();
