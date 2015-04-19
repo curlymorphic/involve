@@ -37,8 +37,8 @@ public:
 	{
 		m_currentValue = 0.0;
 		m_sampleRate = sampleRate;
-		setAttack( 0.0005 );
-		setRelease( 0.100 );
+		setAttack( 0.0001 );
+		setRelease( 0.05 );
 	}
 
 	~EnvelopeDetector()
@@ -50,23 +50,27 @@ public:
 		float tmp = fabsf( in );
 		if( tmp > m_currentValue )
 		{
-			m_currentValue = m_attack_coef * ( m_currentValue - tmp ) + tmp;
+//			m_currentValue = m_attack_coef * ( m_currentValue - tmp ) + tmp;
+			m_currentValue *= m_attack_coef;
+			m_currentValue += (1-m_attack_coef) * tmp;
 		}
 		else
 		{
-			m_currentValue = m_release_coef * (m_currentValue - tmp ) + tmp;
+//			m_currentValue = m_release_coef * (m_currentValue - tmp ) + tmp;/
+			m_currentValue *= m_release_coef;
+			m_currentValue += ( 1 - m_release_coef ) * tmp;
 		}
 		return m_currentValue;
 	}
 
 	void setAttack( float seconds )
 	{
-		m_attack_coef = expf(log( 0.01 )/(seconds * m_sampleRate  ) );
+		m_attack_coef = expf(-1 /( m_sampleRate *  seconds ) );
 	}
 
 	void setRelease( float seconds )
 	{
-		m_release_coef = expf(log( 0.01 )/(seconds * m_sampleRate ) );
+		m_release_coef = expf(-1 /( m_sampleRate * seconds ) );
 	}
 
 private:

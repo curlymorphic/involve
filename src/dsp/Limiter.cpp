@@ -27,7 +27,7 @@ Limiter::Limiter(int sampleRate) :
 	AudioProcess( sampleRate ),
 	m_leftDetector( sampleRate ),
 	m_rightDetector( sampleRate ),
-	m_threshold( -1.0 )
+	m_threshold( 0.5 )
 {
 	setInGain( 0.0 );
 	setOutGain( 0.0 );
@@ -48,15 +48,17 @@ void Limiter::tick(sampleFrame *frame)
 	float Gl = calcCompressorGain( leftDetector, m_threshold );
 	float Gr = calcCompressorGain( rightDetector, m_threshold );
 
-	frame[0][0] = m_inGain * frame[0][0] * m_outGain * Gl;
-	frame[0][1] = m_inGain * frame[0][1] * m_outGain * Gr;
+	frame[0][0] *= Gl;
+	frame[0][1] *= Gr;
 }
 
 float Limiter::calcCompressorGain(float dectortValue, float threshold )
 {
 	//compute gain
-	float yG = threshold - dectortValue;
-	yG = fmin( 0.0f, yG );
-	return powf( 10.0, yG/20.0 );
+//	float yG = threshold - dectortValue;
+	float yG = threshold / dectortValue ;
+	yG = fmin( 1.0f, yG );
+	return  yG;
+//	return powf( 10.0, yG/20.0 );
 }
 
