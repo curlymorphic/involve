@@ -95,26 +95,31 @@ void Demo2AudioModule::processAudio(sampleFrame *buffer, int len)
 			m_oscB->setFrequency( m_controls->freqModel.value() * m_controls->oscBCourseDetuneMode.value() *
 								  m_controls->oscBFineDetuneMode.value() );
 			m_lfo->setFrequency( m_controls->lfoSpeedModel.value() );
+			float lfoValue = m_lfo->uniTick();
 			m_gain->setGain( m_controls->velocityModel.value() *
-							 ( 1.0 - ( m_lfo->uniTick() * m_controls->lfoGainModel.value() ) )
+							 ( 1.0 - ( lfoValue * m_controls->lfoGainModel.value() ) )
 							* ( m_adsr->tick()  ));
 //qDebug( "lfo :%f",m_lfo->uniTick());
 			m_oscA->tick( &sigA );
 			m_oscB->tick( &sigB );
 
 			buffer[f][0] = m_controls->mixModeModel.value() < 0.5 ?
-						( sigA[0] * m_controls->oscAGainModel.value() ) + ( sigB[0] * m_controls->oscBGainModel.value() ) :
-						( sigA[0] * m_controls->oscAGainModel.value() ) * ( sigB[0] * m_controls->oscBGainModel.value() );
+						( sigA[0] * m_controls->oscAGainModel.value() )
+					+ ( sigB[0] * m_controls->oscBGainModel.value() ) :
+						( sigA[0] * m_controls->oscAGainModel.value() )
+			  * ( sigB[0] * m_controls->oscBGainModel.value() );
 			buffer[f][1] = m_controls->mixModeModel.value() < 0.5 ?
-						( sigA[1] * m_controls->oscAGainModel.value() ) + ( sigB[1] * m_controls->oscBGainModel.value() ) :
-						( sigA[1] * m_controls->oscAGainModel.value() ) * ( sigB[1]  * m_controls->oscBGainModel.value() );
+						( sigA[1] * m_controls->oscAGainModel.value() )
+					+ ( sigB[1] * m_controls->oscBGainModel.value() ) :
+						( sigA[1] * m_controls->oscAGainModel.value() )
+			  * ( sigB[1]  * m_controls->oscBGainModel.value() );
 			m_gain->tick( &buffer[f] );
 			int poles = m_controls->filterStagesModel.value();
+			float cutoff = m_controls->cutoffModel.logValue() *
+					( 1.0 - ( lfoValue * m_controls->lfoFilterModel.value() )  );
 			for( int i = 0; i < poles; ++i )
 			{
-				m_filters[i].setParameters( m_controls->cutoffModel.logValue() *
-										 ( 1.0 - ( m_lfo->uniTick() * m_controls->lfoFilterModel.value() )  ),
-										   m_controls->resModel.value()  );
+				m_filters[i].setParameters(cutoff, m_controls->resModel.value()  );
 				m_filters[i].tick( &buffer[f] );
 			}
 		}
