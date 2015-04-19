@@ -86,6 +86,7 @@ public slots:
 
 		ModuleFader *m_cutoffFader;
 		ModuleFader *m_resFader;
+		ModuleFader *m_filterStagesFader;
 
 
 		//oscillaor used to generate wave display data

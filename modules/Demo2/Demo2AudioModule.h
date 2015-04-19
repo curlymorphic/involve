@@ -51,7 +51,7 @@ private:
 	SegmentOscillator *m_oscB;
 	Gain *m_gain;
 	ExtendableSegementOscillator *m_lfo;
-	Lp12 *m_filter;
+	Lp12 *m_filters;
 	Adsr *m_adsr;
 
 

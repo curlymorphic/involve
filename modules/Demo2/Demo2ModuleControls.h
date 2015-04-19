@@ -61,6 +61,7 @@ public:
 
 	Model cutoffModel;
 	Model resModel;
+	Model filterStagesModel;
 
 	Model attackModel;
 	Model decayModel;

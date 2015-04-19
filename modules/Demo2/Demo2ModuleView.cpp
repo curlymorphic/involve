@@ -23,6 +23,7 @@
 #include "Demo2ModuleView.h"
 #include <QGroupBox>
 #include <QVBoxLayout>
+#include <QTimer>
 #include "SegmentOscillator.h"
 #include "ExtendableSegementOscillator.h"
 
@@ -65,6 +66,7 @@ Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
 															this, SLOT( waveBChanged() ) );
 	}
 
+
 	m_oscBSegmentCountFader = new ModuleFader( &m_controls->oscBSegmentCountModel, this );
 	connect( &m_controls->oscBSegmentCountModel, SIGNAL( dataChanged( Model* ) ),
 			 this, SLOT( waveBChanged() ) );
@@ -102,6 +104,7 @@ Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
 
 	m_cutoffFader = new ModuleFader( &m_controls->cutoffModel, this );
 	m_resFader = new ModuleFader( &m_controls->resModel, this );
+	m_filterStagesFader = new ModuleFader( &m_controls->filterStagesModel, this );
 
 
 	waveAChanged();
@@ -161,39 +164,30 @@ Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
 	QGroupBox *generalBox = new QGroupBox( tr( "General" ), this );
 	QHBoxLayout *generalLayout = new QHBoxLayout ( generalBox );
 
-
-	QGroupBox *filterBox = new QGroupBox( tr(" Filter " ), generalBox );
-	filterBox->setContentsMargins( 0, 0, 0, 0 );
-	filterBox->setFlat( false );
-//	filterBox->set
-
-	QHBoxLayout *filterLayout = new QHBoxLayout( filterBox );
 	generalLayout->addWidget( m_cutoffFader, 1 );
 	generalLayout->addWidget( m_resFader, 1 );
-//	generalLayout->addWidget( filterBox );
+	generalLayout->addWidget( m_filterStagesFader, 1 );
 
-	QGroupBox *adsrBox = new QGroupBox( tr( "ADSR" ), generalBox );
-	QHBoxLayout *adsrLayout = new QHBoxLayout( adsrBox );
+	generalLayout->addWidget( new QWidget( this ), 1 );
+
+
 	generalLayout->addWidget( m_attackFader, 1 );
 	generalLayout->addWidget( m_decayFader, 1 );
 	generalLayout->addWidget( m_sustainFader, 1 );
 	generalLayout->addWidget( m_releaseFader, 1 );
-
-//	generalLayout->addWidget( adsrBox );
-
-	QGroupBox *mixBox = new QGroupBox( tr( "Mix" ), generalBox );
-	QHBoxLayout *mixLayout = new QHBoxLayout( mixBox );
+	generalLayout->addWidget( new QWidget( this ), 1 );
 	generalLayout->addWidget( m_mixModeFader, 1 );
 
-//	generalLayout->addWidget( mixBox );
-
-
-
-	m_cutoffFader->show();
-	m_resFader->show();
+//	m_cutoffFader->show();
+//	m_resFader->show();
 	vlayout->addWidget( generalBox );
 
 	layout();
+
+	//initial update of wave displays, allows time for initilization
+	QTimer::singleShot( 1000, this, SLOT( waveAChanged() ) );
+	QTimer::singleShot( 1000, this, SLOT( waveBChanged() ) );
+	QTimer::singleShot( 1000, this, SLOT( waveLfoChanged() ) );
 
 }
 

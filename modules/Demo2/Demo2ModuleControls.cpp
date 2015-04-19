@@ -40,6 +40,7 @@ Demo2ModuleControls::Demo2ModuleControls(QObject *parent)  : ModuleControls( par
 	mixModeModel( 0, 0, MIXMODE_COUNT + 0.9 , 0.5, tr( " Mode ") ),
 	cutoffModel( 10000, 50, 10000,1, tr( "Cut" ) ),
 	resModel( 0.707, 0.707, 5, 0.001, tr( "Res" ) ),
+	filterStagesModel(1, 1, 3, 1, tr( "Poles" ) ),
 	attackModel(1.0, 0.01 , 5 , 0.01, tr( "Atk" ) ),
 	decayModel(1.0, 0.01 , 5 , 0.01, tr( "Dcy" ) ),
 	sustainModel(0.9, 0, 1 , 0.01, tr( "Sus" ) ),
@@ -52,17 +53,17 @@ Demo2ModuleControls::Demo2ModuleControls(QObject *parent)  : ModuleControls( par
 	oscAWaveShapeModels = new Model*[ SegmentOscillator::maxSegmentCount ];
 	for(int i = 0; i < SegmentOscillator::maxSegmentCount ; ++i )
 	{
-		oscAWaveShapeModels[ i ] = new Model( 2, 0, WT_WAVESHAPECOUNT, 1, tr( "Wave" ) );
+		oscAWaveShapeModels[ i ] = new Model( 3, 0, WT_WAVESHAPECOUNT, 1, tr( "Wave" ) );
 	}
 	oscBWaveShapeModels = new Model*[ SegmentOscillator::maxSegmentCount ];
 	for(int i = 0; i < SegmentOscillator::maxSegmentCount ; ++i )
 	{
-		oscBWaveShapeModels[ i ] = new Model( 2, 0, WT_WAVESHAPECOUNT, 1, tr( "Wave" ) );
+		oscBWaveShapeModels[ i ] = new Model( 3, 0, WT_WAVESHAPECOUNT, 1, tr( "Wave" ) );
 	}
 	lfoWaveShapeModels = new Model*[ SegmentOscillator::maxSegmentCount ];
 	for(int i = 0; i < SegmentOscillator::maxSegmentCount ; ++i )
 	{
-		lfoWaveShapeModels[ i ] = new Model( 2, 0, WT_WAVESHAPECOUNT, 1, tr( "Wave" ) );
+		lfoWaveShapeModels[ i ] = new Model( 0, 0, WT_WAVESHAPECOUNT, 1, tr( "Wave" ) );
 	}
 }
 

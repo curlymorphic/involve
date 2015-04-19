@@ -33,7 +33,11 @@ Demo2AudioModule::Demo2AudioModule(qint64 samplerate, ModuleControls *controls) 
 	m_oscB = new SegmentOscillator( samplerate );
 	m_gain = new Gain( samplerate );
 	m_lfo = new ExtendableSegementOscillator( 8, samplerate );
-	m_filter = new Lp12( samplerate );
+	m_filters = new Lp12[ 3 ];
+	for( int i = 0 ; i < 3 ; ++i )
+	{
+		m_filters[i].setSampleRate( samplerate );
+	}
 	m_adsr = new Adsr( samplerate );
 
 	m_lfo->setShape( WT_SAW );
@@ -45,7 +49,7 @@ Demo2AudioModule::~Demo2AudioModule()
 	delete m_oscB;
 	delete m_gain;
 	delete m_lfo;
-	delete m_filter;
+	delete[] m_filters;
 	delete m_adsr;
 }
 
@@ -99,16 +103,20 @@ void Demo2AudioModule::processAudio(sampleFrame *buffer, int len)
 			m_oscB->tick( &sigB );
 
 			buffer[f][0] = m_controls->mixModeModel.value() < 0.5 ?
-						sigA[0] + sigB[0] :
-						sigA[0] * sigB[0];
+						( sigA[0] * m_controls->oscAGainModel.value() ) + ( sigB[0] * m_controls->oscBGainModel.value() ) :
+						( sigA[0] * m_controls->oscAGainModel.value() ) * ( sigB[0] * m_controls->oscBGainModel.value() );
 			buffer[f][1] = m_controls->mixModeModel.value() < 0.5 ?
-						sigA[1] + sigB[1] :
-						sigA[1] * sigB[1];
+						( sigA[1] * m_controls->oscAGainModel.value() ) + ( sigB[1] * m_controls->oscBGainModel.value() ) :
+						( sigA[1] * m_controls->oscAGainModel.value() ) * ( sigB[1]  * m_controls->oscBGainModel.value() );
 			m_gain->tick( &buffer[f] );
-			m_filter->setParameters( m_controls->cutoffModel.logValue() *
-									 ( 1.0 - ( m_lfo->uniTick() * m_controls->lfoFilterModel.value() )  ),
-									   m_controls->resModel.value()  );
-			m_filter->tick( &buffer[f] );
+			int poles = m_controls->filterStagesModel.value();
+			for( int i = 0; i < poles; ++i )
+			{
+				m_filters[i].setParameters( m_controls->cutoffModel.logValue() *
+										 ( 1.0 - ( m_lfo->uniTick() * m_controls->lfoFilterModel.value() )  ),
+										   m_controls->resModel.value()  );
+				m_filters[i].tick( &buffer[f] );
+			}
 		}
 	}
 }
@@ -123,11 +131,15 @@ void Demo2AudioModule::noteOn()
 	{
 		m_oscB->restart();
 	}
-	if( m_controls->oscARetriggerModel.value() > 0.5 )
+	if( m_controls->lfoRetriggerModel.value() > 0.5 )
 	{
-		m_oscA->restart();
+		m_lfo->restart();
 	}
 	m_adsr->noteOn();
+	for( int i = 0; i < 3; ++i )
+	{
+		m_filters[i].clear();
+	}
 
 }
 
