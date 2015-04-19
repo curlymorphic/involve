@@ -47,7 +47,10 @@ Demo2ModuleControls::Demo2ModuleControls(QObject *parent)  : ModuleControls( par
 	releaseModel(3.0, 0.01 , 5 , 0.01, tr( "Rel" ) ),
 	lfoSpeedModel(0.1, 0.01, 3, 0.01, tr( "Spd lfo" ) ),
 	lfoGainModel(0.0, 0.0, 1.0, 0.01, tr( "Amp lfo " ) ),
-	lfoFilterModel(0.0, 0.0, 1.0, 0.01, tr( "Filt lfo" ) )
+	lfoFilterModel(0.0, 0.0, 1.0, 0.01, tr( "Filt lfo" ) ),
+	delayAmountModel(0.0, 0.0, 1, 0.01, tr( "Amt Delay" ) ),
+	delayTimeModel(0.2, 0.01, 1, 0.01, tr( "Time Delay" ) ),
+	delayFeedbackModel(0.5, 0.0, 0.99, 0.01, tr( "Fb  Delay" ) )
 
 {
 	oscAWaveShapeModels = new Model*[ SegmentOscillator::maxSegmentCount ];

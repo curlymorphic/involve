@@ -106,6 +106,10 @@ Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
 	m_resFader = new ModuleFader( &m_controls->resModel, this );
 	m_filterStagesFader = new ModuleFader( &m_controls->filterStagesModel, this );
 
+	m_delayAmountFader = new ModuleFader( &m_controls->delayAmountModel, this );
+	m_delayTimeFader = new ModuleFader( &m_controls->delayTimeModel, this );
+	m_delayFeedbackFader = new ModuleFader( &m_controls->delayFeedbackModel, this );
+
 
 	waveAChanged();
 	waveBChanged();
@@ -177,6 +181,10 @@ Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
 	generalLayout->addWidget( m_releaseFader, 1 );
 	generalLayout->addWidget( new QWidget( this ), 1 );
 	generalLayout->addWidget( m_mixModeFader, 1 );
+	generalLayout->addWidget( new QWidget( this ), 1 );
+	generalLayout->addWidget( m_delayAmountFader, 1 );
+	generalLayout->addWidget( m_delayTimeFader, 1 );
+	generalLayout->addWidget( m_delayFeedbackFader, 1 );
 
 //	m_cutoffFader->show();
 //	m_resFader->show();

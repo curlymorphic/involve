@@ -88,6 +88,10 @@ public slots:
 		ModuleFader *m_resFader;
 		ModuleFader *m_filterStagesFader;
 
+		ModuleFader *m_delayAmountFader;
+		ModuleFader *m_delayTimeFader;
+		ModuleFader *m_delayFeedbackFader;
+
 
 		//oscillaor used to generate wave display data
 		SegmentOscillator m_oscA;

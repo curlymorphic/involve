@@ -39,6 +39,8 @@ Demo2AudioModule::Demo2AudioModule(qint64 samplerate, ModuleControls *controls) 
 		m_filters[i].setSampleRate( samplerate );
 	}
 	m_adsr = new Adsr( samplerate );
+	m_delay = new StereoDelay(2.0, samplerate );
+	delayedFrame = new sampleFrame[1];
 
 	m_lfo->setShape( WT_SAW );
 }
@@ -51,6 +53,8 @@ Demo2AudioModule::~Demo2AudioModule()
 	delete m_lfo;
 	delete[] m_filters;
 	delete m_adsr;
+	delete m_delay;
+	delete delayedFrame;
 }
 
 void Demo2AudioModule::processAudio(sampleFrame *buffer, int len)
@@ -83,6 +87,9 @@ void Demo2AudioModule::processAudio(sampleFrame *buffer, int len)
 		m_adsr->setDecayTime( m_controls->decayModel.value() );
 		m_adsr->setSustainLevel( m_controls->sustainModel.value() );
 		m_adsr->setReleaseTime( m_controls->releaseModel.value() );
+
+		m_delay->setLength( m_controls->delayTimeModel.value() );
+		m_delay->setFeedback( m_controls->delayFeedbackModel.value() );
 
 		sampleFrame sigA;
 		sampleFrame sigB;
@@ -122,6 +129,15 @@ void Demo2AudioModule::processAudio(sampleFrame *buffer, int len)
 				m_filters[i].setParameters(cutoff, m_controls->resModel.value()  );
 				m_filters[i].tick( &buffer[f] );
 			}
+			delayedFrame[0][0] = buffer[f][0];
+			delayedFrame[0][1] = buffer[f][1];
+
+			m_delay->tick( delayedFrame[0] );
+
+			buffer[f][0] = ((1.0 - m_controls->delayAmountModel.value()) * buffer[f][0] ) +
+					(m_controls->delayAmountModel.value() * delayedFrame[0][0] );
+			buffer[f][1] = ((1.0 - m_controls->delayAmountModel.value()) * buffer[f][1] ) +
+					(m_controls->delayAmountModel.value() * delayedFrame[0][1] );
 		}
 	}
 }

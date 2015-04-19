@@ -32,6 +32,7 @@
 #include "ExtendableSegementOscillator.h"
 #include "Filters.h"
 #include "ADSR.h"
+#include "StereoDelay.h"
 
 
 class Demo2AudioModule : public AudioModule
@@ -53,6 +54,8 @@ private:
 	ExtendableSegementOscillator *m_lfo;
 	Lp12 *m_filters;
 	Adsr *m_adsr;
+	StereoDelay *m_delay;
+	sampleFrame *delayedFrame;
 
 
 

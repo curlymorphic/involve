@@ -71,6 +71,10 @@ public:
 	Model lfoSpeedModel;
 	Model lfoGainModel;
 	Model lfoFilterModel;
+
+	Model delayAmountModel;
+	Model delayTimeModel;
+	Model delayFeedbackModel;
 };
 
 #endif // DEMO2MODULECONTROLS_H

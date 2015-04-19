@@ -155,7 +155,6 @@ qint64 AudioDevice::readData(char *data, qint64 len)
 					m_frameBuffer[i][0] );
 			m_audioDeviceControls->peaks[1] = qMax( m_audioDeviceControls->peaks[1],
 					m_frameBuffer[i][1] );
-
 		}
 
 		sampleFrameToBuffer( m_frameBuffer, len, m_format );

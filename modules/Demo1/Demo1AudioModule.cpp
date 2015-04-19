@@ -41,7 +41,15 @@ Demo1AudioModule::Demo1AudioModule(qint64 sampleRate, Demo1ModuleControls *contr
 
 Demo1AudioModule::~Demo1AudioModule()
 {
+
 	delete m_osc;
+	delete m_gain;
+	delete m_volLfo;
+	delete m_lp;
+	delete m_lp2;
+	delete m_ad;
+	delete m_delay;
+	delete delayedFrame;
 }
 
 void Demo1AudioModule::processAudio(sampleFrame *buffer, int len)
