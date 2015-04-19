@@ -53,6 +53,8 @@ void Demo1AudioModule::processAudio(sampleFrame *buffer, int len)
 			m_volLfo->setShape( (WTWaveShape )m_controls->lfoShapeModel.value() );
 			m_volLfo->setFrequency( m_controls->lfoSpeedModel.value() );
 
+			float lfoValue = m_volLfo->uniTick();
+
 			m_ad->setAttackTime( m_controls->attackModel.value() );
 			m_ad->setDecayTime( m_controls->decayModel.value() );
 			m_ad->setSustainLevel( m_controls->sustainModel.value() );
@@ -60,10 +62,10 @@ void Demo1AudioModule::processAudio(sampleFrame *buffer, int len)
 			m_osc->setFrequency( m_controls->freqModel.value() );
 			m_osc->setShape( (WTWaveShape)(int)m_controls->waveShapeModel.value() );
 			m_gain->setGain( m_controls->velocityModel.value() *
-							  ( 1.0 - ( m_volLfo->uniTick() * m_controls->lfoGainModel.value() ) )
+							  ( 1.0 - ( lfoValue * m_controls->lfoGainModel.value() ) )
 							 * ( m_ad->tick()  ));
 			m_lp->setParameters(m_controls->cutOffModel.logValue() *
-								( 1.0 - ( m_volLfo->uniTick() * m_controls->lfoFilterModel.value() )  ),
+								( 1.0 - ( lfoValue * m_controls->lfoFilterModel.value() )  ),
 								  m_controls->resModel.value()  );
 			m_lp2->setParameters( m_controls->cutOffModel.logValue(), m_controls->resModel.value() );
 			m_delay->setLength( m_controls->delayTimeModel.value() );
