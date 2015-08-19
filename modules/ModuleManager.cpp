@@ -61,7 +61,7 @@ void ModuleManager::initModules( int samplerate )
 	Demo1AudioModule *d1am = new Demo1AudioModule( samplerate, d1mc );
 	Demo1ModuleView *d1mv = new Demo1ModuleView( d1mc );
 
-	ModuleData *d1md = new ModuleData( "Demo1",
+	ModuleData *d1md = new ModuleData( "1 OSC",
 									   tr( "Single Oscillator Subtractive Synth " ),
 									   d1am, d1mc, d1mv );
 	addModule( d1md );
@@ -70,8 +70,8 @@ void ModuleManager::initModules( int samplerate )
 	Demo2AudioModule *d2am = new Demo2AudioModule( samplerate, d2mc );
 	Demo2ModuleView *d2mv = new Demo2ModuleView( d2mc );
 
-	ModuleData *d2md = new ModuleData( "Demo 2",
-									   tr( "Single Constant Osc" ),
+	ModuleData *d2md = new ModuleData( "Segment",
+									   tr( "Segment Osc" ),
 									   d2am, d2mc, d2mv );
 	addModule( d2md );
 

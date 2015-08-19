@@ -197,7 +197,7 @@ Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
 	QTimer::singleShot( 1000, this, SLOT( waveBChanged() ) );
 	QTimer::singleShot( 1000, this, SLOT( waveLfoChanged() ) );
 
-	smallUi();
+	//smallUi();
 
 }
 
@@ -310,7 +310,7 @@ void Demo2ModuleView::smallUi()
 	m_lfoGainFader->hide();
 	m_lfoRetriggerFader->hide();
 
-	m_controls->lfoSegmentCountModel.setValue( 4 );
+	m_controls->lfoSegmentCountModel.setValue( 2 );
 
 	oscBShapeBox->hide();
 	m_controls->oscBGainModel.setValue( 0 );

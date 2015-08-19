@@ -27,7 +27,7 @@ Limiter::Limiter(int sampleRate) :
 	AudioProcess( sampleRate ),
 	m_leftDetector( sampleRate ),
 	m_rightDetector( sampleRate ),
-	m_threshold( 0.5 )
+	m_threshold( 0.9 )
 {
 	setInGain( 0.0 );
 	setOutGain( 0.0 );
