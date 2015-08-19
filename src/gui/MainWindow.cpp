@@ -97,7 +97,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 	m_audioThread = new AudioThread(m_audioDeviceControls, m_moduleManager, this );
-	m_audioThread->start( QThread::TimeCriticalPriority); //changhed to high priory for desktop
+	m_audioThread->start( QThread::Priority::TimeCriticalPriority); //changhed to high priory for desktop
 
 
 	periodicUpdate = new QTimer( this );

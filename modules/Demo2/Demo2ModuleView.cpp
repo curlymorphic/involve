@@ -132,7 +132,7 @@ Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
 	shapeALayout->addWidget( m_oscAFineDetuneFader, 1 );
 	vlayout->addWidget( oscAShapeBox );
 
-	QGroupBox *oscBShapeBox = new QGroupBox( tr( "Oscillator B" ), this );
+	oscBShapeBox = new QGroupBox( tr( "Oscillator B" ), this );
 	QHBoxLayout *shapeBLayout = new QHBoxLayout( oscBShapeBox );
 	for(int i = 0; i < SegmentOscillator::maxSegmentCount ; ++i )
 	{
@@ -147,7 +147,7 @@ Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
 	shapeBLayout->addWidget( m_oscBFineDetuneFader, 1 );
 	vlayout->addWidget( oscBShapeBox );
 
-	QGroupBox *lfoShapeBox = new QGroupBox( tr( "Lfo" ), this );
+	lfoShapeBox = new QGroupBox( tr( "Lfo" ), this );
 	QHBoxLayout *shapeLfoLayout = new QHBoxLayout( lfoShapeBox );
 	for(int i = 0; i < ExtendableSegementOscillator::maxSegmentCount * 2; ++i )
 	{
@@ -196,6 +196,8 @@ Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
 	QTimer::singleShot( 1000, this, SLOT( waveAChanged() ) );
 	QTimer::singleShot( 1000, this, SLOT( waveBChanged() ) );
 	QTimer::singleShot( 1000, this, SLOT( waveLfoChanged() ) );
+
+	smallUi();
 
 }
 
@@ -281,5 +283,43 @@ void Demo2ModuleView::waveLfoChanged()
 	}
 //	m_osc.processAudio( m_waveData, m_oscWaveLength );
 	m_lfoWaveDisplay->setData( m_waveLfoData, ( int )( m_lfoWaveLength * ( int )m_controls->lfoSegmentCountModel.value()  ) );
+}
+
+void Demo2ModuleView::smallUi()
+{
+	for(int i = 4; i < 8; ++ i)
+	{
+		m_oscAWaveShapeFaders[i]->hide();
+	}
+	m_oscASegmentCountFader->hide();
+	m_oscAGainFader->hide();
+	m_oscARetriggerFader->hide();
+
+	m_delayAmountFader->hide();
+	m_delayTimeFader->hide();
+	m_delayFeedbackFader->hide();
+	m_mixModeFader->hide();
+
+//	lfoShapeBox->hide();
+
+	for(int i = 4; i < 8; ++i)
+	{
+		m_lfoWaveShapeFaders[i]->hide();
+	}
+	m_lfoSegmentCountFader->hide();
+	m_lfoGainFader->hide();
+	m_lfoRetriggerFader->hide();
+
+	m_controls->lfoSegmentCountModel.setValue( 4 );
+
+	oscBShapeBox->hide();
+	m_controls->oscBGainModel.setValue( 0 );
+
+
+}
+
+void Demo2ModuleView::largeUi()
+{
+
 }
 

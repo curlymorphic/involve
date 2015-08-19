@@ -35,6 +35,7 @@
 #include "WaveDisplay.h"
 #include "SegmentOscillator.h"
 #include "ExtendableSegementOscillator.h"
+#include "QGroupBox"
 
 class Demo2ModuleView : public ModuleView
 {
@@ -48,6 +49,8 @@ public slots:
 	void waveAChanged();
 	void waveBChanged();
 	void waveLfoChanged();
+	void smallUi();
+	void largeUi();
 
 	private:
 		Demo2ModuleControls *m_controls;
@@ -91,6 +94,9 @@ public slots:
 		ModuleFader *m_delayAmountFader;
 		ModuleFader *m_delayTimeFader;
 		ModuleFader *m_delayFeedbackFader;
+
+		QGroupBox *lfoShapeBox;
+		QGroupBox *oscBShapeBox;
 
 
 		//oscillaor used to generate wave display data

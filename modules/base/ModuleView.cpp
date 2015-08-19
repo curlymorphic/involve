@@ -47,6 +47,16 @@ void ModuleView::layout()
 
 }
 
+void ModuleView::smallUi()
+{
+
+}
+
+void ModuleView::largeUi()
+{
+
+}
+
 void ModuleView::notePressed()
 {
 	m_moduleControls->noteOnModel.setValue( 1.0 );
