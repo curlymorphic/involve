@@ -64,7 +64,6 @@ void ModuleManager::initModules( int samplerate )
 	ModuleData *d1md = new ModuleData( "1 OSC",
 									   tr( "Single Oscillator Subtractive Synth " ),
 									   d1am, d1mc, d1mv );
-	addModule( d1md );
 
 	Demo2ModuleControls *d2mc = new Demo2ModuleControls();
 	Demo2AudioModule *d2am = new Demo2AudioModule( samplerate, d2mc );
@@ -73,7 +72,6 @@ void ModuleManager::initModules( int samplerate )
 	ModuleData *d2md = new ModuleData( "Segment",
 									   tr( "Segment Osc" ),
 									   d2am, d2mc, d2mv );
-	addModule( d2md );
 
 	SuperSawerModuleControls *ssmc = new SuperSawerModuleControls();
 	SuperSawAudioModule *ssam = new SuperSawAudioModule( samplerate, ssmc );
@@ -82,8 +80,10 @@ void ModuleManager::initModules( int samplerate )
 	ModuleData *ssmd = new ModuleData( "Super Sawer",
 									   tr( " 5 unison saw + sub" ),
 									   ssam, ssmc, ssmv );
-	addModule( ssmd );
 
+	addModule( d2md );
+	addModule( d1md );
+	addModule( ssmd );
 	changeModule( 0 );
 }
 
