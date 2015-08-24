@@ -38,7 +38,7 @@ Demo2ModuleControls::Demo2ModuleControls(QObject *parent)  : ModuleControls( par
 	lfoSegmentCountModel( 4, 1, ExtendableSegementOscillator::maxSegmentCount, 1, tr( "Segs" ) ),
 	lfoRetriggerModel( 1, 0, 1, 1, tr( "Retrig" ) ),
 	mixModeModel( 0, 0, MIXMODE_COUNT + 0.9 , 0.5, tr( " Mode ") ),
-	cutoffModel( 10000, 50, 10000,1, tr( "Cut" ) ),
+	cutoffModel( 10000, 75, 10000,1, tr( "Cut" ) ),
 	resModel( 0.707, 0.707, 5, 0.001, tr( "Res" ) ),
 	filterStagesModel(1, 1, 3, 1, tr( "Poles" ) ),
 	attackModel(0.001, 0.001 , 5 , 0.001, tr( "Atk" ) ),
