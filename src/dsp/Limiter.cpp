@@ -21,13 +21,14 @@
  */
 
 #include "Limiter.h"
+#include "AudioMath.h"
 
 
 Limiter::Limiter(int sampleRate) :
 	AudioProcess( sampleRate ),
 	m_leftDetector( sampleRate ),
 	m_rightDetector( sampleRate ),
-	m_threshold( 0.7 )
+	m_threshold( -3 )
 {
 	setInGain( 0.0 );
 	setOutGain( 0.0 );
@@ -55,10 +56,10 @@ void Limiter::tick(sampleFrame *frame)
 float Limiter::calcCompressorGain(float dectortValue, float threshold )
 {
 	//compute gain
-//	float yG = threshold - dectortValue;
-	float yG = threshold / dectortValue ;
-	yG = fmin( 1.0f, yG );
-	return  yG;
-//	return powf( 10.0, yG/20.0 );
+	float yG = threshold - dectortValue;
+//	float yG = threshold / dectortValue ;
+	yG = fmin( 0.0f, yG );
+//	return  yG;
+	return powf( 10.0f, yG/20.0f );
 }
 

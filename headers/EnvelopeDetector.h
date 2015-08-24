@@ -37,8 +37,8 @@ public:
 	{
 		m_currentValue = 0.0;
 		m_sampleRate = sampleRate;
-		setAttack( 0.0001 );
-		setRelease( 0.05 );
+		setAttack( 0.005 );
+		setRelease( 0.5 );
 	}
 
 	~EnvelopeDetector()
@@ -56,7 +56,7 @@ public:
 		}
 		else
 		{
-//			m_currentValue = m_release_coef * (m_currentValue - tmp ) + tmp;/
+//			m_currentValue = m_release_coef * (m_currentValue - tmp ) + tmp;
 			m_currentValue *= m_release_coef;
 			m_currentValue += ( 1 - m_release_coef ) * tmp;
 		}
