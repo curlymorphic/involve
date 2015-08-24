@@ -116,6 +116,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_yBtn = new QPushButton( this );
 	m_yBtn->show();
 	connect ( m_yBtn, SIGNAL( clicked() ), this, SLOT( yBtnPressed() ) );
+	
+	QTimer::singleShot( 500, this, SLOT( menuBtnPressed() ) );
 
 
 }

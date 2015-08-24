@@ -99,7 +99,8 @@ void ModuleManager::initModules( int samplerate )
 	addModule( d2md );
 	addModule( d1md );
 	addModule( ssmd );
-	changeModule( 0 );
+//	changeModule( 0 );
+	m_currentModule = m_modules->at( 0 );
 }
 
 void ModuleManager::addModule(ModuleData *moduleData)

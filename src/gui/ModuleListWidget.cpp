@@ -33,11 +33,17 @@ ModuleListWidget::ModuleListWidget(ModuleData *moduleData, QWidget *parent) :
 {
 	QVBoxLayout *vLayout = new QVBoxLayout;
 	QLabel *name = new QLabel( m_moduleData->getName() );
+	QPalette sample_palette;
+	sample_palette.setColor(QPalette::Window, Qt::white);
+	sample_palette.setColor(QPalette::WindowText, Qt::white);
+	name->setPalette(sample_palette);
+	
 	QLabel *description = new QLabel( m_moduleData->getDescription() );
 	vLayout->addWidget( name );
 	vLayout->addWidget( description );
 	setLayout( vLayout );
 	setAttribute( Qt::WA_AcceptTouchEvents, true);
+	setAutoFillBackground( true );
 }
 
 ModuleListWidget::~ModuleListWidget()

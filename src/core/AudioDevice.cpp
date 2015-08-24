@@ -139,7 +139,8 @@ void AudioDevice::createAudioOutput()
 
 qint64 AudioDevice::readData(char *data, qint64 len)
 {
-	memcpy(data,m_buffer,len);
+
+
 	if( len )
 	{
 		len = len > bytesAvailable() ? bytesAvailable() : len;
@@ -162,6 +163,7 @@ qint64 AudioDevice::readData(char *data, qint64 len)
 		sampleFrameToBuffer( m_frameBuffer, len, m_format );
 
 		m_audioDeviceControls->m_bufferSize = len;
+		memcpy(data,m_buffer,len);
 	}
 	return len;
 }

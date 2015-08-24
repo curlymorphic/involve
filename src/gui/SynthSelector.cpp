@@ -41,6 +41,7 @@ SynthSelector::SynthSelector(ModuleManager *moduleManager, QWidget *parent) :
 				 this, SLOT( moduleSelected( ModuleData* ) ) );
 	}
 	setLayout( vLayout );
+	setAutoFillBackground( true );
 
 }
 
