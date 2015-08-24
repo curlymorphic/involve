@@ -59,6 +59,7 @@ void ModelManager::assignX()
 {
 
 		m_automationSensor->m_xModel = m_lastNonAssignedChangedModel;
+		emit AutoMationSensorChanged();
 
 }
 
@@ -66,6 +67,19 @@ void ModelManager::assignY()
 {
 
 		m_automationSensor->m_yModel = m_lastNonAssignedChangedModel;
+		emit AutoMationSensorChanged();
+		
+}
 
+void ModelManager::unassignX()
+{
+	m_automationSensor->m_xModel=0;
+	emit AutoMationSensorChanged();
+}
+
+void ModelManager::unassignY()
+{
+	m_automationSensor->m_yModel=0;
+	emit AutoMationSensorChanged();
 }
 

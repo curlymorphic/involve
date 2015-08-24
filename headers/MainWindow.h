@@ -92,6 +92,9 @@ private:
 	QPushButton *m_menuBtn;
 	QPushButton *m_xBtn;
 	QPushButton *m_yBtn;
+	
+	uint m_lastXClick;
+	uint m_lastYClick;
 
 protected:
 	 virtual void resizeEvent(QResizeEvent * event);
