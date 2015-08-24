@@ -72,7 +72,10 @@ SOURCES += main.cpp\
     modules/SuperSawer/SuperSawAudioModule.cpp \
     src/dsp/ExtendableSegementOscillator.cpp \
     src/dsp/SegmentOscillator.cpp \
-    src/gui/WaveDisplay.cpp
+    src/gui/WaveDisplay.cpp \
+    modules/MiniSeq/MiniSegControls.cpp \
+    modules/MiniSeq/MiniSegAudioModule.cpp \
+    modules/MiniSeq/MiniSegModuleView.cpp
 #	src/Analyser.cpp
 
 HEADERS  += headers/MainWindow.h \
@@ -127,7 +130,10 @@ HEADERS  += headers/MainWindow.h \
     modules/SuperSawer/SuperSawAudioModule.h \
     src/dsp/ExtendableSegementOscillator.h \
     src/dsp/SegmentOscillator.h \
-    src/gui/WaveDisplay.h
+    src/gui/WaveDisplay.h \
+    modules/MiniSeq/MiniSegControls.h \
+    modules/MiniSeq/MiniSegAudioModule.h \
+    modules/MiniSeq/MiniSegModuleView.h
 
 
 

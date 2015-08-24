@@ -31,6 +31,9 @@
 #include "SuperSawer/SuperSawerModuleControls.h"
 #include "SuperSawer/SuperSawAudioModule.h"
 #include "SuperSawer/SuperSawModuleView.h"
+#include "MiniSeq/MiniSegControls.h"
+#include "MiniSeq/MiniSegAudioModule.h"
+#include "MiniSeq/MiniSegModuleView.h"
 
 
 ModuleManager::ModuleManager( int samplerate, QObject *parent) : QObject(parent) ,
@@ -76,11 +79,23 @@ void ModuleManager::initModules( int samplerate )
 	SuperSawerModuleControls *ssmc = new SuperSawerModuleControls();
 	SuperSawAudioModule *ssam = new SuperSawAudioModule( samplerate, ssmc );
 	SuperSawModuleView *ssmv = new SuperSawModuleView( ssmc );
-
 	ModuleData *ssmd = new ModuleData( "Super Sawer",
 									   tr( " 5 unison saw + sub" ),
 									   ssam, ssmc, ssmv );
+	
+	
+	MiniSegControls *msmc = new MiniSegControls();
+	MiniSegAudioModule *msam = new MiniSegAudioModule( samplerate, msmc );
+	MiniSegModuleView *msmv = new MiniSegModuleView( msmc );
+	
+	
 
+	ModuleData *msmd = new ModuleData( "Mini Segment Synth",
+									   tr( " Single Oscillator segment Synth" ),
+									   msam, msmc, msmv );
+	
+	
+	addModule( msmd );
 	addModule( d2md );
 	addModule( d1md );
 	addModule( ssmd );
