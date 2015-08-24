@@ -51,6 +51,9 @@ public:
 		return m_instance;
 	}
 	
+	static AutomationSensor *getAutomationSensor();
+
+	
 signals:
 	void AutoMationSensorChanged();
 

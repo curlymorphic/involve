@@ -83,3 +83,17 @@ void ModelManager::unassignY()
 	emit AutoMationSensorChanged();
 }
 
+AutomationSensor *ModelManager::getAutomationSensor()
+{
+	if(m_instance)
+	{
+		return m_instance->m_automationSensor;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+
+

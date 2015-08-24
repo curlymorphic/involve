@@ -24,6 +24,7 @@
 #include <QPainter>
 #include <QTouchEvent>
 #include <QPalette>
+#include "ModelManager.h"
 
 
 
@@ -54,6 +55,19 @@ void VFader::paintEvent(QPaintEvent *event)
 	QPainter painter( this );
 	painter.setPen( QPen ( QColor ( 255, 0, 0, 255), 1 ,
 						   Qt::SolidLine, Qt::RoundCap, Qt::BevelJoin ));
+	if( ModelManager::getAutomationSensor() )
+	{
+		if(ModelManager::getAutomationSensor()->m_xModel == m_yModel)
+		{
+			painter.setPen( QPen ( QColor("blue"), 1 ,
+								   Qt::SolidLine, Qt::RoundCap, Qt::BevelJoin ));
+		}
+		else if  (ModelManager::getAutomationSensor()->m_yModel == m_yModel)
+		{
+			painter.setPen( QPen ( QColor("yellow"), 1 ,
+								   Qt::SolidLine, Qt::RoundCap, Qt::BevelJoin ));
+		}
+	}
 	painter.drawLine(width() * 0.5, 0, width() * 0.5 , height() );
 	if( !m_fader )
 	{
