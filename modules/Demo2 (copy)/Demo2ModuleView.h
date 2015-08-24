@@ -20,56 +20,32 @@
  *
  */
 
-#include "Model.h"
-#include "MainWindow.h"
-//#include
 
 
+#ifndef DEMO2MODULEVIEW_H
+#define DEMO2MODULEVIEW_H
 
-Model::Model()
+#include <QObject>
+#include <QWidget>
+#include "ModuleView.h"
+#include "Demo2ModuleControls.h"
+#include "Fader.h"
+#include "VFader.h"
+#include "ModuleFader.h"
+
+class Demo2ModuleView : public ModuleView
 {
+	Q_OBJECT
+public:
+	Demo2ModuleView(ModuleControls *controls, QWidget *parent = 0 , Qt::WindowFlags flags = 0 );
+	~Demo2ModuleView();
+	virtual void layout();
 
-}
+	private:
+		Demo2ModuleControls *m_controls;
 
-Model::Model(float init, float min, float max, float interval, QString name, QObject *parent) :
-	QObject( parent ),
-	m_value( init ),
-	m_initial( init ),
-	m_min( min ),
-	m_max( max ),
-	m_interval( interval ),
-	m_name( name ),
-	m_initValueChanged(false)
-{
-	emit dataChanged( this );
-//	MainWindow *mw = 0;
-//	while( !mw)
-//	{
-//		mw = (qobject_cast<MainWindow*> (QApplication::topLevelWidgets().at( 0 )));
-//	}
-//	mw->modelManager()->registerModel( this );
-	ModelManager::instance()->registerModel( this );
-}
+		ModuleFader *m_waveShapeAFader;
+		ModuleFader *m_waveShapeBFader;
+};
 
-Model::~Model()
-{
-
-}
-
-void Model::setValue(float val)
-{
-	if( val < m_min ) { m_value = val; }
-	else if( val > m_max ) { m_value = val; }
-	else { m_value = val; }
-
-	if( m_value != m_initial ) { m_initValueChanged = true; }
-
-	emit dataChanged( this );
-
-}
-
-void Model::inc(float val)
-{
-	setValue( value() + val);
-}
-
+#endif // DEMO2MODULEVIEW_H

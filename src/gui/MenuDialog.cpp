@@ -38,7 +38,7 @@ void MenuDialog::loadImages()
 	m_backgroundImage = new QPixmap (":/new/prefix1/images/Box.png");
 	m_scaledBackgroundImage = new QPixmap( *m_backgroundImage );
 	palette->setBrush(QPalette::Background, *( new QBrush( *m_scaledBackgroundImage )));
-	palette->setBrush(QPalette::Text, *( new QBrush ( * (new QColor(200, 200, 200, 255 ) ) ) )  );
+	palette->setBrush(QPalette::Text, *( new QBrush ( * (new QColor(0, 200, 200, 255 ) ) ) )  );
 	setPalette(*palette);
 	m_logoImage = new QPixmap( ":/new/prefix1/images/Logo.png" );
 	m_scaledLogoImage = new QPixmap( *m_logoImage );

@@ -20,56 +20,11 @@
  *
  */
 
-#include "Model.h"
-#include "MainWindow.h"
-//#include
+#include "Demo2ModuleControls.h"
 
-
-
-Model::Model()
+Demo2ModuleControls::Demo2ModuleControls(QObject *parent)  : ModuleControls( parent ),
+	waveShapeAModel( 2, 0 , 4 , 1, tr( "Wave" ) ),
+	waveShapeBModel( 3, 0 , 4 , 1, tr( "Wave" ) )
 {
-
-}
-
-Model::Model(float init, float min, float max, float interval, QString name, QObject *parent) :
-	QObject( parent ),
-	m_value( init ),
-	m_initial( init ),
-	m_min( min ),
-	m_max( max ),
-	m_interval( interval ),
-	m_name( name ),
-	m_initValueChanged(false)
-{
-	emit dataChanged( this );
-//	MainWindow *mw = 0;
-//	while( !mw)
-//	{
-//		mw = (qobject_cast<MainWindow*> (QApplication::topLevelWidgets().at( 0 )));
-//	}
-//	mw->modelManager()->registerModel( this );
-	ModelManager::instance()->registerModel( this );
-}
-
-Model::~Model()
-{
-
-}
-
-void Model::setValue(float val)
-{
-	if( val < m_min ) { m_value = val; }
-	else if( val > m_max ) { m_value = val; }
-	else { m_value = val; }
-
-	if( m_value != m_initial ) { m_initValueChanged = true; }
-
-	emit dataChanged( this );
-
-}
-
-void Model::inc(float val)
-{
-	setValue( value() + val);
 }
 

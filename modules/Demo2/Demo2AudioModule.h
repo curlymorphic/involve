@@ -28,6 +28,11 @@
 #include "Demo2ModuleControls.h"
 #include "Gain.h"
 #include "WTOscillator.h"
+#include "SegmentOscillator.h"
+#include "ExtendableSegementOscillator.h"
+#include "Filters.h"
+#include "ADSR.h"
+#include "StereoDelay.h"
 
 
 class Demo2AudioModule : public AudioModule
@@ -43,9 +48,18 @@ protected:
 	virtual void noteOff();
 
 private:
-	WTOscillator *m_oscA;
+	SegmentOscillator *m_oscA;
+	SegmentOscillator *m_oscB;
 	Gain *m_gain;
-	WTOscillator *m_oscB;
+	ExtendableSegementOscillator *m_lfo;
+	Lp12 *m_filters;
+	Adsr *m_adsr;
+	StereoDelay *m_delay;
+	sampleFrame *delayedFrame;
+
+
+
+
 	Demo2ModuleControls *m_controls;
 
 };

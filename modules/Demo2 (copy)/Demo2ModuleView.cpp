@@ -20,56 +20,42 @@
  *
  */
 
-#include "Model.h"
-#include "MainWindow.h"
-//#include
+#include "Demo2ModuleView.h"
+#include <QGroupBox>
+#include <QVBoxLayout>
 
 
 
-Model::Model()
+Demo2ModuleView::Demo2ModuleView(ModuleControls *controls, QWidget *parent,
+								 Qt::WindowFlags flags):
+	ModuleView( parent, controls, flags ),
+	m_controls( (Demo2ModuleControls*)controls )
+{
+	m_waveShapeAFader = new ModuleFader( &m_controls->waveShapeAModel, this );
+	m_waveShapeBFader = new ModuleFader( &m_controls->waveShapeBModel, this );
+
+	QHBoxLayout *shapeLayout = new QHBoxLayout( this );
+	shapeLayout->addWidget( m_waveShapeAFader );
+	shapeLayout->addWidget( m_waveShapeBFader );
+
+	m_waveShapeAFader->show();
+	m_waveShapeBFader->show();
+
+	layout();
+
+}
+
+Demo2ModuleView::~Demo2ModuleView()
 {
 
 }
 
-Model::Model(float init, float min, float max, float interval, QString name, QObject *parent) :
-	QObject( parent ),
-	m_value( init ),
-	m_initial( init ),
-	m_min( min ),
-	m_max( max ),
-	m_interval( interval ),
-	m_name( name ),
-	m_initValueChanged(false)
+void Demo2ModuleView::layout()
 {
-	emit dataChanged( this );
-//	MainWindow *mw = 0;
-//	while( !mw)
-//	{
-//		mw = (qobject_cast<MainWindow*> (QApplication::topLevelWidgets().at( 0 )));
-//	}
-//	mw->modelManager()->registerModel( this );
-	ModelManager::instance()->registerModel( this );
-}
+	const int height8 = height() / 9;
+	const int wwidth = width();
 
-Model::~Model()
-{
-
-}
-
-void Model::setValue(float val)
-{
-	if( val < m_min ) { m_value = val; }
-	else if( val > m_max ) { m_value = val; }
-	else { m_value = val; }
-
-	if( m_value != m_initial ) { m_initValueChanged = true; }
-
-	emit dataChanged( this );
-
-}
-
-void Model::inc(float val)
-{
-	setValue( value() + val);
+	m_waveShapeAFader->resize( wwidth * 0.1 , height8 * 2 );
+	m_waveShapeBFader->resize( wwidth * 0.1 , height8 * 2 );
 }
 

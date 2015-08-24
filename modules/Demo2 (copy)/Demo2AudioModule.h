@@ -20,56 +20,34 @@
  *
  */
 
-#include "Model.h"
-#include "MainWindow.h"
-//#include
+#ifndef DEMO2AUDIOMODULE_H
+#define DEMO2AUDIOMODULE_H
+
+#include <QObject>
+#include "AudioModule.h"
+#include "Demo2ModuleControls.h"
+#include "Gain.h"
+#include "WTOscillator.h"
 
 
-
-Model::Model()
+class Demo2AudioModule : public AudioModule
 {
+public:
+	Demo2AudioModule(qint64 samplerate, ModuleControls *controls);
+	virtual ~Demo2AudioModule();
+	virtual void processAudio(sampleFrame *buffer, int len );
 
-}
+protected:
 
-Model::Model(float init, float min, float max, float interval, QString name, QObject *parent) :
-	QObject( parent ),
-	m_value( init ),
-	m_initial( init ),
-	m_min( min ),
-	m_max( max ),
-	m_interval( interval ),
-	m_name( name ),
-	m_initValueChanged(false)
-{
-	emit dataChanged( this );
-//	MainWindow *mw = 0;
-//	while( !mw)
-//	{
-//		mw = (qobject_cast<MainWindow*> (QApplication::topLevelWidgets().at( 0 )));
-//	}
-//	mw->modelManager()->registerModel( this );
-	ModelManager::instance()->registerModel( this );
-}
+	virtual void noteOn();
+	virtual void noteOff();
 
-Model::~Model()
-{
+private:
+	WTOscillator *m_oscA;
+	Gain *m_gain;
+	WTOscillator *m_oscB;
+	Demo2ModuleControls *m_controls;
 
-}
+};
 
-void Model::setValue(float val)
-{
-	if( val < m_min ) { m_value = val; }
-	else if( val > m_max ) { m_value = val; }
-	else { m_value = val; }
-
-	if( m_value != m_initial ) { m_initValueChanged = true; }
-
-	emit dataChanged( this );
-
-}
-
-void Model::inc(float val)
-{
-	setValue( value() + val);
-}
-
+#endif // DEMO2AUDIOMODULE_H

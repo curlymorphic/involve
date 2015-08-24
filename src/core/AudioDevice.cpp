@@ -129,15 +129,18 @@ void AudioDevice::createAudioOutput()
 	m_audioOutput = new QAudioOutput(m_device, m_format, this);
 
 	start();
-	m_audioOutput->setBufferSize( 512 );
+	m_audioOutput->setBufferSize( 1024 );
 	m_audioOutput->start(this);
-//	qDebug(" buffer size : %d", m_audioOutput->bufferSize() );
+	qDebug(" buffer size : %d", m_audioOutput->bufferSize() );
+	m_bufferSize = m_audioOutput->bufferSize() / 8;
 }
 
 
 
 qint64 AudioDevice::readData(char *data, qint64 len)
 {
+
+
 	if( len )
 	{
 		len = len > bytesAvailable() ? bytesAvailable() : len;
@@ -145,16 +148,22 @@ qint64 AudioDevice::readData(char *data, qint64 len)
 		for(int i = 0; i < len / 4; i++)
 		{
 			m_frameBuffer[i][0] *= m_audioDeviceControls->m_gainModel.value();
+			m_frameBuffer[i][1] *= m_audioDeviceControls->m_gainModel.value();
+		}
+		m_limiter.processAudio( m_frameBuffer, len / 4 );
+		//get peaks
+		for(int i = 0; i < len / 4; i++)
+		{
 			m_audioDeviceControls->peaks[0] = qMax( m_audioDeviceControls->peaks[0],
 					m_frameBuffer[i][0] );
-			m_frameBuffer[i][1] *= m_audioDeviceControls->m_gainModel.value();
 			m_audioDeviceControls->peaks[1] = qMax( m_audioDeviceControls->peaks[1],
 					m_frameBuffer[i][1] );
 		}
-		m_limiter.processAudio( m_frameBuffer, len / 4 );
+
 		sampleFrameToBuffer( m_frameBuffer, len, m_format );
-		memcpy(data,m_buffer,len);
+
 		m_audioDeviceControls->m_bufferSize = len;
+		memcpy(data,m_buffer,len);
 	}
 	return len;
 }
@@ -169,7 +178,7 @@ qint64 AudioDevice::writeData(const char *data, qint64 len)
 
 qint64 AudioDevice::bytesAvailable() const
 {
-	return bufferSize * 4;
+	return m_bufferSize * 4;
 }
 
 void AudioDevice::moduleChanged(ModuleData *md)

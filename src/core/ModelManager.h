@@ -43,11 +43,19 @@ public:
 	void registerModel( Model *model );
 	void assignX();
 	void assignY();
+	void unassignX();
+	void unassignY();
 
 	static ModelManager *instance()
 	{
 		return m_instance;
 	}
+	
+	static AutomationSensor *getAutomationSensor();
+
+	
+signals:
+	void AutoMationSensorChanged();
 
 private slots:
 	void ModelChanging( Model* );

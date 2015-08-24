@@ -119,12 +119,24 @@ bool TouchController::event(QEvent *event)
 	case QEvent::TouchEnd:
 	case QEvent::TouchUpdate:
 
-	{
+{
 		if(event->type() == QEvent::TouchBegin ) { emit noteOn(); }
 		if(event->type() == QEvent::TouchEnd ) { emit noteOff(); }
 		QTouchEvent *touchEvent = static_cast<QTouchEvent *>(event);
 		int x = touchEvent->touchPoints().at(0).pos().x();
 		int y = touchEvent->touchPoints().at(0).pos().y();
+		if( m_xModel && x > 0 && x < width() ) { m_xModel->setValue( ( x / m_pixelPerX ) + m_minX ); }
+		if( m_yModel && y > 0 && y < height() ) { m_yModel->setValue( (( height() - y )  / m_pixelPerY ) + m_minY); }
+		return true;
+		break;
+}
+
+	case QEvent::MouseButtonPress:
+	case QEvent::MouseMove:
+	{
+		QMouseEvent *mouseEvent = static_cast<QMouseEvent *>(event);
+		int x = mouseEvent->pos().x();
+		int y = mouseEvent->pos().y();
 		if( m_xModel && x > 0 && x < width() ) { m_xModel->setValue( ( x / m_pixelPerX ) + m_minX ); }
 		if( m_yModel && y > 0 && y < height() ) { m_yModel->setValue( (( height() - y )  / m_pixelPerY ) + m_minY); }
 		return true;

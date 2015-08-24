@@ -32,6 +32,10 @@
 #include "Fader.h"
 #include "VFader.h"
 #include "ModuleFader.h"
+#include "WaveDisplay.h"
+#include "SegmentOscillator.h"
+#include "ExtendableSegementOscillator.h"
+#include "QGroupBox"
 
 class Demo2ModuleView : public ModuleView
 {
@@ -41,11 +45,71 @@ public:
 	~Demo2ModuleView();
 	virtual void layout();
 
+public slots:
+	void waveAChanged();
+	void waveBChanged();
+	void waveLfoChanged();
+	void smallUi();
+	void largeUi();
+
 	private:
 		Demo2ModuleControls *m_controls;
 
-		ModuleFader *m_waveShapeAFader;
-		ModuleFader *m_waveShapeBFader;
+		ModuleFader **m_oscAWaveShapeFaders;
+		ModuleFader *m_oscASegmentCountFader;
+		WaveDisplay *m_oscAWaveDisplay;
+		ModuleFader *m_oscAGainFader;
+		ModuleFader *m_oscACourseDetuneFader;
+		ModuleFader *m_oscAFineDetuneFader;
+		ModuleFader *m_oscARetriggerFader;
+
+		ModuleFader **m_oscBWaveShapeFaders;
+		ModuleFader *m_oscBSegmentCountFader;
+		WaveDisplay *m_oscBWaveDisplay;
+		ModuleFader *m_oscBGainFader;
+		ModuleFader *m_oscBCourseDetuneFader;
+		ModuleFader *m_oscBFineDetuneFader;
+		ModuleFader *m_oscBRetriggerFader;
+
+		ModuleFader **m_lfoWaveShapeFaders;
+		ModuleFader *m_lfoSegmentCountFader;
+		ModuleFader *m_lfoRetriggerFader;
+		ModuleFader *m_lfoSpeedFader;
+		ModuleFader *m_lfoGainFader;
+		ModuleFader *m_lfoFilterFader;
+		WaveDisplay *m_lfoWaveDisplay;
+
+		ModuleFader *m_mixModeFader;
+
+		ModuleFader *m_attackFader;
+		ModuleFader *m_decayFader;
+		ModuleFader *m_sustainFader;
+		ModuleFader *m_releaseFader;
+
+
+		ModuleFader *m_cutoffFader;
+		ModuleFader *m_resFader;
+		ModuleFader *m_filterStagesFader;
+
+		ModuleFader *m_delayAmountFader;
+		ModuleFader *m_delayTimeFader;
+		ModuleFader *m_delayFeedbackFader;
+
+		QGroupBox *lfoShapeBox;
+		QGroupBox *oscBShapeBox;
+
+
+		//oscillaor used to generate wave display data
+		SegmentOscillator m_oscA;
+		SegmentOscillator m_oscB;
+		ExtendableSegementOscillator m_lfo;
+
+		float *m_waveAData;
+		int m_oscAWaveLength;
+		float *m_waveBData;
+		int m_oscBWaveLength;
+		float *m_waveLfoData;
+		int m_lfoWaveLength;
 };
 
 #endif // DEMO2MODULEVIEW_H

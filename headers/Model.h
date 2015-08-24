@@ -23,6 +23,8 @@
 #ifndef MODEL_H
 #define MODEL_H
 
+#include "AudioMath.h"
+
 #include <QObject>
 
 ///
@@ -32,6 +34,7 @@ class Model : public QObject
 {
 	Q_OBJECT
 public:
+	explicit Model();
 	explicit Model( float init, float min, float max, float interval, QString name, QObject *parent = 0);
 	~Model();
 	void setValue( float val );

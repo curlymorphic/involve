@@ -48,10 +48,13 @@ public:
 	}
 	inline void clear()
 	{
-		for( int i = 0; i < 2; ++i )
+		if( isnanf( m_z1[ 0 ] ) )
 		{
-			m_z1[i] = 0.0f;
-			m_z2[i] = 0.0f;
+			for( int i = 0; i < 2; ++i )
+			{
+				m_z1[i] = 0.0f;
+				m_z2[i] = 0.0f;
+			}
 		}
 	}
 	inline float update( float in, int ch )
@@ -244,7 +247,7 @@ public :
 class Lp12 : public Filter
 {
 public :
-	Lp12( int samplerate) :
+	explicit Lp12( int samplerate = 44100 ) :
 		Filter( samplerate )
 	{
 	}

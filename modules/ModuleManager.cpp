@@ -31,6 +31,9 @@
 #include "SuperSawer/SuperSawerModuleControls.h"
 #include "SuperSawer/SuperSawAudioModule.h"
 #include "SuperSawer/SuperSawModuleView.h"
+#include "MiniSeq/MiniSegControls.h"
+#include "MiniSeq/MiniSegAudioModule.h"
+#include "MiniSeq/MiniSegModuleView.h"
 
 
 ModuleManager::ModuleManager( int samplerate, QObject *parent) : QObject(parent) ,
@@ -56,34 +59,48 @@ ModuleManager::~ModuleManager()
 void ModuleManager::initModules( int samplerate )
 {
 	//TODO init modules
+
 	Demo1ModuleControls *d1mc = new Demo1ModuleControls( );
 	Demo1AudioModule *d1am = new Demo1AudioModule( samplerate, d1mc );
 	Demo1ModuleView *d1mv = new Demo1ModuleView( d1mc );
 
-	ModuleData *d1md = new ModuleData( "Demo1",
+	ModuleData *d1md = new ModuleData( "1 OSC",
 									   tr( "Single Oscillator Subtractive Synth " ),
 									   d1am, d1mc, d1mv );
-	addModule( d1md );
 
-//	Demo2ModuleControls *d2mc = new Demo2ModuleControls();
-//	Demo2AudioModule *d2am = new Demo2AudioModule( samplerate, d2mc );
-//	Demo2ModuleView *d2mv = new Demo2ModuleView( d2mc );
+	Demo2ModuleControls *d2mc = new Demo2ModuleControls();
+	Demo2AudioModule *d2am = new Demo2AudioModule( samplerate, d2mc );
+	Demo2ModuleView *d2mv = new Demo2ModuleView( d2mc );
 
-//	ModuleData *d2md = new ModuleData( "Demo 2",
-//									   tr( "Single Constant Osc" ),
-//									   d2am, d2mc, d2mv );
-//	addModule( d2md );
+	ModuleData *d2md = new ModuleData( "Segment",
+									   tr( "Segment Osc" ),
+									   d2am, d2mc, d2mv );
 
 	SuperSawerModuleControls *ssmc = new SuperSawerModuleControls();
 	SuperSawAudioModule *ssam = new SuperSawAudioModule( samplerate, ssmc );
 	SuperSawModuleView *ssmv = new SuperSawModuleView( ssmc );
-
 	ModuleData *ssmd = new ModuleData( "Super Sawer",
 									   tr( " 5 unison saw + sub" ),
 									   ssam, ssmc, ssmv );
-	addModule( ssmd );
+	
+	
+	MiniSegControls *msmc = new MiniSegControls();
+	MiniSegAudioModule *msam = new MiniSegAudioModule( samplerate, msmc );
+	MiniSegModuleView *msmv = new MiniSegModuleView( msmc );
+	
+	
 
-	changeModule( 0 );
+	ModuleData *msmd = new ModuleData( "Mini Segment Synth",
+									   tr( " Single Oscillator segment Synth" ),
+									   msam, msmc, msmv );
+	
+	
+	addModule( msmd );
+	addModule( d2md );
+	addModule( d1md );
+	addModule( ssmd );
+//	changeModule( 0 );
+	m_currentModule = m_modules->at( 0 );
 }
 
 void ModuleManager::addModule(ModuleData *moduleData)

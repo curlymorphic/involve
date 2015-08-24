@@ -38,6 +38,10 @@ public:
 	~ModuleView();
 	virtual void layout();
 
+public slots:
+	void smallUi();
+	void largeUi();
+
 private slots:
 	void notePressed();
 	void noteRelease();

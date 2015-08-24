@@ -26,7 +26,16 @@
 #include <QtConcurrent/QtConcurrent>
 #include "string.h"
 
+sample_t **WTOscillator::squareTables = 0;
+sample_t **WTOscillator::sineTables = 0;
+sample_t **WTOscillator::sawTables = 0;
+sample_t **WTOscillator::triTables = 0;
 
+sample_t **WTOscillator::sin2Tables = 0;
+sample_t **WTOscillator::doubleSineTables = 0;
+sample_t **WTOscillator::doubleTriangleTables = 0;
+sample_t **WTOscillator::doubleSquareTables = 0;
+sample_t **WTOscillator::doubleSawTables = 0;
 
 void WTOscillator::allocTables()
 {
@@ -35,10 +44,22 @@ void WTOscillator::allocTables()
 	sineTables = new sample_t*[ m_tableCount ];
 	sawTables = new sample_t*[ m_tableCount ];
 	triTables = new sample_t*[ m_tableCount ];
+
+	sin2Tables = new sample_t*[ m_tableCount ];
+	doubleSineTables = new sample_t*[ m_tableCount ];
+	doubleTriangleTables= new sample_t*[ m_tableCount ];
+	doubleSquareTables= new sample_t*[ m_tableCount ];
+	doubleSawTables= new sample_t*[ m_tableCount ];
+
 	memset( squareTables, 0, sizeof( sample_t ) * m_tableCount );
 	memset( sineTables, 0, sizeof( sample_t ) * m_tableCount );
 	memset( sawTables, 0, sizeof( sample_t ) * m_tableCount );
 	memset( triTables, 0, sizeof( sample_t ) * m_tableCount );
+	memset( sin2Tables, 0, sizeof( sample_t ) * m_tableCount );
+	memset( doubleSineTables, 0, sizeof( sample_t ) * m_tableCount );
+	memset( doubleTriangleTables, 0, sizeof( sample_t ) * m_tableCount );
+	memset( doubleSquareTables, 0, sizeof( sample_t ) * m_tableCount );
+	memset( doubleSawTables, 0, sizeof( sample_t ) * m_tableCount );
 }
 
 void WTOscillator::generateWaveTables()
@@ -67,6 +88,17 @@ void WTOscillator::generateWaveTables()
 		triTables[i] = triTable;
 	}
 
+	for( int i = 0; i < m_tableCount; ++i )
+	{
+		generateSine2Table( m_sampleRate / m_bandFreq[i] * 0.5 );
+		sin2Tables[i] = sawTable;
+	}
+
+	generateDoubleTables( sineTables, doubleSineTables );
+	generateDoubleTables( triTables, doubleTriangleTables );
+	generateDoubleTables( squareTables, doubleSquareTables );
+	generateDoubleTables( sawTables, doubleSawTables );
+
 	setShape( m_currentShape );
 //	return 1;
 }
@@ -86,11 +118,14 @@ WTOscillator::WTOscillator(int sampleRate) :
 			2093.5, 4186.0, 10000, 20000 };
 	m_tableCount = 10;
 	setFrequency( 440.0 );
-	allocTables();
-	qDebug("generate tables start \n");
-	QFuture<void> future = QtConcurrent::run( this,  &WTOscillator::generateWaveTables )  ;
-//	future.waitForFinished();
-	qDebug( "generate Tables end \n " );
+	if( !squareTables )
+	{
+		allocTables();
+		qDebug("generate tables start \n");
+		QFuture<void> future = QtConcurrent::run( this,  &WTOscillator::generateWaveTables )  ;
+		//	future.waitForFinished();
+		qDebug( "generate Tables end \n " );
+	}
 
 }
 
@@ -105,7 +140,7 @@ WTOscillator::~WTOscillator()
 
 
 
-sample_t WTOscillator::tick()
+sample_t WTOscillator::monoTick()
 {
 	if( !m_currentTable )
 	{
@@ -130,14 +165,14 @@ sample_t WTOscillator::tick()
 sample_t sample;
 void WTOscillator::tick(sampleFrame *frame)
 {
-	sample = tick();
+	sample = monoTick();
 	frame[0][0] = sample;
 	frame[0][1] = sample;
 }
 
 float WTOscillator::uniTick()
 {
-	return (tick()/2)+ 0.5;
+	return (monoTick()/2)+ 0.5;
 }
 
 void WTOscillator::setFrequency(float freq)
@@ -164,6 +199,21 @@ void WTOscillator::setShape(WTWaveShape shape)
 	case WT_TRIANGLE:
 		m_currentTable = triTables[ band ];
 		break;
+	case WT_SINE2:
+		m_currentTable = sin2Tables[ band ];
+		break;
+	case WT_DOUBLE_SINE:
+		m_currentTable = doubleSineTables[ band ];
+		break;
+	case WT_DOUBLE_TRIANGLE:
+		m_currentTable = doubleTriangleTables[ band ];
+		break;
+	case WT_DOUBLE_SQUARE:
+		m_currentTable = doubleSquareTables[ band ];
+		break;
+	case WT_DOUBLE_SAW:
+		m_currentTable = doubleSawTables[ band ];
+		break;
 	default:
 		break;
 	}
@@ -183,6 +233,27 @@ void WTOscillator::generateSineTable( int bands )
 	for(int i = 0; i < TABLE_LEN; i++)
 	{
 		sineTable[i] = sinf( ((float)i/(float)TABLE_LEN) * f_2PI );
+	}
+}
+
+void WTOscillator::generateSine2Table(int bands)
+{
+	float max = 0;
+	sawTable = new sample_t[ TABLE_LEN ];
+	for(int i = 0 ; i < TABLE_LEN; i++)
+	{
+		sawTable[i] = 0.0;
+		for(int g = 1; g <= 2; g++)
+		{
+			double n = double(g);
+			sawTable[i] += sinf( ((float)i/(float)TABLE_LEN) * f_2PI * g);
+		}
+		max = fmax( max, sawTable[i] );
+	}
+
+	for( int i = 0; i < TABLE_LEN; i++ )
+	{
+		sawTable[i] /= max;
 	}
 }
 
@@ -250,6 +321,22 @@ void WTOscillator::generateSquareTable(int bands)
 	for( int i = 0; i < TABLE_LEN; i++ )
 	{
 		squareTable[i] /= max;
+	}
+}
+
+void WTOscillator::generateDoubleTables(sample_t **origin, sample_t **destination)
+{
+	for( int i =0 ; i < m_tableCount; ++i )
+	{
+		sample_t *table = new sample_t[ TABLE_LEN ];
+		for( int a = 0; a < 2; ++a )
+		{
+			for( int f = 0; f < TABLE_LEN * 0.5; ++f )
+			{
+				table[ ( int )( f + ( a * TABLE_LEN * 0.5 ) ) ]= origin[ i ][ f * 2 ];
+			}
+		}
+		destination[i] = table;
 	}
 }
 

@@ -97,7 +97,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
 	m_audioThread = new AudioThread(m_audioDeviceControls, m_moduleManager, this );
-	m_audioThread->start(QThread::HighestPriority);
+	m_audioThread->start( QThread::HighestPriority); //changhed to high priory for desktop
 
 
 	periodicUpdate = new QTimer( this );
@@ -110,12 +110,15 @@ MainWindow::MainWindow(QWidget *parent) :
 	m_menuBtn->show();
 	connect( m_menuBtn , SIGNAL( clicked() ), this, SLOT( menuBtnPressed() ) );
 
+
 	m_xBtn = new QPushButton(  this );
 	m_xBtn->show();
 	connect( m_xBtn, SIGNAL( clicked() ), this, SLOT( xBtnPressed() ) );
 	m_yBtn = new QPushButton( this );
 	m_yBtn->show();
 	connect ( m_yBtn, SIGNAL( clicked() ), this, SLOT( yBtnPressed() ) );
+	
+	QTimer::singleShot( 500, this, SLOT( menuBtnPressed() ) );
 
 
 }
@@ -138,12 +141,30 @@ void MainWindow::menuBtnPressed()
 
 void MainWindow::xBtnPressed()
 {
-	m_modelManager->assignX();
+	uint currentTime = QDateTime::currentMSecsSinceEpoch();
+	if(currentTime - m_lastXClick < 500 )
+	{
+		m_modelManager->unassignX();
+	}
+	else
+	{
+		m_modelManager->assignX();
+	}
+	m_lastXClick = QDateTime::currentMSecsSinceEpoch();
 }
 
 void MainWindow::yBtnPressed()
 {
-	m_modelManager->assignY();
+	uint currentTime = QDateTime::currentMSecsSinceEpoch();
+	if(currentTime - m_lastYClick < 500 )
+	{
+		m_modelManager->unassignY();
+	}
+	else
+	{
+		m_modelManager->assignY();
+	}
+	m_lastYClick = QDateTime::currentMSecsSinceEpoch();
 }
 
 void MainWindow::moduleChanged(ModuleData *moduleData)
