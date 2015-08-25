@@ -76,7 +76,7 @@ SOURCES += main.cpp\
     modules/MiniSeq/MiniSegAudioModule.cpp \
     modules/MiniSeq/MiniSegModuleView.cpp \
     modules/MiniSeq/MiniSegControls.cpp
-#	src/Analyser.cpp
+	src/Analyser.cpp
 
 HEADERS  += headers/MainWindow.h \
 	headers/Types.h \
@@ -114,7 +114,7 @@ HEADERS  += headers/MainWindow.h \
 	headers/Limiter.h \
     headers/EnvelopeDetector.h \
     src/gui/ModuleFader.h \
-#	headers/Analyser.h \
+	headers/Analyser.h \
 	modules/Demo2/Demo2AudioModule.h \
 	modules/Demo2/Demo2ModuleControls.h \
 	modules/Demo2/Demo2ModuleView.h \

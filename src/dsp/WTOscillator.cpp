@@ -238,6 +238,7 @@ void WTOscillator::generateSineTable( int bands )
 
 void WTOscillator::generateSine2Table(int bands)
 {
+	bands = bands;
 	float max = 0;
 	sawTable = new sample_t[ TABLE_LEN ];
 	for(int i = 0 ; i < TABLE_LEN; i++)
@@ -245,7 +246,6 @@ void WTOscillator::generateSine2Table(int bands)
 		sawTable[i] = 0.0;
 		for(int g = 1; g <= 2; g++)
 		{
-			double n = double(g);
 			sawTable[i] += sinf( ((float)i/(float)TABLE_LEN) * f_2PI * g);
 		}
 		max = fmax( max, sawTable[i] );
