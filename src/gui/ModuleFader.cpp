@@ -29,6 +29,10 @@ ModuleFader::ModuleFader(Model *model, QWidget *parent) : QWidget(parent) ,
 	QString lableText = m_model->getName();
 	lableText.truncate( 4 );
 	m_label->setText( lableText );
+	QFont font = m_label->font();
+	font.setPointSize(8);
+	font.setBold(true);
+	m_label->setFont(font);
 //	m_label->setAttribute( Qt::WA_OpaquePaintEvent );
 	m_label->setAutoFillBackground( true );
 	QPalette *p = new QPalette();

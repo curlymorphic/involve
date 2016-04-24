@@ -12,8 +12,5 @@
         <file>images/ButtonY.png</file>
         <file>images/Logo.png</file>
     </qresource>
-    <qresource prefix="/">
-        <file>../../../../Documents/involveArt/Fader/HFaderKnob.png</file>
-        <file>../../../../Documents/involveArt/Fader/VFaderBack.png</file>
-    </qresource>
+    <qresource prefix="/"/>
 </RCC>
