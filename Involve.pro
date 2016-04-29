@@ -75,7 +75,8 @@ SOURCES += main.cpp\
     src/gui/WaveDisplay.cpp \
     modules/MiniSeq/MiniSegControls.cpp \
     modules/MiniSeq/MiniSegAudioModule.cpp \
-    modules/MiniSeq/MiniSegModuleView.cpp
+    modules/MiniSeq/MiniSegModuleView.cpp \
+    src/core/simplesequencer.cpp
 #	src/Analyser.cpp
 
 HEADERS  += headers/MainWindow.h \
@@ -133,7 +134,8 @@ HEADERS  += headers/MainWindow.h \
     src/gui/WaveDisplay.h \
     modules/MiniSeq/MiniSegControls.h \
     modules/MiniSeq/MiniSegAudioModule.h \
-    modules/MiniSeq/MiniSegModuleView.h
+    modules/MiniSeq/MiniSegModuleView.h \
+    src/core/simplesequencer.h
 
 
 

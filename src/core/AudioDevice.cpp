@@ -38,6 +38,7 @@ AudioDevice::AudioDevice(const QAudioFormat &format, ModuleManager *mm, AudioDev
 	m_audioDeviceControls( adc ),
 	m_limiter( adc->m_sampleRate )
 {
+	m_bufferSize = 256;
 	m_format = format;
 
 	m_frameBuffer = new sampleFrame[100000]; //to big !!!!

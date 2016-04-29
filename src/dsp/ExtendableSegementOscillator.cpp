@@ -43,10 +43,9 @@ ExtendableSegementOscillator::~ExtendableSegementOscillator()
 
 }
 
-ExtendableSegementOscillator::ExtendableSegementOscillator() :
-	ExtendableSegementOscillator( ExtendableSegementOscillator::maxSegmentCount )
+ExtendableSegementOscillator::ExtendableSegementOscillator()
 {
-
+	ExtendableSegementOscillator(maxSegmentCount );
 }
 
 sample_t ExtendableSegementOscillator::monoTick()

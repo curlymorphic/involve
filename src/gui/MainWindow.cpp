@@ -39,6 +39,7 @@
 #include <QGridLayout>
 #include <QObject>
 #include "MenuDialog.h"
+#include "simplesequencer.h"
 
 
 const int DurationSeconds = 1;
@@ -54,7 +55,8 @@ MainWindow::MainWindow(QWidget *parent) :
 	ui(new Ui::MainWindow),
 //	m_modelManager( 0 ),
 //	m_audioDeviceControls( 0 ),
-	m_gridLayout( 0 )
+	m_gridLayout( 0 ),
+	m_simpleSeq( 0)
 {
 	m_modelManager = new ModelManager( );
 	m_moduleManager = new ModuleManager( DataSampleRateHz );
@@ -95,6 +97,10 @@ MainWindow::MainWindow(QWidget *parent) :
 	connect( m_ribbon, SIGNAL( noteOn() ), m_moduleView, SLOT( notePressed() ) ) ;
 	connect( m_ribbon, SIGNAL( noteOff() ), m_moduleView, SLOT( noteRelease() ) );
 
+	m_simpleSeq = new SimpleSequencer( &m_controls->freqModel, &m_controls->velocityModel, this);
+	connect ( m_simpleSeq, SIGNAL(noteOn()), m_moduleView, SLOT( notePressed()) );
+	connect ( m_simpleSeq, SIGNAL(noteOff()), m_moduleView, SLOT( noteRelease()) );
+
 
 	m_audioThread = new AudioThread(m_audioDeviceControls, m_moduleManager, this );
 	m_audioThread->start( QThread::HighestPriority); //changhed to high priory for desktop
@@ -103,8 +109,12 @@ MainWindow::MainWindow(QWidget *parent) :
 	periodicUpdate = new QTimer( this );
 	periodicUpdate->start( 50 );
 
-	connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( updateRibbon() ));
-		connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( update() ));
+	if(m_ribbon)
+	{
+		connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( updateRibbon() ));
+	}
+	connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( update() ));
+	connect( periodicUpdate, SIGNAL(timeout()), m_simpleSeq, SLOT(tick()));
 
 	m_menuBtn = new QPushButton( this );
 	m_menuBtn->show();
@@ -175,13 +185,22 @@ void MainWindow::moduleChanged(ModuleData *moduleData)
 	m_moduleView->setParent( this );
 	m_moduleView->show();
 	resizeEvent( 0 );
-	m_ribbon->setModels( &(moduleData->getModuleControls()->freqModel),
-						 &(moduleData->getModuleControls()->velocityModel ) );
-	connect( m_ribbon, SIGNAL( noteOn() ),moduleData->getModuleView(), SLOT( notePressed() ) ) ;
-	connect( m_ribbon, SIGNAL( noteOff() ),moduleData->getModuleView(), SLOT( noteRelease() ) );
 
-	connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( updateRibbon() ));
-		connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( update() ));
+	m_simpleSeq->setModels( &(moduleData->getModuleControls()->freqModel),
+						 &(moduleData->getModuleControls()->velocityModel ) );
+	connect( m_simpleSeq, SIGNAL( noteOn() ),moduleData->getModuleView(), SLOT( notePressed() ) ) ;
+	connect( m_simpleSeq, SIGNAL( noteOff() ),moduleData->getModuleView(), SLOT( noteRelease() ) );
+
+	if(m_ribbon)
+	{
+		m_ribbon->setModels( &(moduleData->getModuleControls()->freqModel),
+							 &(moduleData->getModuleControls()->velocityModel ) );
+		connect( m_ribbon, SIGNAL( noteOn() ),moduleData->getModuleView(), SLOT( notePressed() ) ) ;
+		connect( m_ribbon, SIGNAL( noteOff() ),moduleData->getModuleView(), SLOT( noteRelease() ) );
+
+		connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( updateRibbon() ));
+	}
+	connect( periodicUpdate, SIGNAL( timeout() ), this, SLOT( update() ));
 
 }
 
@@ -263,7 +282,10 @@ void MainWindow::updateRibbon()
 	m_moduleManager->currentModule()->getModuleControls()->freqModel.setMin( midiNoteFreq( (int)m_uiControls->startOctave.value()*12 ) );
 	m_moduleManager->currentModule()->getModuleControls()->freqModel.setMax(  midiNoteFreq( ((int) m_uiControls->startOctave.value() * 12 ) +
 												 m_uiControls->octaves.value() * 12 ) );
-	m_ribbon->recalculatePixelMultipliers();
+	if(m_ribbon)
+	{
+		m_ribbon->recalculatePixelMultipliers();
+	}
 	m_moduleView->layout();
 	QMainWindow::update();
 }

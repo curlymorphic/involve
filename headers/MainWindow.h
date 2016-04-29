@@ -44,6 +44,7 @@
 #include <QPushButton>
 #include "ModuleManager.h"
 #include "ModelManager.h"
+#include "simplesequencer.h"
 
 namespace Ui {
 class MainWindow;
@@ -92,6 +93,8 @@ private:
 	QPushButton *m_menuBtn;
 	QPushButton *m_xBtn;
 	QPushButton *m_yBtn;
+	SimpleSequencer *m_simpleSeq;
+
 	
 	uint m_lastXClick;
 	uint m_lastYClick;
