@@ -33,7 +33,7 @@ class StereoDelay : public AudioProcess
 {
 public:
 	StereoDelay( int maxLength, int sampleRate );
-	~StereoDelay();
+	virtual ~StereoDelay();
 	inline void setLength( float length )
 	{
 		length *= m_sampleRate;

@@ -73,10 +73,10 @@ SOURCES += main.cpp\
     src/dsp/ExtendableSegementOscillator.cpp \
     src/dsp/SegmentOscillator.cpp \
     src/gui/WaveDisplay.cpp \
-    modules/MiniSeq/MiniSegControls.cpp \
     modules/MiniSeq/MiniSegAudioModule.cpp \
-    modules/MiniSeq/MiniSegModuleView.cpp
-#	src/Analyser.cpp
+    modules/MiniSeq/MiniSegModuleView.cpp \
+    modules/MiniSeq/MiniSegControls.cpp
+	src/Analyser.cpp
 
 HEADERS  += headers/MainWindow.h \
 	headers/Types.h \
@@ -114,7 +114,7 @@ HEADERS  += headers/MainWindow.h \
 	headers/Limiter.h \
     headers/EnvelopeDetector.h \
     src/gui/ModuleFader.h \
-#	headers/Analyser.h \
+	headers/Analyser.h \
 	modules/Demo2/Demo2AudioModule.h \
 	modules/Demo2/Demo2ModuleControls.h \
 	modules/Demo2/Demo2ModuleView.h \
@@ -133,7 +133,7 @@ HEADERS  += headers/MainWindow.h \
     src/gui/WaveDisplay.h \
     modules/MiniSeq/MiniSegControls.h \
     modules/MiniSeq/MiniSegAudioModule.h \
-    modules/MiniSeq/MiniSegModuleView.h
+    modules/MiniSeq/MiniSegModuleView.h \
 
 
 

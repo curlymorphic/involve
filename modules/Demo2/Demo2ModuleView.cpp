@@ -208,8 +208,7 @@ Demo2ModuleView::~Demo2ModuleView()
 
 void Demo2ModuleView::layout()
 {
-	const int height8 = height() / 11;
-	const int wwidth = width();
+
 	for(int i = 0; i < SegmentOscillator::maxSegmentCount ; ++i )
 	{
 //		m_waveShapeFaders[i]->resize( wwidth * 0.05 , height8 * 2 );
